@@ -4,25 +4,9 @@
 * Sign-up, sign-in integration for your apps. 
 * Social identity provider e.g. Facebook, Google.
 
-* **Cognito User Pools:** User directory with authentication to IpD(Identity provider) to grant access to you app.
+* **Cognito User Pools:** User directory with authentication to IpD(Identity provider) to grant access to your app.
 * **Cognito Identity Pools:** Provide **temporary** credentials for user to access AWS services.
 * **Cognito Sync:** Syncs user data and preferences across all devices.
-
-<img src="../images/amazon-cognito/amazon-cognito.png" alt="">
-
-**Web Identity Federation and IpD:** 
-
-* **Web Identity Federation:** To exchange identity and security information between an identity provider(IdP) and an application.
-* **Identity Provider(IdP):** a trusted provider of your user identity that lets you use authenticate to access other services. Identity Providers could be Facebook, Amazon, Google, Twitter, Github, LinkedIn
-* **Types of Identity Providers:**
-  * Single Sign-On(SAML)
-  * OAuth(OpenId)
-
-**Cognito User Pools:**
-
-* User Pools are user directories used to manage the actions for web and mobile apps such as:
-  * **Sign-up** 
-  * c:** Syncs user data and preferences across all devices.
 
 <img src="../images/amazon-cognito/amazon-cognito.png" alt="">
 
@@ -41,8 +25,8 @@
   * **Sign-In** 
   * **Account recovery** 
   * **Account confirmation** 
-* Allow uses to sign-in directly to the User Pool, or using Web Identity Federation. 
-* Uses AWS Cognito as the identity broker between AWS and the identity provider. 
+* Allow users to sign-in directly to the User Pool, or using Web Identity Federation. 
+* Uses AWS Cognito as the **identity broker** between AWS and the identity provider. 
 * Successful user authentication generates a JSON web Token(JWTs)
 * User Pools can be thought of as the account used to access the system(i.e: email address and password)
 

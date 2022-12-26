@@ -1,3 +1,4 @@
+[8:43:07]
 ### High Availability
 
 The ability for a system to remain available
@@ -15,7 +16,7 @@ The solution we need to implement in order to ensure **High Avialability:**
 2. We should run instances in another regions. We can route traffic to another Region via **Route53**
 3. We should use **Auto Scaling Groups** to increase the amount of instances to meet the demand of traffic
 4. We should use **Auto Scaling Groups** to ensure a minimum amount of instances are running and have **ELB** route traffic to healthy instances.
-5. We should use **CLoudFront** to cache static content for faster delivery in nearby regions. We can also run out instances in nearby regions and route traffic using a geolocation policy in **Route53**
+5. We should use **CloudFront** to cache static content for faster delivery in nearby regions. We can also run out instances in nearby regions and route traffic using a geolocation policy in **Route53**
 
 <img src="../images/high-availability/ha-arch.png" alt="">
 

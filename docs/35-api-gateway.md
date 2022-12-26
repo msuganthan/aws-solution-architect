@@ -1,4 +1,4 @@
-### API Gateway
+### API Gateway[9:03:47]
 
 * Fully managed service to create, publish, maintain, monitor, and secure APIs at any scale.
 * API Gateway is a solution for **creating secure APIs** in your cloud environment at **any scale**.
@@ -13,7 +13,7 @@
 * Expose HTTPS endpoints to define a **RESTful API.**
 * Highly scalable **(happens automatically)** and cost-effective.
 * Send each API endpoint to a different target.
-* Maintain **Multiple versions** of you API
+* Maintain **Multiple versions** of your API
 
 ### Configuration
 

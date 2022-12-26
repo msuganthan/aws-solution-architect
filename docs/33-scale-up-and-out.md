@@ -1,6 +1,7 @@
+[8:46:26]
 ### Scale Up and Scale Out
 
-When utilization increases and we are reaching capacity we can:
+When utilization increases, and we are reaching capacity we can:
 
 ### Scale-up(Vertical Scaling)
 

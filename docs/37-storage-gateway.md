@@ -1,4 +1,4 @@
-### Storage Gateway
+### Storage Gateway[9:22:26]
 
 * Extending, backing up **on-premise storage to the cloud**
 * AWS Storage Gateway **connects an on-premises software appliance with cloud-based storage.**
