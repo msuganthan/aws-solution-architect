@@ -1,18 +1,49 @@
+<!-- TOC -->
+  * [S3](#s3)
+    * [Intro](#intro)
+      * [What is object storage(Object-based storage)?](#what-is-object-storageobject-based-storage)
+    * [S3 Object:](#s3-object)
+    * [S3 Storage Classes:](#s3-storage-classes)
+      * [Standard(default):](#standarddefault-)
+      * [Intelligent Tiering:](#intelligent-tiering-)
+      * [Standard Infrequently Accessed(IA):](#standard-infrequently-accessedia)
+      * [One Zone IA:](#one-zone-ia-)
+      * [Glacier:](#glacier-)
+      * [Glacier Deep Archive:](#glacier-deep-archive-)
+      * [S3 - Storage Classes Comparison:](#s3---storage-classes-comparison)
+    * [S3 Security:](#s3-security)
+      * [Access Control Lists](#access-control-lists)
+      * [Bucket Policies](#bucket-policies)
+    * [S3 Encryption:](#s3-encryption)
+      * [Encryption in Transit:](#encryption-in-transit)
+      * [Server Side Encryption(SSE): Encryption at Rest](#server-side-encryptionsse-encryption-at-rest)
+      * [Client-side Encryption:](#client-side-encryption)
+      * [S3 - Data consistency:](#s3---data-consistency)
+      * [S3 - Cross Region Replication(CRR):](#s3---cross-region-replicationcrr)
+    * [S3 Versioning:](#s3-versioning)
+    * [S3 Lifecycle Management:](#s3-lifecycle-management)
+    * [S3 - Transfer Acceleration:](#s3---transfer-acceleration)
+    * [S3 - Presigned URLs:](#s3---presigned-urls)
+    * [MFA - Delete:](#mfa---delete)
+    * [S3 CheatSheet:](#s3-cheatsheet)
+<!-- TOC -->
+## S3
+
 ### Intro
 
 * **Object-based** storage service.
 * Serverless storage in the cloud.
 
-#### What is object storage(Object-based storage)?**
+#### What is object storage(Object-based storage)?
 
 * **Data storage architecture** that manages data as objects, as opposed to other storage architectures:
-* file systems which manages data as a files and fire hierarchy, and 
+* file systems which manages data as a files and file hierarchy, and 
 * block storage which manages data as blocks within sectors and tracks. 
 
 * S3 provides you with **unlimited storage**. You don't need to think about the underlying infrastructure.
 * The S3 console provides and interface for you to upload and access your data.
 
-### **S3 Object:**
+### S3 Object:
 
 * Objects contain your data. They are like files. 
 * Object may consist of:
@@ -27,46 +58,46 @@
 * Buckets hold objects. Buckets can also have folders which in turn hold objects. 
 * S3 is a **universal namespace** so bucket names much be unique(think like having a domain name)
 
-### **S3 Storage Classes:**
+### S3 Storage Classes:
 
 * Trade **Retrieval Time, Accessibility and Duration** for Cheaper Storage. 
 * 11 9's(Eleven Nines) => 99.99999999999% 
 * 9 9's(Nine Nines) => 99.999999999%
 
-#### **Standard(default)**: 
+#### Standard(default): 
 
 * Fast! 99.99% Availability, 
 * 11 9's Durability. 
 * Replicated across **at least three AZs**
 
-#### **Intelligent Tiering**: 
+#### Intelligent Tiering: 
 
 * Uses ML to analyze your object usage and determine the appropriate storage class. 
 * Data is moved to the most cost-effective access tier, without any performance impact or added overhead.
 
-#### **Standard Infrequently Accessed(IA):** 
+#### Standard Infrequently Accessed(IA):
 
 * Still Fast, **cheaper if you access the files less than once a month**. 
 * Additional retrieval fee is applied. 50% less than Standard(reduced availability)
 
-#### **One Zone IA**: 
+#### One Zone IA: 
 
 * Still Fast, Objects only exists in one AZ. 
 * Availability(is 99.5%) but cheaper than Standard IA by 20% less(Reduce durability) Data could get destroyed. 
 * A retrieval fee is applied.
 
-#### **Glacier**: 
+#### Glacier: 
 
 * **For long term cold storage.**
 
 * Retrieval of data can **take minutes to hours** but the off is very cheap storage.
 
-#### **Glacier Deep Archive**: 
+#### Glacier Deep Archive: 
 
 * The lowest cost storage class. 
 * Data retrieval **time is 12 hours.** 
 
-#### **S3 - Storage Classes Comparison:**
+#### S3 - Storage Classes Comparison:
 
 |                                | Standard | Intelligent Tiering | Standard IA | One-Zone IA | Glacier       | Glacier Deep Archive |
 |--------------------------------|----------|---------------------|-------------|-------------|---------------|----------------------|
@@ -79,19 +110,19 @@
 | Retrieval fee                  | N/A      | N/A                 | Per GB      | Per GB      | Per GB        | Per GB               |
 | First byte latency             | ms       | ms                  | ms          | ms          | mins to hours | hours                |
 
-### **S3 Security:**
+### S3 Security:
 
 * All new buckets are **PRIVATE** when created by default. 
 * Logging per request can be turned on a bucket. 
 * Log files are generated and saved in a different bucket(even a bucket in a different AWS account if desired)
 * Access control is configured using **Bucket Policies** and **Access Control Lists(ACL)**
 
-#### **Access Control Lists**
+#### Access Control Lists
 
 * Legacy feature(but not deprecated) of controlling access to buckets and objects. 
 * Simple way of granting access.
 
-#### **Bucket Policies**
+#### Bucket Policies
 
 * Use a policy to define complex rule access.
 
@@ -110,13 +141,13 @@
 }
 ```
 
-### **S3 Encryption:**
+### S3 Encryption:
 
-#### **Encryption in Transit:**
+#### Encryption in Transit:
 
 * Traffic between your local host and S3 is achieved via SSL/TLS
 
-#### **Server Side Encryption(SSE): Encryption at Rest**
+#### Server Side Encryption(SSE): Encryption at Rest
 
 * Amazon help you encrypt the object data
 * S3 Managed Keys - (Amazon manages all the keys)
@@ -124,11 +155,11 @@
 * **SSE-KMS:** Envelope encryption, AWS KMS and you manage the keys.
 * **SSE-C:** Customer provided key(you manage the keys)
 
-#### **Client-side Encryption:**
+#### Client-side Encryption:
 
 * You encrypt your own files before uploading them to S3
 
-#### **S3 - Data consistency:**
+#### S3 - Data consistency:
 
 | **New Objects(PUTS)**                                                        | **Overwrite(PUTS) or Delete Objects(DELETE)**                                                                            |
 |------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
@@ -137,7 +168,7 @@
 |                                                                              | If you were to read immediately, S3 may return you an old copy. You need to generally wait a few seconds before reading. |
 
 
-#### **S3 - Cross Region Replication(CRR):**
+#### S3 - Cross Region Replication(CRR):
 
 * When enabled, any object that is uploaded will be automatically replicated to another region(s). 
 * Provides higher durability and potential disaster recovery for objects.
@@ -147,7 +178,7 @@
 * You must have **versioning turned on both the source and destination buckets**. 
 * You can have **CRR replicate to another AWS account**. 
 
-### **S3 Versioning:**
+### S3 Versioning:
 
 * Store all version of an object in S3 
 * Once **enabled it cannot be disabled**, only suspended on the bucket.
@@ -157,7 +188,7 @@
 * Fully integrates with S3 Life cycle rules. 
 * MFA Delete feature provides extra protection against deletion of your data.
 
-### **S3 Lifecycle Management:**
+### S3 Lifecycle Management:
 
 * Automate the process of **moving objects to different Storage classes** or deleting objects all together. 
 * Can be used together with versioning.
@@ -166,7 +197,7 @@
 <img src="../images/s3/s3-life-cycle-management.png" alt="">
 
 
-### **S3 - Transfer Acceleration:**
+### S3 - Transfer Acceleration:
 
 * Fast and secure transfer of files **over long distances** between your end users and an S3 bucket. 
 * Utilizes the **cloudFront's** distributed **Edge Locations**. 
@@ -175,7 +206,7 @@
 
 <img src="../images/s3/s3-transfer-acceleration.png" alt="">
 
-### **S3 - Presigned URLs:**
+### S3 - Presigned URLs:
 
 * Generate a URL which provides you **temporary access to an object either to upload or download object data**. 
 * Presigned URLs are commonly used **to provided access to private objects**. 
@@ -186,7 +217,7 @@
 You have a web-application which needs to allow users to download files from a password protected part of your web-app. Your web-app generates presigned url which expires after 5 seconds. The user download the file.
 
 
-### **MFA - Delete:**
+### MFA - Delete:
 
 * * MFA delete ensures users cannot delete objects from a bucket **unless they provide their MFA code**. 
 * * MFA delete can only be enabled under these conditions. 
@@ -205,7 +236,7 @@ aws s3api put-bucket-versioning \
 
 * Only the bucket owner logged in as Root user can DELETE objects from bucket.
 
-### **S3 CheatSheet:**
+### S3 CheatSheet:
 
 1. Simple Storage Service(S3): Object based storage. Store unlimited amount of data without worry of underlying storage infra-structure.
 2. S3 replicates data across at least 3 AZs to ensure 99.99% Availability and 11's 9s of durability.
