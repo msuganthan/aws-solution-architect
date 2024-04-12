@@ -19,6 +19,20 @@
   * You get billed for all the provisioned capacity.
   * You can increase the capacity of the drive over time.
 
+#### What is IOPS?
+
+IOPS stands for Input/Output Per Second. It is the speed at which **non-contiguous reads and writes** can be performed on a storage medium. high I/O = lots of small fast reads and writes
+
+#### What is Throughput?
+
+The **data transfer rate to and from the storage medium**  in megabytes per second.
+
+#### What is Bandwidth?
+
+Bandwidth is **the measurement of the total possible speed of data movement along the network**
+
+**Note:** Think of **Bandwidth** as the **Pipe** and **Throughput** as the **Water**
+
 #### EBS Example:
 
 <img src="../images/ebs/ebs-volume-example.png" alt="">
@@ -30,18 +44,6 @@
   * By default, any other attached EBS volume is not deleted(attribute disabled)
 * This can be controlled by the AWS console / AWS CLI
 * Use case: preserve root volume when instance is terminated
-
-#### What is IOPS? 
-IOPS stands for Input/Output Per Second. It is the speed at which **non-contiguous reads and writes** can be performed on a storage medium. high I/O = lots of small fast reads and writes
-
-#### What is Throughput?
-The **data transfer rate to and from the storage medium**  in megabytes per second.
-
-#### What is Bandwidth?
-
-Bandwidth is **the measurement of the total possible speed of data movement along the network**
-
-**Note:** Think of **Bandwidth** as the **Pipe** and **Throughput** as the **Water**
 
 * **Elastic Block Store** is a highly available and durable solution for attaching persistent block storage volumes to an EC2 instance. Volumes are automatically replicated within their Availability Zone(AZ) to protect from component failure.
 
@@ -82,20 +84,50 @@ Bandwidth is **the measurement of the total possible speed of data movement alon
   * **Durable for decades**
   * **cheap to produce**
 
-**Moving Volumes**
+### EBS Snapshots
 
-* **From one AZ to another**
-  * Take a snapshot of the volume
-  * create an AMI from the Spanshot
-  * launch new EC2 instance in desired AZ
+* Make a backup(snapshot) of your EBS volume at a point in time.
+* Not necessary to detach volume to do snapshot, but recommended
+* Can copy snapshots across AZ or Region.
+
+<img src="../images/ebs/ebs-snap-shot-example.png" alt="">
+
+### EBS Snapshots Features
+
+#### EBS Snapshot Archive
+
+* Move a Snapshot to an "archive tier" that is 75% cheaper.
+* Takes with 24 to 72 hours for restoring the archive.
+
+<img src="../images/ebs/ebs-snap-shot-archive.png" alt="">
+
+#### Recycle Bin for EBS Snapshots
+
+* Setup rules for retain deleted snapshots so you can recover them after an accidental deletion
+* Specify retention(from 1 day to 1 year)
+
+<img src="../images/ebs/ebs-snap-shot-recycle-bin.png" alt="">
+
+#### Fast Snapshot Restore(FSR)
+
+* Force full initialization of snapshot to have no latency on the first use($$$)
+
+#### Moving Volumes
+
+##### From one AZ to another
+
+* Take a snapshot of the volume
+* create an AMI from the Spanshot
+* launch new EC2 instance in desired AZ
 
 <img src="../images/ebs/move-from-one-az-to-another.png" alt="">
 
-* **From one region to another**
-  * take a snapshot of the volume
-  * create an AMI from the snapshot
-  * copy the AMI to another region
-  * launch a new EC2 instance from the copied AMI
+##### From one region to another
+
+* take a snapshot of the volume
+* create an AMI from the snapshot
+* copy the AMI to another region
+* launch a new EC2 instance from the copied AMI
 
 <img src="../images/ebs/move-from-one-region-to-another.png" alt="">
 
