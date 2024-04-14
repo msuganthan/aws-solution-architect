@@ -1,9 +1,26 @@
 ### Amazon Machine Image(AMI): A template to configure new instances.
 
+* AMI are a customization of an EC2 instance
+  * You add your own software, configuration, operating system, monitoring.
+  * Faster boot/configuration time because all your software is pre-packaged.
+* AMI are built for a specific region (and can be copied across regions)
+* You can launch EC2 instances from:
+  * **A Public AMI**: AWS provided
+  * **You own AMI**: you make and maintain them yourself
+  * **An AWS Marketplace AMI**: an AMI someone else made (and potentially sells)
+
 * Amazon Machine Image(AMI) provides the information required to launch an instance.
 * You can turn you **EC2 instances into AMIs,** so you can create copies of your server.
 
-**An AMI holds the following information:**
+#### AMI Process(from an EC2 instance)
+
+* Start an EC2 instance and customize it
+* Stop the instance(for data integrity)
+* Build an AMI - this will also create EBS snapshots
+* Launch instances from other AMIs
+
+#### An AMI holds the following information:
+
 * A template for the root volume for the instance(**EBS Snapshot or Instance Store template**) e.g. an operating system, an application server and applications.
 * Launch permissions that control which AWS accounts can use the AMI to launch instances.
 * A block device mapping that specifies the volumes to attach to the instance which it's launched.
@@ -11,7 +28,7 @@
 
 <img src="../images/ami/ami.png" alt="">
 
-**AMI Use cases**
+### AMI Use cases
 
 AMIs help you keep incremental changes to your OS, application code and system packages
 
@@ -23,19 +40,19 @@ AMIs help you keep incremental changes to your OS, application code and system p
 * Using **System Manager Automation** you can routinely patch your AMIs with security updates and bake those AMIs.
 * AMIs are used with **LaunchConfigurations.** When you want to roll out updates to multiple instances you make a copy of your LaunchConfiguration with new AMI.
 
-**AMI Marketplace:**
+### AMI Marketplace:
 
 * The AWS Marketplace lets you **purchase subscription** to vendor maintained AMIs.
 
 <img src="../images/ami/aws-market-place.png" alt="">
 
-**Creating an AMI:** 
+### Creating an AMI:
 
 * You can **create an AMI** from an existing EC2 instance that's either **running** or **stopped**.
 
 <img src="../images/ami/create-ami.png" alt="">
 
-**Choosing an AMI**
+### Choosing an AMI
 
 * AWS has hundreds of AMIs you can search and select from.
 * **Community AMI are** free AMIs maintained by the community
@@ -43,7 +60,7 @@ AMIs help you keep incremental changes to your OS, application code and system p
 
 <img src="../images/ami/choosing-an-ami.png" alt="">
 
-**Amazon Machine Images can be selected based on:**
+#### Amazon Machine Images can be selected based on:
 * Region
 * Operating System
 * Architecture(32-bit or 64-bit)
@@ -58,7 +75,7 @@ AMIs are categorized as either backed by Amazon EBS, or backed by Instance Store
 
 <img src="../images/ami/choosing-an-ami-device-type.png" alt="">
 
-**Copying an AMI**
+### Copying an AMI
 
 * AMIs are region specific. If you want to use an AMI from another region. You need to **Copy the AMI** and then select the destination region.
 

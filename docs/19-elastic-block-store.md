@@ -45,13 +45,55 @@ Bandwidth is **the measurement of the total possible speed of data movement alon
 * This can be controlled by the AWS console / AWS CLI
 * Use case: preserve root volume when instance is terminated
 
-* **Elastic Block Store** is a highly available and durable solution for attaching persistent block storage volumes to an EC2 instance. Volumes are automatically replicated within their Availability Zone(AZ) to protect from component failure.
+### Elastic Block Store
 
-* **General Purpose(SSD)**  (gp2) for general usage without specific requirements
-* **Provisioned IOPS(SSD)** (io1) when you require really fast input & output
-* **Throughput Optimized HDD** (st1) magnetic drive optimized for quick throughput
-* **Cold HDD** (sc1) The Lowest cost HDD volume for infrequently access workloads
-* **EBS Magnetic** (standard) previous generation HDD
+* Is a highly available and durable solution for attaching persistent block storage volumes to an EC2 instance. Volumes are automatically replicated within their Availability Zone(AZ) to protect from component failure.
+
+* EBS Volumes come in 6 types
+  * **gp2/gp3(SSD):** General purpose SSD volume that balances price and performance for a wide variety of workloads.
+  * **io1/io2 Block Express (SSD):** Highest-performance SSD volume for mission-critical low-latency or high-throughput workloads.
+  * **st 1 (HDD):** Low cost HDD volume designed for frequently accessed, throughput-intensive workloads.
+  * **sc 1 (HDD):** Lowest cost HDD volume designed for less frequently accessed workloads.
+* EBS Volumes are characterized in Size | Throughput | IOPS (I/O Ops Per Sec)
+* Only gp2 / gp3 and io1/io2 Block Express can be used as boot volumes.
+
+#### General Purpose SSD
+
+* Cost-effective storage, low-latency
+* System bool volumes, Virtual desktops, Development and test environments
+* 1 GiB - 16 TiB
+* gp3:
+  * Baseline of 3000 IOPS and throughtput of 125 MiB/s
+  * Can increase IOPS up to 16,000 and throughput up to 1000 MiB/s independently.
+* gp2: 
+  * Small gp2 volumes can burst IOPS to 3,000
+  * Size of the volume and IOPS are linked, max IOPS is 16,000
+  * 3 IOPS per GB, means at 5,334 GB we are the max IOPS.
+
+#### Provisioned IOPS(PIOPS) SSD
+
+* Critical business application with sustained IOPS performance
+* Or application that need more than 16,000 IOPS
+* Great for database workload(sensitive to storage perf and consistency)
+* io1 (4 GiB - 16 TiB)
+  * Max PIOPS: 64,000 for Nitro EC2 instances & 32,000 for other
+  * Can increase PIOPS independently from storage size
+* io2 Block Express(4 GiB - 64 TiB)
+  * Sub-millisecond latency
+  * Max PIOPS: 256,000 with an IOPS:GiB ratio of 1000:1
+* Supports EBS Multi-attach
+
+#### Hard Disk Drives(HDD)
+
+* Cannot be a boot volume
+* 125 GiB to 16 TiB
+* Throughput Optimized HDD (st 1)
+  * Big Data, Data Warehouses, Log Processing
+  * Max throughput 500 MiB/s - max IOPS 500
+* Cold HDD(sc 1)
+  * For data that is infrequently accessed
+  * Scenarios where the lowest cost is important
+  * Max throughput 250 MiB/s - max IOPS 250
 
 |                 | Solid State Drives(SSD)        | ---                                                                              | Hard Disk Drives(HDD)                                                      | ---                                              |                      |
 |-----------------|--------------------------------|----------------------------------------------------------------------------------|----------------------------------------------------------------------------|--------------------------------------------------|----------------------|
@@ -63,9 +105,9 @@ Bandwidth is **the measurement of the total possible speed of data movement alon
 | **Max IOPS**    | 16,000                         | 64,000                                                                           | 500                                                                        | 250                                              | 40-200               |
 
 
-**Storage Volumes**
+#### Storage Volumes
 
-**Hard Disk Drive(HDD):**
+##### Hard Disk Drive(HDD)
 
 * Is magnetic storage that uses rotating platters an actuator arm and a magnetic head(similar to record player).
 * HDD is very good at writing a continuous amount of data.
@@ -73,13 +115,14 @@ Bandwidth is **the measurement of the total possible speed of data movement alon
   * **Better for throughput**
   * **Physical Moving Part**
 
-**Solid State Drive(SSD)**
+##### Solid State Drive(SSD)
 
 * Uses integrated circuit assemblies as memory to store data persistently, typically using flash memory. SSDs are typically more resistant to physical shock, run silently and have **quicker access time and lower latency**.
   * **Very good frequently reads and writes(I/O)**
   * **No physical moving parts**
 
-**Magnetic Tape**
+##### Magnetic Tape
+
 * A large reel of magnetic tape. A tage drive is used to write data to the tapel. Medium and large sized data centers deployed both tape and disk formats. They normally come in the form of a cassettes. Magnetic is very cheap to produce and can store considerable amount of data.
   * **Durable for decades**
   * **cheap to produce**
@@ -131,7 +174,7 @@ Bandwidth is **the measurement of the total possible speed of data movement alon
 
 <img src="../images/ebs/move-from-one-region-to-another.png" alt="">
 
-**Encrypted Root volumes**
+### Encrypted Root volumes
 
 When you are through the wizard launching an EC2 instance you can encrypt the volume on creation.
 
