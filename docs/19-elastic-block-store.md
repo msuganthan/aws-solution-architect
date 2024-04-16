@@ -186,19 +186,27 @@ Bandwidth is **the measurement of the total possible speed of data movement alon
 
 <img src="../images/ebs/move-from-one-region-to-another.png" alt="">
 
-### Encrypted Root volumes
+### EBS Encryption
 
-When you are through the wizard launching an EC2 instance you can encrypt the volume on creation.
+* When you create and encrpted EBS volume, you get the following:
+  * Data at rest is encrypted inside the volume.
+  * All the data in flight moving between the instance and the volume is encrypted
+  * All snapshots are encrypted
+  * All volumes created from the snapshot.
+* Encryption and decryption are handled transparently(you have nothing to do)
+* Encryption has a minimal impact on latency
+* EBS Encryption leverages keys from KMS(AES-256)
+* Copying an unencrypted snapshot allows encryption
+* Snapshots of encrypted volumes are encrypted
 
 <img src="../images/ec2/encryption-on-creation.png" alt="encryption on creation">
 
-If you want to encrypt an existing volume you'll have to do the following:
-* Take a Spanshot of the unencrypted volume
-* Create a copy of that Snapshot and select the Encryption option.
-* Create a new AMI from the encrypted Snapshot
-* Launch a new EC2 instance from the created AMI
+#### Encryption: encrypt an unencrypted EBS volume
 
-<img src="../images/ec2/encrypt-existing-copy.png" alt="encrypt existing copy">
+* Create an EBS snapshot of the volume
+* Encrypt the EBS snapshot(using copy)
+* Create new EBS volume from the snapshot (the volume will also be encrypted)
+* Now you can attach the encrypted volume to the original instance
 
 ### EBS vs Instance Store Volumes
 
