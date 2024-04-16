@@ -83,6 +83,18 @@ Bandwidth is **the measurement of the total possible speed of data movement alon
   * Max PIOPS: 256,000 with an IOPS:GiB ratio of 1000:1
 * Supports EBS Multi-attach
 
+#### EBS Multi-Attach - io1 / io2 family
+
+* Attach the same EBS volume to multiple EC2 instances in the same AZ
+* Each instance has full read & write permissions to the high performance volume.
+* Use cases:
+  * Achieve higher application availability in clustered Linux application(ex: Teradata)
+  * Application must manage concurrent write operations
+* Upto 16 EC2 instances at a time.
+* Must use a file system that's cluster-aware(not XFS, EXT4, etc...)
+
+<img src="../images/ebs/ebs-multi-attach.png" alt="">
+
 #### Hard Disk Drives(HDD)
 
 * Cannot be a boot volume
