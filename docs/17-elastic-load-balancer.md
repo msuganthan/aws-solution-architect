@@ -1,14 +1,107 @@
+### What is load balancing?
+
+* Load balancers are servers that forward traffic to multiple servers (e.g. EC2 instances) downstream.
+
+#### Why use a load balancer?
+
+* Spread load across multiple downstream instances
+* Expose a single point of access(DNS) to your application
+* Seamlessly handle failure of downstream instances
+* Do regular health check to your instances
+* Provide SSL termination (HTTPS) for your websites
+* Enforce stickiness with cookies
+* High availability across zones
+* Separate public traffic from private traffic.
+
+<img src="../images/elb/load-balancer.png" alt="load balancer">
+
 ### Elastic Load Balancer
 
-* Distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses and Lambda functions.
+* An Elastic Load Balancer is a **managed load balancer**
+  * AWS guarantees that it will be working
+  * AWS takes care of upgrades, maintenance, high availability
+  * AWS provides only a few configuration knobs
 
-**Intro**
+* It costs less to setup your own load balancer, but it will be a lot more effort on your end.
 
-* Load Balancers can be **physical hardware or virtual software** that accepts incoming traffic, and then distributes the traffic to multiple targets. This can balance that load via different rules. These rules vary based on types of load balancers.
-* **Elastic Load Balancer(ELB)** is the AWS solution for load balancing traffic, and there are 3 types available.
-  * Application Load Balancer ALB(HTTP/HTTPS)
-  * Network Load Balancer NLB(TCP/UDP)
-  * Classic Load Balancer CLB(Legacy)
+* It is integrated with many AWS offerings/services
+  * EC2, EC2 Auto Scaling Group, Amazon ECS
+  * AWS Certificate Manager(ACM), CloudWatch
+  * Route 53, AWS WAF, AWS Global Accelerator
+
+#### Health Checks
+
+* Health checks are crucial for Load Balancers
+* They enable the load balancer to know if instances it forwards traffic to are available to reply to requests
+* The health check is done on a port and a route(/health is common)
+* If the response is not 200(OKAY), then the instance is unhealthy
+
+<img src="../images/elb/health-checker.png" alt="Health Checkers">
+
+#### Types
+
+* AWS has 4 kinds of managed Load Balancers
+* **Classic Load Balancer** (v1 - old generation) - 2009 - CLB
+  * HTTP, HTTPS, TCP, SSL (secure TCP)
+* **Application Load Balancer** (v2 - new generation) - 2016 - ALB
+  * HTTP, HTTPS, WebSocket
+* **Network Load Balancer** (v2 - new generation) - 2017 - NLB
+  * TCP, TLS (secure TCP), UDP
+* **Gateway Load Balancer** - 2020 - GWLB
+  * Operates at Layer 3 (Network Layer) - IP Protocol
+
+* Overall, it is recommended to use the newer generation load balancers as they provide more features
+* Some load balancers can be set as _internal_(private) or _external_(public) ELBs
+
+### Load Balancer Security Groups
+
+<img src="../images/elb/load-balancer-security-group.png" alt="Load balancer security group">
+
+Here if your check closer the source of the ec2 which allows traffic only from Load Balancer.
+
+### Application Load Balancer(v2)
+
+* Application load balancers is Layer 7(HTTP)
+
+* Load balancing to multiple HTTP applications across machines(target groups)
+* Load balancing to multiple applications on the same machine(ex: containers)
+* Support for HTTP/2 and WebSocket
+* Support redirects (from HTTP to HTTPS for example)
+
+* **Routing tables** to different target groups:
+  * Routing based on path in URL(example.com/users & example.com/posts)
+  * Routing based on hostname in URL(one.example.com & other.example.com)
+  * Routing based on Query String, Headers
+    * example.com/users?id=123&order=false
+
+* ALB are a great fit for micro-services & container-based application(example: Docker & Amazon ECS)
+* Has a port mapping feature to redirect to a dynamic port in ECS
+* In comparison, we'd need multiple Classic Load Balancer per application
+
+<img src="../images/elb/http-based-traffic.png" alt="Http based traffic">
+
+#### Target Groups
+
+* EC2 instances (can be managed by an Auto Scaling Group) - HTTP
+* ECS tasks (managed by ECS itself) - HTTP
+* Lambda functions - HTTP request is translated into a JSON event
+* IP Addresses - must be private IPs
+
+* ALB can route to multiple target groups
+* Health checks are at the target group level.
+
+* Query String Routing
+
+<img src="../images/elb/query-string-routing.png" alt="Query String routing">
+
+#### Good to know
+
+* Fixed hostname(XXX.region.elb.amazonaws.com)
+* The application server don't see the IP of the client directly
+  * The true IP of the client is inserted in the header **X-Forwarded-For**
+  * We can also get Port(X-Forwarded-Port) and proto(X-Forwarded-Proto)
+
+<img src="../images/elb/x-forwarded-for.png" alt="X Forwarded For">
 
 **The Rules of Traffic**
 
