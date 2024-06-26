@@ -103,6 +103,40 @@ Here if your check closer the source of the ec2 which allows traffic only from L
 
 <img src="../images/elb/x-forwarded-for.png" alt="X Forwarded For">
 
+### Network Load Balancer
+
+* It allows:
+  * Forward TCP & UDP traffic to your instances
+  * Handle millions of request per seconds
+  * Less Latency ~100 ms (vs 400 ms for ALB)
+* NLB has **one static IP per AZ**, and supports assigning Elastic IP(helpful for whitelisting specific IP)
+* NLB are used for extreme performance, TCP or UDP traffic
+* Not included in the AWS free tier
+
+<img src="../images/elb/network-load-balancer.png" alt="Network load balancer">
+
+#### Network Load Balancer - Target Groups
+
+* EC2 instances
+* IP Addresses - must be a private IPs
+* Application Load Balancer
+* Health Checks support the **TCP, HTTP and HTTPS Protocols**.
+
+<img src="../images/elb/network-load-balancer-target-groups.png" alt="Network Load Balancer Target group.">
+
+### Gateways Load Balancer
+
+* Deploy, scale and manage fleet of 3rd party network virtual appliances in AWS
+* Example: Firewalls, Intrusion Detection and Prevention Systems, Deep Packet Inspection Systems, payload manipulation...
+
+* Operates at Layer 3 (Network Layer) - IP Packets
+* Combines the following functions:
+  * **Transparent Network Gateway** - single entry/exit for all traffic
+  * **Load Balancer** - distributes traffic to your virtual appliances
+* Uses the **GENEVE** protocol on port **6081**
+
+
+
 **The Rules of Traffic**
 
 **Listeners:** 
