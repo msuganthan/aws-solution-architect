@@ -232,6 +232,7 @@ Note:
   * Uses Server Name Indication(SNI) to make it work
 * Network Load Balancer(v2)
   * Supports multiple listeners with multiple SSL certificates
+  * Uses Server Name Indication(SNI) to make it work
 
 **The Rules of Traffic**
 
