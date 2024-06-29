@@ -247,6 +247,85 @@ Note:
 
 <img src="../images/elb/connection-draining.png" alt="Connection Draining">
 
+### What's an Auto Scaling Group?
+
+* In real-life, the load on your websites and application can change
+* In the cloud, you can create and get rid of servers very quickly
+
+* The goal of an Auto Scaling Group (ASG) is to:
+  * Scale out (add EC2 instances) to match an increased load
+  * Scale in (remove EC2 instances) to match a decreased load
+  * Ensure we have a minimum and a maximum number of EC2 instances running
+  * Automatically register new instances to a load balancer
+  * Re-create an EC2 instance in case a previous one is terminated (ex: if unhealthy)
+
+* ASG are free(you pay of the underlying EC2 instances)
+
+<img src="../images/elb/auto-scaling-group-in-aws.png" alt="Auto Scaling Group in AWS">
+
+<img src="../images/elb/asg-with-load-balancer.png" alt="Auto Scaling Group with Load Balancer.">
+
+#### Auto Scaling Group Attributes
+
+* A Launch Template(old "Launch Configuration" are deprecated)
+  * AMI + Instance Type
+  * EC2 User data
+  * EBS Volumes
+  * Security Group
+  * SSH Key Pair
+  * IAM Roles for your EC2 Instances
+  * Network + Subnet Information
+  * Load Balancer Information
+* Min Size / Max Size / Initial capacity
+* Scaling Policies
+
+<img src="../images/elb/auto-scaling-group-attributes.png" alt="Auto Scaling Group Attributes">
+
+#### Auto Scaling - CloudWatch Alarms & Scaling
+
+* It is possible to scale an ASG based on Cloud Watch alarms
+* An alarm monitors a metric (such as Average CPU, or a custom metric)
+* Metrics such as Average CPU are computed for the overall ASG instances
+* Based on the alarm:
+  * We can create scale-out policies(increase the number of instances)
+  * We can create scale-in policies(decrease the number of instances)
+
+<img src="../images/elb/auto-scaling-group-with-cloud-watch.png" alt="Auto scaling group with cloud watch">
+
+#### Auto Scaling Group - Scaling Policies
+
+* **Dynamic Scaling**
+  * **Target Tracking Scaling**
+    * Simple to set-up
+    * Example: I want the average ASG CPU to stay at around 40%
+  * **Simple/Step Scaling**
+    * When a CloudWatch alarm is triggered(example CPU > 70%), then add 2 units
+    * When a CloudWatch alarm is triggered(example CPU < 30%), then remove 1
+* **Scheduled Scaling**
+  * Anticipate a scaling based on known usage pattern
+  * Example: increase the min capacity to 10 at 5 pm on Fridays
+* **Predictive Scaling**
+  * Continuously forecast load and schedule scaling ahead
+
+<img src="../images/elb/predictive-scaling.png" alt="Predictive Scaling">
+
+#### Good metrics to scale on
+
+* CPU Utilization: Average CPU utilization across your instances
+* RequestCountPerTarget: to make sure the number of requests per EC2 instance is stable
+* Average Network In/Out: If you're application is network bound
+* Any custom metric: that you push using CloudWatch
+
+<img src="../images/elb/requests-count-per-target.png" alt="request count per target">
+
+#### Auto Scaling Groups - Scaling Cool downs
+
+* After a scaling activity happens, you are in the **cool down period(default 300 seconds)**
+* During the cool down period, the ASG will not launch or terminate additional instances(to all for metrics to stabilize)
+* Advice: Use a ready-to-use AMI to reduce configuration time in order to be serving requests faster and reduce the cool down period
+
+<img src="../images/elb/auto-scaling-group-with-cloud-watch.png" alt="Auto scaling cool downs">
+
 **The Rules of Traffic**
 
 **Listeners:** 
