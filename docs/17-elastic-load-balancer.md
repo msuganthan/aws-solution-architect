@@ -234,6 +234,19 @@ Note:
   * Supports multiple listeners with multiple SSL certificates
   * Uses Server Name Indication(SNI) to make it work
 
+### Connection Draining
+
+* Feature naming
+  * Connection Draining - for CLB
+  * De-registration Delay - for ALB & NLB
+* Time for complete "in-flight requests" while the instance is de-registering or unhealthy
+* Stops sending new requests to the EC2 instance which is de-registering
+* Between 1 and 3600 seconds(default 300 seconds)
+* Can be disabled(set value to 0)
+* Set to a low value if your requests are short
+
+<img src="../images/elb/connection-draining.png" alt="Connection Draining">
+
 **The Rules of Traffic**
 
 **Listeners:** 
@@ -341,20 +354,3 @@ Note:
 
 <img src="../images/elb/request-routing.png" alt="">
 <img src="../images/elb/request-routing-rules.png" alt="">
-
-**CheatSheet**
-
-* There are three ELBs: **Network, Application, and Classic** Load Balancer
-* A Elastic Load Balancer must have **at least two** Availability Zones.
-* Elastic Load Balancers **cannot go cross-region.** You must create one per region.
-* ALB has **Listeners, Rules and Target Groups** to route traffic.
-* NLB use **Listeners and Target Groups to route traffic**
-* CLB use **Listeners and EC2 instances are directly registered** as targets to CLB
-* Application Load Balancer is for HTTP(S) traffic and the name implies it is good for Web Applications.
-* Network Load Balancer is for TCP/UDP is good for network throughput eg. Video Games
-* Classic Load Balancer is legacy and It's recommended to use ALB or NLB
-* Use X-Forwarded-For to get original IP of incoming traffic passing through ELB
-* You can attach Web Application Firewall to ALB but to NLB or CLB
-* You can attach Amazon Certification Manager SSL to any of the Elastic Load Balancers for SSL
-* **ALB has advanced Request Routing riles where you can route based on subdomain header, path and other HTTP(S) information**
-* Sticky Sessions can be enabled for CLB or ALB and sessions are remembered via Cookie.
