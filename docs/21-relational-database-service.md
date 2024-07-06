@@ -238,3 +238,105 @@ Auto-scaling due to high CPU usage.
 * Useful to create a "staging" database from a production database without impacting the production database.
 
 <img src="../images/rds/aurora-cloning.png" alt="Aurora Cloning">
+
+### RDS & Aurora Security
+
+* At-rest encryption:
+  * Database master & replicas encryption using AWS KMS - must be defined as launch time
+  * If the master is not encrypted, the read replicas cannot be encrypted
+  * To encrypt an un-encrypted database, go through a DB snapshot & restore as encrypted
+* In-flight encryption: TLS-ready by default, use the AWSTLS root certificates client-side
+* IAM Authentication: IAM roles to connect to your database(instead of username/pw)
+* Security Groups: Control Network access to your RDS/Aurora DB
+* No SSH available except on RDS Custom
+* Audit Logs can be enabled and sent to CloudWatch Logs for longer retention
+
+### RDS  Proxy
+
+* Fully managed database proxy for RDS
+* Allows apps to pool and share DB connections established with the database
+* Improving database efficiency by reducing the stress on database resources(e.g: CPU, RAM) and minimize open connections(and timeouts)
+* Serverless, autoscaling, highly available(multi-AZ)
+* Reduced RDS & Aurora failover time by up 66%
+* Supports RDS(MySQL, PostgreSQL, MariaDB, MS SQL Server) and Aurora(MySQL, PostgreSQL)
+* No code changes required for most apps
+* Enforce IAM Authentication for DB and securely store credentials in AWS Secret Manager
+* RDS Proxy is never publicly accessible(must be accessed from VPC)
+
+<img src="../images/rds/rds-proxy.png" alt="RDS proxy">
+
+### Amazon ElasicCache Overview
+
+* The same way RDS is to get managed Relational Databases
+* ElasticCache is to get managed Redis or Mamcached
+* Caches are in-memory databases with really high performance, low latency
+* Helps reduce load off of database for read intensive workloads
+* Helps make your application stateless
+* AWS takes care of OS maintenance / patching, optimizations, setup, configuration, monitoring, failure recovery and backups
+* Using ElasticCache involves heave application code changes
+
+#### ElastiCache Solution Architecture - DB Cache
+
+* Application queries ElastiCache, if not available, get from RDS and store in ElasticCache
+* Helps relive load in RDS
+* Cache must have an invalidation strategy to make sure only the most current data is used in there.
+
+<img src="../images/rds/elastic-cache-db-cache.png" alt="ElastiCache Architecture">
+
+#### ElastiCache Solution Architecture - User Session Store
+
+* User logs into any of the application 
+* The application writes the session data into ElastiCache
+* The user hits another instance of our application
+* The instance retrieves the data and the user is already logged in
+
+<img src="../images/rds/elastic-cache-user-session-store.png" alt="User session store">
+
+#### ElastiCache - Redis vs Memcached
+
+##### Redis
+
+* Multi-AZ with auto failover
+* Read replicas to scale reads and have high availability
+* Data Durability using AOF persistence
+* Backup and restore features
+* Supports Sets and Sorted Sets
+
+<img src="../images/rds/elastic-cache-redis.png" alt="Elastic Cache Redis">
+
+##### MemCached
+
+* Multi-node for partitioning of data(sharding)
+* No high availability(replication)
+* Non persistent
+* No backup and restore
+* Multi-threaded architecture
+
+<img src="../images/rds/elasti-cache-memcached.png" alt="memcached">
+
+### ElastiCache - Cache Security
+
+* ElastiCache supports **IAM Authentication for Redis**
+* IAM policies on ElastiCache are only used for AWS API-Level security
+* **Redis AUTH**
+  * You can set a "password/token" when you create a Redis cluster
+  * This is an extra level of security for your cache(on top of security group)
+  * Support SSL in flight encryption
+* **MemCached**
+  * Support SASL-based authentication(advanced)
+
+<img src="../images/rds/elastic-cache-security.png" alt="Elastic Cache Security">
+
+#### Patterns for ElastiCache
+
+* **Lazy Loading**: all the read data is cached, data can become stale in cache
+* **Write through**: Adds or update data in the cache when written to a DB(no stale data)
+* **Session Store**: Store temporary session data in a cache(using TTL feature)
+
+#### ElastiCache - Redis use cache
+
+* Gaming Leaderboards are computationally complex
+* **Redis Sorted Sets** guarantee both uniqueness and element ordering
+* Each time a new element added, it's ranked in real time, then added in correct order
+
+<img src="../images/rds/elasticache-redis-use-case.png" alt="Redis use case">
