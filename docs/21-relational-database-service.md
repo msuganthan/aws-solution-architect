@@ -217,7 +217,7 @@ Auto-scaling due to high CPU usage.
 
 #### RDS & Aurora Restore options
 
-* Restoring a RDS/Aurora backup or a snapshot creates a new database
+* Restoring an RDS/Aurora backup or a snapshot creates a new database
 * Restoring MySQL RDS database from S3
   * Create a back of your on-premises database
   * Store it in Amazon S3

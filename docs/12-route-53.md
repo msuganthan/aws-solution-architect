@@ -1,4 +1,127 @@
-### Route 53
+### What is DNS?
+
+* Domain Name System which translates the human friendly hostname into the machine IP addresses
+* www.google.com => 171.217.18.36
+* DNS is the backbone of the internet
+* DNS uses hierarchical naming structure
+  * .com
+  * example.com
+  * www.example.com
+  * api.example.com
+  
+#### DNS Terminologies
+
+* Domain Registrar: Amazon Route 53, GoDaddy,...
+* DNS Records: A, AAAA, CNAME, NS,...
+* Zone File: contains DNS records
+* Name Server: resolves DNS queries(Authoritative or Non-Authoritative)
+* Top Level Domain (TLD): .com, .us, .in, .gov, .org, ...
+* Second Level Domain (SLD): amazon.com, google.com, ...
+
+<img src="../images/route53/dns-terminologies.png" alt="DNS Terminologies">
+
+#### How DNS Works
+
+<img src="../images/route53/dns-work.png" alt="How DNS Works">
+
+### Amazon Route 53 
+
+* A highly available, scalable, fully managed and Authoritative DNS
+  * Authoritative = the customer (you) can update the DNS records
+* Route 53 is also a Domain Registrar
+* Ability to check the health of your resources
+* The only AWS service which provides 100% availability SLA
+* Why Route 53? 53 is a reference to the traditional DNS port.
+
+<img src="../images/route53/amazon-route-53.png" alt="Amazon Route 53">
+
+#### Route 53 - Records
+
+* How you want to route traffic for a domain
+* Each record contains:
+  * **Domain/subdomain Name** - e.g., example.com
+  * **RecordType** - e.g., A or AAAA
+  * **Value** - e.g., 12.34.56.78
+  * **Routing Policy** - how Route 53 respond to queries
+  * **TTL** - amount of time the record cached at DNS Resolvers
+* Route 53 supports the following DNS record types:
+  * (must know) A / AAAA / CNAME / NS
+  * (advanced) CAA / DS / MX / NAPTR / PTR / SOA / TXT / SPF / SRV
+
+#### Route 53 - Record Types
+
+* **A** - maps a hostname to IPV4
+* **AAAA** - maps a hostname to IPV6
+* **CNAME** - maps a hostname to another hostname
+  * The target is a domain name which must have an A or AAAA record
+  * Can't create a CNAME record for the top node of a DNS namespace(Zone Apex)
+  * Example: you can't create for example.com, but you can create for www.example.com
+* **NS** - Name Servers for the Hosted Zone
+
+#### Route 53 - Hosted Zones
+
+* A container for records that define how to route traffic to a domain and its subdomains
+* **Public Hosted Zones** - contains records that specify how to route traffic on the Internet(public domain names) application1.mypublicdomain.com
+* **Private Hosted Zones** - contains records that specify how to route traffic within one or more VPCs (private domain names) application1.company.internal
+
+* You pay $0.50 per month per hosted zone
+
+<img src="../images/route53/public-vs-private-hosted-zones.png" alt="Public vs Private Hosted zones">
+
+#### Route 53 - Records TTL(Time to Live)
+
+* High TTL - e.g., 24 hr
+  * Less traffic on Route 53
+  * Possibly outdated record
+* Low TTL - e.g, 60 sec
+  * More traffic on Route 53($$)
+  * Records are outdated for less time
+  * Easy to change records
+* Except for Alias records, TTL is mandatory for each DNS record
+
+<img src="../images/route53/route-53-ttl.png" alt="Route 53 TTL">
+
+### CNAME vs Alias
+
+* AWS Resources(Load Balancer, CloudFront...) expose an AWS hostname:
+  * lb1-1234.us-east-1.elb.amazonaws.com and you want myapp.mydomain.com
+
+* CNAME:
+  * Point a hostname to any other hostname(app.mydoamin.com => blabla.anything.com)
+  * ONLY FOR NON ROOT DOMAIN(something.mydomain.com)
+* Alias:
+  * Points a hostname to an AWS Resource(app.mydomain.com => blabla.amazonaws.com)
+  * Works for ROOT DOMAIN and NON ROOT DOMAIN(aka mydomain.com)
+  * Free of charge
+
+#### Route 53 - Alias Records
+
+* Maps a hostname to an AWS resource
+* An extension to DNS functionality
+* Automatically recognizes changes in the resource's IP addresses
+* Unlike CNAME, it can be used for the top node of a DNS namespace(Zone Apex) e.g: example.com
+* Alias Record is always of type A/AAAA for AWS resources(IPv4/IPv6)
+* **You can't set the TTL**
+
+<img src="../images/route53/route-53-alias-records.png" alt="Alias records">
+
+### Route 53 - Alias Records Targets
+
+* Elastic Load Balancers
+* CloudFront Distributions
+* API Gateway
+* Elastic Beanstalk environments
+* S3 Websites
+* VPC Interface Endpoints
+* Global Accelerator accelerator
+* Route 53 record in the same hosted zone
+
+* **You cannot set an ALIAS record for an EC2 DNS name**
+
+<img src="../images/route53/route-53-alias-records-targets.png" alt="Alias Records Target">
+
+
+======================================
 
 Route53 Domain Name Service **think** Godaddy or NameCheap but with more synergies with AWS services.
 
@@ -20,14 +143,14 @@ Use Route53 to get your custom domains to point to your AWS Resources.
 5. Route traffic to CloudFront which servers out S3 static hosted website.
 6. Route traffic to an Elastic IP(EIP) which is a static IP that hosts our company Minecraft server.
 
-<img src="../images/route53/route53.png" alt="Route53">
+<img src="../images/route53/old/route53.png" alt="Route53">
 
 **Record Sets**
 
 * We create record sets which allows us to point our naked domain(exampro.co) and subdomains via Domain records.
 * For example, we can send our www subdomain using an **A record** to point a specific IP address,
 
-<img src="../images/route53/record-set.png" alt="">
+<img src="../images/route53/old/record-set.png" alt="">
 
 **Route53 - Alias Record**
 
@@ -35,7 +158,7 @@ Use Route53 to get your custom domains to point to your AWS Resources.
 * Alias records are smart where **they can detect the change of an IP address and continuously keep that endpoint pointed to the correct resource.**
 * In most cases you want to be using Alias which routing traffic to AWS resources.
 
-<img src="../images/route53/route53-alias-record.png" alt="route53 alias record"/>
+<img src="../images/route53/old/route53-alias-record.png" alt="route53 alias record"/>
 
 **Routing Policies:**
 
@@ -51,7 +174,7 @@ Use Route53 to get your custom domains to point to your AWS Resources.
 
 Supports **versioning,** so you can roll out or roll back updates.
 
-<img src="../images/route53/route53-traffic-flow.png" alt="">
+<img src="../images/route53/old/route53-traffic-flow.png" alt="">
 
 **Simple Routing Policies**
 
@@ -61,8 +184,8 @@ Supports **versioning,** so you can roll out or roll back updates.
 
 For example if you have a record for `www.exampro.co` with 3 different IP address values, users would be directly randomly to 1 of them when visiting the domain.
 
-<img src="../images/route53/simple-routing-policy.png" alt="">
-<img src="../images/route53/route53-simple-policies.png" alt="">
+<img src="../images/route53/old/simple-routing-policy.png" alt="">
+<img src="../images/route53/old/route53-simple-policies.png" alt="">
 
 **Weighted Routing Policies**
 
@@ -71,7 +194,7 @@ For example if you have a record for `www.exampro.co` with 3 different IP addres
 
 For example if you had an ALB running experimental features you could test against a small amount traffic at random to minimize the impact of affect.
 
-<img src="../images/route53/route53-weighted-routing.png" alt="">
+<img src="../images/route53/old/route53-weighted-routing.png" alt="">
 
 **Latency Based Routing Policies:**
 
@@ -80,7 +203,7 @@ For example if you had an ALB running experimental features you could test again
 
 For example, You have two copies of your web-app backed by ALB. One in Calif, US and another in Montreal CA. A request comes in from Toronto, it will be routed to Montreal since it will have lower latency.
 
-<img src="../images/route53/latency-policy.png" alt="">
+<img src="../images/route53/old/latency-policy.png" alt="">
 
 **Failover Routing Policies:**
 
@@ -89,14 +212,14 @@ For example, You have two copies of your web-app backed by ALB. One in Calif, US
 
 For example, we have primary and secondary web-app backed by ALB. Route53 determines our primary is unhealthy and fails over to secondary ALB.
 
-<img src="../images/route53/failover-routing-policies.png" alt="">
+<img src="../images/route53/old/failover-routing-policies.png" alt="">
 
 **Geolocation routing policies:**
 
 * Allow you to direct traffic based on the geographic location of where the request originated from.
 * For example this would let you route all traffic coming from North America to servers located in North America regions, where queries from other regions could be directed to servers hosted in that region.(potentially with pricing and language specific to that region)
 
-<img src="../images/route53/geo-location-routing-policies.png" alt="">
+<img src="../images/route53/old/geo-location-routing-policies.png" alt="">
 
 **Geo-proximity Routing Policies:**
 
@@ -105,8 +228,8 @@ For example, we have primary and secondary web-app backed by ALB. Route53 determ
 
 `Bias` values expand and shrink the size of the geographic region from which traffic is routed to. **You must use Route53 Traffic flow** in order to use geo-proximity routing policies.
 
-<img src="../images/route53/geo-proximity-routing-policies.png" alt="">
-<img src="../images/route53/geo-proximity-routing-policies1.png" alt="">
+<img src="../images/route53/old/geo-proximity-routing-policies.png" alt="">
+<img src="../images/route53/old/geo-proximity-routing-policies1.png" alt="">
 
 **Multi-value Answer Policies:**
 
@@ -115,7 +238,7 @@ For example, we have primary and secondary web-app backed by ALB. Route53 determ
 
 Similar to Simple Routing, however with an added health check for your record set resources.
 
-<img src="../images/route53/multi-value-answer-policies.png" alt="">
+<img src="../images/route53/old/multi-value-answer-policies.png" alt="">
 
 **Route53 - Health Checks**
 
@@ -131,19 +254,4 @@ Similar to Simple Routing, however with an added health check for your record se
 * A regional service that lets you route DNS queries between your **VPCs and your network**.
 * DNS Resolution for **Hybrid Environments**
 
-<img src="../images/route53/resolver.png" alt="">
-
-**CheatSheet:**
-
-* Route53 is a DNS provider, register and manage domains, create record sets. This Godaddy or NameCheap.
-* Simple Routing - Default routing policy, multiple adresses result in a random endpoint selection.
-* Weighted - Split up traffic based on different weights
-* Latency - Direct traffic based on region, for lowest possible latency for users.
-* Failover - Primary site in one location, secondary data recovery site in another.
-* Geolocation - Route traffic based on the geographic location of request origin.
-* Geo-proximity - Route traffic based on geographic location using `Bias value`
-* Multi-value - Return multiple values in response to DNS queries(using health check)
-* Traffic flow - visual editor for chaining routing policies can version policy records for easy rollback
-* AWS Alias Record - smart DNS record detects changed IPs for AWS resources and adjust automatically.
-* Resolver - Let you regionally route DNS queries between your VPC and your network Hybrid environments
-* Health checks can be created to monitor and automatically over endpoints. You can have health checks monitor other health checks.
+<img src="../images/route53/old/resolver.png" alt="">
