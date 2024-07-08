@@ -120,6 +120,52 @@
 
 <img src="../images/route53/route-53-alias-records-targets.png" alt="Alias Records Target">
 
+### Route 53 - Routing Policies
+
+* Define how Route 53 responds to DNS queries
+* Don't get confused by the word "Routing"
+  * It's not the same as Load balancer routing which routes the traffic
+  * DNS does not route any traffic, it only responds to the DNS queries
+* Route 53 Supports the following Routing Policies
+  * Simple
+  * Weighted
+  * Failover
+  * Latency Based
+  * Geolocation
+  * Multi-Value Answer
+  * Geo proximity(using Route 53 Traffic Flow Feature)
+
+#### Routing Policies - Simple
+
+* Typically, route traffic to a single resource
+* Can specify multiple values in the same record
+* **If multiple values are returned, a random one is chosen by the client**
+* When Alias enabled, specify only one AWS resource
+* Can't be associated with Health Checks
+
+<img src="../images/route53/route-53-routing-policies-simple.png" alt="Routing Policies Simple">
+
+#### Routing Policies - Weighted
+
+* Control the % of the requests that go to each specific resource
+* Assign each record a relative weight
+  * traffic(%) = Weight for a specific record / Sum of all the weights for all records
+* DNS records must have the same name and type
+* Use-cases: load balancing between regions, testing new application versions...
+* **Assign a weight of 0 to a record to stop sending traffic to a resource**
+* If all records have weight of 0, the all records will be returned equally.
+
+<img src="../images/route53/route-53-routing-policies-weighted.png" alt="Route 53 - Weighted">
+
+#### Routing Policies - Latency
+
+* Redirected to the resources that has the least latency close to us
+* Super helpful when latency for users is a priority
+* **Latency is based on traffic between users and AWS regions**
+* German users may be directed to the US(if that's the lowest latency)
+* Can be associated with Health Checks(has a failover capability)
+
+<img src="../images/route53/route-53-routing-policies-latency.png" alt="Route 53 - Latency">
 
 ======================================
 
