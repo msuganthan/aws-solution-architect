@@ -167,6 +167,49 @@
 
 <img src="../images/route53/route-53-routing-policies-latency.png" alt="Route 53 - Latency">
 
+#### Route 53 - Health Checks
+
+* HTTP Health Checks are only for **public resources**
+* Health Check => Automated DNS Failover:
+  * Health checks that monitor an  endpoint(application, server, other AWS resource)
+  * Health checks that monitor other health checks(Calculated Health Checks)
+  * Health checks that monitor CloudWatch Alarms(full control !!!) - e.g., throttles of DynamoDB, alarms on RDS, custom metrics, (helpful for private resources)
+* Health Checks are integrated with CW metrics
+
+<img src="../images/route53/route-53-health-checks.png" alt="Health Checks">
+
+#### Health Checks - Monitor an Endpoint
+
+* **About 15 global health checkers will check the endpoint health**
+  * Healthy/Unhealthy Threshold - 3(default)
+  * Interval - 30 sec (can set to 10 sec - higher cost)
+  * Supported protocol: HTTP, HTTPS and TCP
+  * If > 18% of health report the endpoint is health, Route 53 considers it **Healthy**. Otherwise, it's **Unhealthy**
+  * Ability to choose which location you want Route 53 to use
+* Health Checks pass only when the endpoint responds with the 2xx and 3xx status codes
+* Health Checks can be setup to pass / fail based on the text in the first **5120 bytes** of the response
+* Configure you router/firewall to allow incoming requests from Route 53 Health Checkers
+
+<img src="../images/route53/route-53-monitor-an-endpoint.png" alt="Monitor an endpoint">
+
+#### Route 53 - Calculated Health Checks
+
+* Combine the results of multiple Health Checks into a single Health Check
+* You can use **OR**, **AND**, or **NOT**
+* Can monitor up to 256 Child Health Checks
+* Specify how many of the health checks need to pass to make the parent pass
+* Usage: perform maintenance of your website without causing all health checks to fail
+
+<img src="../images/route53/route-53-calculated-health-checks.png" alt="Calculated Health Checks">
+
+#### Health Checks - Private Hosted Zones
+
+* Route 53 health checkers are outside the VPC
+* They can't access private endpoints(private VPC or on-premises resources)
+* You can create a **CloudWatch Metric** and associate a **Cloudwatch Alarm**, then create a Health Check that checks the alarm itself
+
+<img src="../images/route53/route-53-private-hosted-zones.png" alt="Private hosted zones">
+
 ======================================
 
 Route53 Domain Name Service **think** Godaddy or NameCheap but with more synergies with AWS services.
