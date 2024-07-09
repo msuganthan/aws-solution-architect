@@ -210,6 +210,22 @@
 
 <img src="../images/route53/route-53-private-hosted-zones.png" alt="Private hosted zones">
 
+### Routing Policies - Failover(Active-Passive)
+
+<img src="../images/route53/route-53-failover-policies.png" alt="Route 53 Failover policies">
+
+### Routing Policies - Geolocation
+
+* Different from latency-based
+* **This routing is based on user location**
+* Specify location by Continent, Country, or by US State(if there's overlapping, more precise location selected)
+* Should create a **Default** record(in case there's no match on location)
+* Use cases: website localization, restrict content distribution, load balancing,...
+* Can be associated with Health Checks
+
+<img src="../images/route53/route-53-routing-policies-geolocation.png" alt="Geolocation">
+
+
 ======================================
 
 Route53 Domain Name Service **think** Godaddy or NameCheap but with more synergies with AWS services.
