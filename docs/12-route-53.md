@@ -214,7 +214,7 @@
 
 <img src="../images/route53/route-53-failover-policies.png" alt="Route 53 Failover policies">
 
-### Routing Policies - Geolocation
+#### Routing Policies - Geolocation
 
 * Different from latency-based
 * **This routing is based on user location**
@@ -225,138 +225,72 @@
 
 <img src="../images/route53/route-53-routing-policies-geolocation.png" alt="Geolocation">
 
+#### Routing Policies - GeoLocation
 
-======================================
+* Different from latency based
+* This routing is based on user location
+* Specify location by Continent, Country or by US state(if there's overlapping, most precise location selected)
+* Should create a "Default" record(in case there's no match on location)
+* Use cases: website localization, restrict content distribution, load balancing,...
+* Can be associated with Health Checks
 
-Route53 Domain Name Service **think** Godaddy or NameCheap but with more synergies with AWS services.
+<img src="../images/route53/route-53-geo-location.png" alt="Geo Location">
 
-You can:
-* register and manage domains
-* create various records sets on a domain
-* implement complex **traffic flows** eg. Blue/green deploy, fail-overs
-* Continuously monitor records via health checks
-* resolve VPC's outside of AWS.
+#### Geo proximity Routing Policy
 
-**Route53-Use case**
+* Route traffic to your resources based on the geographic location of users and resources
+* Ability to shift more traffic to resource based on the defined bias:
+  * To expand(1 to 99) - more traffic to the resource
+  * To shrink(-1 to -99) - less traffic to the resource
 
-Use Route53 to get your custom domains to point to your AWS Resources.
+* Resource can be:
+  * AWS resources(specify AWS region)
+  * Non-AWS resource(specify Latitude and Longitude)
+* You must use Route 53 traffic flow(advanced) to use this feature.
 
-1. Incoming internet traffic
-2. Route traffic to our web-app backend by ELB
-3. Route traffic to an instance we use to tweak out AMI
-4. Route traffic to API gateway which powers our API
-5. Route traffic to CloudFront which servers out S3 static hosted website.
-6. Route traffic to an Elastic IP(EIP) which is a static IP that hosts our company Minecraft server.
+<img src="../images/route53/route-53-geo-proximity-routing.png" alt="Geo proximity routing">
 
-<img src="../images/route53/old/route53.png" alt="Route53">
+* Higher bias in us-east-1
 
-**Record Sets**
+<img src="../images/route53/route-53-geo-proximity-routing-higher-bias.png" alt="Higher bias">
 
-* We create record sets which allows us to point our naked domain(exampro.co) and subdomains via Domain records.
-* For example, we can send our www subdomain using an **A record** to point a specific IP address,
+#### Routing Policies - IP-based Routing
 
-<img src="../images/route53/old/record-set.png" alt="">
+* Routing is based on client's IP addresses
+* You provide a list of CIDR for your clients and the corresponding endpoints/locations user-IP-to-endpoint mappings)
+* Use-cases: Optimize performance, reduce network costs...
+* Example: route end users from a particular ISP to a specific endpoint
 
-**Route53 - Alias Record**
+<img src="../images/route53/route-53-ip-based-routing.png" alt="IP based routing">
 
-* AWS has their own special Alias Record which extends DNS functionality. It will route traffic to specific AWS resources.
-* Alias records are smart where **they can detect the change of an IP address and continuously keep that endpoint pointed to the correct resource.**
-* In most cases you want to be using Alias which routing traffic to AWS resources.
+#### Routing Policies - Multi-Value
 
-<img src="../images/route53/old/route53-alias-record.png" alt="route53 alias record"/>
+* Use when routing traffic to multiple resources
+* Route 53 return multiple values/resources
+* Can be associated with Health Checks(return only values for health resources)
+* Up to 8 healthy records are return for each Multi-Value query
+* Multi-Value is not a substitute for having an ELB(because it is a client side balancing)
 
-**Routing Policies:**
+<img src="../images/route53/route-53-multi-value-policy.png" alt="Multi Value policy">
 
-* **Simple Routing:** default routing policy, multiple addresses result in random selection.
-* **Weighted Routing:** route traffic based on weighted values to split traffic.
-* **Latency-Based Routing:** route traffic to region resource with lowest latency.
-* **Failover Routing:** route traffic if primary endpoint is unhealthy to secondary endpoint.
-* **Geolocation Routing** route traffic based on the location of your users.
-* **Geo-proximity Routing** route traffic based on the location of your resources and optionally, shift traffic from resources in one location to resources in another.
-* **Multi-value Answer Routing** respond to DNS queries with up to eight healthy records selected at random.
 
-**A visual editor** lets you create sophisticated routing configurations for your resources using existing routing types.
+### Domain Registrar vs DNS Service
 
-Supports **versioning,** so you can roll out or roll back updates.
+* You buy or register your domain name with a Domain Registrar typically by paying annual charges(e.g GoDaddy, Amazon registrar Inc.)
+* The Domain Registrar usually provides you with a DNS service to manage your DNS records
+* But you can use another DNS service to manage you DNS records
+* Example: purchase the domain from GoDaddy and use Route 53 to manage your DNS records
 
-<img src="../images/route53/old/route53-traffic-flow.png" alt="">
+<img src="../images/route53/route-53-go-daddy-to-amazon.png" alt="GoDaddy to amazon">
 
-**Simple Routing Policies**
+#### GoDaddy as Registrar & Route 53 as DNS Service
 
-* Simple Routing Policies are the most basic routing policies in Route53 **Default Policy**
-* You have 1 record and provide multiple IP addresses.
-* When multiple values are specified for a record, Route53 will return all values back to the user in a random order.
+<img src="../images/route53/route-53-go-daddy-as-registrar.png" alt="Go Daddy as registrar">
 
-For example if you have a record for `www.exampro.co` with 3 different IP address values, users would be directly randomly to 1 of them when visiting the domain.
+* If you buy your domain on a 3rd party registrar, you can still use Route 53 as the DNS service provider
 
-<img src="../images/route53/old/simple-routing-policy.png" alt="">
-<img src="../images/route53/old/route53-simple-policies.png" alt="">
+1. Create a Hosted Zone in Route 53
+2. Update NS Records on the 3rd party website to use Route 53 **Name Servers**
 
-**Weighted Routing Policies**
-
-* Weighted Routing Policies let you split up traffic based on different `weights` assigned.
-* This allows you to send a certain percentage of overall traffic to one server, and have any other traffic apart from that directed to a completely different server.
-
-For example if you had an ALB running experimental features you could test against a small amount traffic at random to minimize the impact of affect.
-
-<img src="../images/route53/old/route53-weighted-routing.png" alt="">
-
-**Latency Based Routing Policies:**
-
-* Latency Based Routing allows you to direct traffic based on the lowest network latency possible for your end-user **based on region.**
-* Requires a latency resource record to be set for the EC2 or ELD resource that hosts your application in each region.
-
-For example, You have two copies of your web-app backed by ALB. One in Calif, US and another in Montreal CA. A request comes in from Toronto, it will be routed to Montreal since it will have lower latency.
-
-<img src="../images/route53/old/latency-policy.png" alt="">
-
-**Failover Routing Policies:**
-
-* Failover Routing Policies allow you to create active/passive setups in situations where you want a primary site in one location and a secondary data recovery site in another.
-* Route52 automatically monitors health-checks from your primary site to determine the health of end-points. If an end-point is determined to be in a failed state, all traffic is automatically directed to the secondary location.
-
-For example, we have primary and secondary web-app backed by ALB. Route53 determines our primary is unhealthy and fails over to secondary ALB.
-
-<img src="../images/route53/old/failover-routing-policies.png" alt="">
-
-**Geolocation routing policies:**
-
-* Allow you to direct traffic based on the geographic location of where the request originated from.
-* For example this would let you route all traffic coming from North America to servers located in North America regions, where queries from other regions could be directed to servers hosted in that region.(potentially with pricing and language specific to that region)
-
-<img src="../images/route53/old/geo-location-routing-policies.png" alt="">
-
-**Geo-proximity Routing Policies:**
-
-* Allow you to direct traffic based on the geographic location of your users, and your AWS resources.
-* You can route more or less traffic to a specific resource by specifying a `Bias` value.
-
-`Bias` values expand and shrink the size of the geographic region from which traffic is routed to. **You must use Route53 Traffic flow** in order to use geo-proximity routing policies.
-
-<img src="../images/route53/old/geo-proximity-routing-policies.png" alt="">
-<img src="../images/route53/old/geo-proximity-routing-policies1.png" alt="">
-
-**Multi-value Answer Policies:**
-
-* Let you configure Route53 to return multiple values such as IP addresses for your web-servers, in response to DNS queries.
-* Multiple values can be specified for almost any record. Route53 automatically performs health-checks on resources and only returns values of ones deemed healthy.
-
-Similar to Simple Routing, however with an added health check for your record set resources.
-
-<img src="../images/route53/old/multi-value-answer-policies.png" alt="">
-
-**Route53 - Health Checks**
-
-* Checks health every **30s** by default. Can be reduced to every **10s**.
-* A health check can **initial a failover** if status is returned unhealthy.
-* A CloudWatch Alarm can be created to alert you of status unhealthy
-* A health check can monitor other health check to create a chain of reactions.
-* Can create up to 50 health checks for AWS endpoints that are within or linked to the same AWS account.
-
-**Route53 - Resolver**
-
-* Formerly known as **.2 resolver**
-* A regional service that lets you route DNS queries between your **VPCs and your network**.
-* DNS Resolution for **Hybrid Environments**
-
-<img src="../images/route53/old/resolver.png" alt="">
+* Domain registrar != DNS Service
+* But every Domain registrar usually comes with some DNS features
