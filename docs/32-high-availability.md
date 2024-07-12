@@ -1,4 +1,3 @@
-[8:43:07]
 ### High Availability
 
 The ability for a system to remain available
