@@ -118,3 +118,26 @@
 * These settings were created to prevent company data leaks
 * If you know your bucket should never be public, leave these on
 * Can be set at the account level
+
+### Amazon S3 - Static Website Hosting
+
+* S3 can host static websites and have them accessible on the Internet
+
+* The website URL will be (depending on the region)
+  * http://bucket-name.s3-website-aws-region.amazonaws.com
+  or 
+  * http://bucket-name.s3-website.aws-region.amazonaws.com
+
+* If you get a **403 Forbidden** error, make sure the bucket policy allows public reads!!!
+
+### Amazon S3 - Versioning
+
+* You can version your files in Amazon S3
+* It is enabled at the **bucket level**
+* Same key overwrite will change the "version": 1,2,3...
+* It is best practice to version your buckets
+  * Protect against unintended deletes(ability to restore a version)
+  * Easy roll back to previous version
+* Notes:
+  * Any files that is not versioned prior to enabling versioning will have version "null"
+  * Suspending versioning does not delete the prevision versions
