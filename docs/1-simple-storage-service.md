@@ -278,8 +278,8 @@
 * A rule in your company states that you should be able to recover your deleted S3 objects immediately for 30 days, although this may happen rarely. After this time, and for up to 365 days, deleted objects should be recoverable within 48 hours.
 
 * Enabled **S3 versioning**, in order to have object versions, so that "deleted objects" are in fact hidden by a "delete marker" and can be recovered.
-* Transition the "non current versions" of the object to **Standard IA**
-* Transition afterward the "non current versions" to **Glacier Deep Archive**
+* Transition the "non-current versions" of the object to **Standard IA**
+* Transition afterward the "non-current versions" to **Glacier Deep Archive**
 
 #### Amazon S3 Analytics - Storage Class Analysis
 
@@ -291,3 +291,40 @@
 * Good first step to put together Lifecycle Rules(or improve them)
 
 <img src="../images/s3/storage-class-analysis.png" alt="Storage class analysis">
+
+
+### S3 Requester Pays
+
+* In general, bucket owners pay for all Amazon S3 storage and data transfer cost associated with their bucket
+* With **Requester Pays Bucket**, the requester instead of the bucket owner pays the cost of the request and the data download from the bucket.
+* Helpful when you want to share large dataset with other account.
+* The requester must be authenticated in AWS(cannot be anonymous)
+
+<img src="../images/s3/s3-requester-pay.png" alt="Requester Pay">
+
+### S3 Event Notifications
+
+* S3:ObjectCreated, S3:ObjectRemoved, S3:ObjectRestore, S3:Replication,...
+* Object name filtering is possible(*.jpg)
+* Use case: generate thumbnails of images uploaded to S3
+* Can create as many "S3 events" as desired
+
+* S3 event notifications typically deliver events in seconds but can sometime take a minute or longer
+
+<img src="../images/s3/s3-event-notification.png" alt="Event notification">
+
+#### S3 Event Notifications - IAM Permissions
+
+* To send event to SNS, SQS or Lambda we need to create Resource Policy, which allow S3 to send notification to this services
+
+<img src="../images/s3/s3-event-notifications-resource-policy.png" alt="Event Notification Event Policy">
+
+#### S3 Event Notification with Amazon EventBridge
+
+* From S3 you can send notification to EventBridge and from there you can send notification to 18 different amazon service as destination
+
+<img src="../images/s3/s3-notification-to-event-bridge.png" alt="Notification to Event bridge">
+
+* **Advanced filtering** options with JSON rules(metadata, object size, name...)
+* **Multiple Destinations** - ex Step Functions, kinesis Streams / Firehose...
+* **EventBridge Capabilities** - Archive, Replay Events, Reliable delivery
