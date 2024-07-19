@@ -328,3 +328,42 @@
 * **Advanced filtering** options with JSON rules(metadata, object size, name...)
 * **Multiple Destinations** - ex Step Functions, kinesis Streams / Firehose...
 * **EventBridge Capabilities** - Archive, Replay Events, Reliable delivery
+
+### S3- Baseline Performance
+
+* Amazon S3 automatically scales to high request rates, latency 100-200 ms
+* Your application can achieve at least 3,500 PUT/COPY/POST/DELETE or 5,500 GET/HEAD requests per second per prefix in a bucket.
+* There is no limits to the number of prefixes in a bucket
+* Example(object path => prefix):
+  * bucket/folder1/sub1/file => /folder1/sub1/
+  * bucket/folder1/sub2/file => /folder1/sub2/
+  * bucket/1/file => /1/
+  * bucket/2/file => /2/
+* If you spread reads across all four prefixes evenly, you can achieve 22,000 requests per second for GET and HEAD
+
+#### Multi-part upload:
+
+* recommended for file > 100MB, must use for files > 5GB
+* Can help parallelize uploads(speed up transfers)
+
+<img src="../images/s3/s3-multi-part-uploads.png" alt="S3 Multi part uploads">
+
+#### S3 transfer acceleration
+
+* Increase transfer speed by transferring file to an AWS edge location which will forward the data to the S3 bucket in the target region
+* Compatible with multipart upload
+
+<img src="../images/s3/s3-edge-location.png" alt="Edge location">
+
+
+#### S3 Byte-Range Fetches
+
+* Parallelize GETs by requesting specific byte ranges
+* Better resilience in case of failure
+* Can be used to speed up downloads
+
+<img src="../images/s3/s3-byte-range-request.png" alt="Byte Range request">
+
+* Can be used to retrieve only partial data(for example the head of a file)
+
+<img src="../images/s3/s3-byte-range-retrieval.png" alt="Byte range retrieval">
