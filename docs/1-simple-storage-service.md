@@ -390,3 +390,68 @@
 * You can use S3 inventory to get object list and use S3 select to filter your objects
 
 <img src="../images/s3/s3-batch-operations.png" alt="S3 Batch operations">
+
+### S3 - Storage Lens
+
+* Understand, analyze and optimize storage across entire AWS organization
+* Discover anomalies, identify cost efficiencies, and apply data protection best practices across AWS organization(30 days usage & activity metrics)
+* Aggregate data for organization, specific accounts, regions, buckets, or prefixes
+* Default dashboard or create your own dashboards
+* Can be configured to export metrics daily to an S3 bucket(CSV, Parquet)
+
+<img src="../images/s3/s3-storage-lens.png" alt="Storage lens">
+
+#### Storage Lens - Default Dashboard
+
+* Visualize summarized insights and trends for both free and advanced metrics
+* Default dashboard shows Multi-Region and Multi-Account data
+* Preconfigured by Amazon S3
+* Can't be deleted, but can be disabled
+
+<img src="../images/s3/s3-lens-default-dashboard.png" alt="S3 lens Default Dashboard">
+
+#### Storage Lens - Metrics
+
+* **Summary Metrics**
+  * General insights about your S3 storage
+  * StorageBytes, Object Count...
+  * Use-cases: identify the fastest-growing(or not used) buckets and prefixes
+* **Cost-optimization Metrics**
+  * Provide insights to manage and optimize your storage costs
+  * NonCurrentVersionStorageBytes, IncompleteMultipartUploadStorageBytes...
+  * Use cases: identify buckets with incomplete multipart uploaded older than 7 days, identify which objects could be transitioned to lower cost storage class.
+* **Data-Protection Metrics**
+  * Provide insights for data protection features
+  * VersioningEnabledBucketCount, MFADeleteEnabledBucketCount, SSEKMSEnabledBucketCount, CrossRegionReplicationRuleCount...
+  * Use-case: identify buckets that aren't following data-protection best practices
+* **Access-Management Metrics**
+  * Provide insights for S3 Object ownership
+  * ObjectOwnershipBucketOwnerEnforcedBucketCount...
+  * Use-cases: identify which object ownership setting your buckets use
+* **Event Metrics**
+  * Provide insights for S3 Event Notifications
+  * EventNotificationEnabledBucketCount(identify which buckets have S3 Event Notifications configured)
+* **Performance Metrics**
+  * Provide insights for S3 Transfer Acceleration
+  * TransferAccelerationBucketCount(identify which buckets have S3 transfer acceleration enabled)
+* **Activity Metrics**
+  * Provide insights about how your storage is requested
+  * AllRequests, GetRequests, PutRequests, ListRequests, BytesDownloads...
+* **Detailed Status Code Metrics**
+  * Provide insights for HTTP status codes
+  * 200OKStatusCount, 403ForbiddenErrorCount, 404NotFoundErrorCount...
+
+#### Storage Lens - Free vs Paid
+
+* **Free Metrics**
+  * Automatically available for all customers
+  * Contains around 28 usage metrics
+  * Data is available for queries for 14 days
+* **Advanced Metrics and Recommendations**
+  * Additional paid metrics and features
+  * **Advanced metrics** - Activity, Advanced Cost Optimization, Advanced Data Protection, Status Code
+  * **CloudWatch Publishing** - Access metrics in CloudWatch without additional charges
+  * **Prefix Aggregation** - Collect metrics at the prefix level
+  * Data is available for queries for 15 months.
+
+<img src="../images/s3/s3-lens-free-vs-paid.png" alt="Free vs Paid">
