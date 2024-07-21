@@ -543,3 +543,161 @@
 ```
 
 <img src="../images/s3/s3-aws-secure-transport.png" alt="Force encryption">
+
+
+### Default Encryption vs Bucket Policies
+
+* SSE-S3 encryption is automatically applied to new objects stored in S3 bucket
+* Optionally you can force encryption using a bucket policy and refuse any API call to put an S3 object without encryption headers(SSE-KMS or SSE-C)
+
+```json
+{
+  "version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Deny",
+      "Action": "s3:PutObject",
+      "Principal": "*",
+      "Resource": "arn:aws:s3:::my-bucket/*",
+      "Condition": {
+        "StringNotEquals": {
+          "s3:x-amz-server-side-encryption": "aws:kms"
+        }
+      }
+    }
+  ]
+}
+```
+
+```json
+{
+  "version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Deny",
+      "Action": "s3:PutObject",
+      "Principal": "*",
+      "Resource": "arn:aws:s3:::my-bucket/*",
+      "Condition": {
+        "Null": {
+          "s3:x-amz-server-side-encryption-customer-algorithm": "true"
+        }
+      }
+    }
+  ]
+}
+```
+
+### What is CORS?
+
+* Cross-Origin Resource Sharing(CORS)
+* Origin = scheme(protocol) + host (domain) + port
+  * example: https://www.example.com (implied port is 443 for HTTPS, 80 for HTTP)
+* Web Browser based mechanism to allow requests to other origins while visiting the main origin
+* Same origin: http://example.com/app1 & http://example.com/app2
+* Different origins: http://www/example.com & http://other.example.com
+* The requests won't be fulfilled unless the other origin allows for the request, using CORS headers(example: Access-Control-Allow-Origin)
+
+<img src="../images/s3/web-cors.png" alt="Web Browser CORS">
+
+#### Amazon S3 - CORS
+
+* If a client makes a cross-origin request on our S3 bucket, we need to enable the correct CORS headers
+* You can allow for a specific origin or for *(all origins)
+
+<img src="../images/s3/s3-cors.png" alt="S3 Cors">
+
+### Amazon S3 - MFA Delete
+
+* **MFA(Multi-Factor Authentication) - ** force users to generate a code on a device(usually a mobile phone or hardware) before doing important operation on S3
+* MFA will be required to:
+  * permanently delete an object version
+  * Suspend versioning on the bucket
+* MFA won't be required to:
+  * Enable Versioning
+  * List deleted version
+* To use MFA Delete, Versioning must be enabled on the bucket
+* Only the bucket owner(root account) can enable/disable MFA Delete
+
+### S3 Access Logs
+
+* For audit purpose, you may want to log all access to S3 bucket
+* Any request made to S3, from any account, authorized or denied will be logged into another S3 bucket
+* That data can be analyzed using data analysis tools...
+* The target logging bucket must be in the same AWS region
+
+* The log format is at
+  https://docs.aws.amazon.com/AmazonS3/latest/userguide/LogFormat.html
+
+#### S3 Access Logs: Warning 
+
+* Do not set you logging bucket to be the monitored bucket
+* It will create a logging loop, and your bucket will grow exponentially
+
+### Amazon S3 - Pre Signed URLs
+
+* Generate pre-signed URLs using the S3 console, AWS CLI or SDK
+* URL Expiration
+  * S3 Console - 1 min up to 720 mins(12 hours)
+  * AWS CLI - configure expiration with --expire-in parameter in seconds(default 3600 secs, max.604800 secs ~168 hours)
+* Users given a pre-signed URL inherit the permissions of the user that generated the URL for GET/PUT
+
+* Examples:
+  * Allow only logged-in users to download a premium video from your S3 bucket
+  * Allow an ever-changing list of users to download files by generating URLs dynamically
+  * Allow temporarily a user to upload a file to a precise location in your S3 bucket
+
+<img src="../images/s3/s3-pre-signed-url.png" alt="S3 Pre signed URL">
+
+
+### S3 Glacier Vault Lock
+
+* Adopt a WORM(Write Once Read Many) model
+* Create a Vault Lock Policy
+* Lock the policy for future edits
+* Helpful for compliance and data retention
+
+<img src="../images/s3/s3-vault-lock-policy.png" alt="Vault Lock Policy">
+
+#### S3 Object Lock(versioning must be enabled)
+
+* Adopt a WORM(Write Once Read Many) model
+* Block an object version deletion for a specified amount of time
+* **Retention mode - Compliance**:
+  * Object versions can't be overwritten or deleted by any user, including the root user
+  * Objects retention modes can't be changed, and retention periods can't be shortened
+* **Retention mode - Governance**:
+  * Most users can't overwrite or delete an object version or alter its lock settings
+  * Some users have special permissions to change the retention or delete the object
+* **Retention Period**: protect the object for a fixed period, it can be extended
+* **Legal Hold**:
+  * **protect the object indefinitely, independent of retention period**
+  * can be freely placed and removed using the `s3:PutObjectLegalHold` IAM permission
+
+#### Access Points
+
+* Access Points simplify security management for S3 Buckets
+* Each Access Point has:
+  * its own DNS name(Internet Origin or VPC origin)
+  * an access point policy(similar to bucket policy) - manage security at scale
+
+<img src="../images/s3/s3-access-points.png" alt="S3 Access Points">
+
+#### S3 - Access Points - VPC Origin
+
+* We can define the access point to be accessible only from within the VPC
+* You must create a **VPC Endpoint** to access the Access Point(Gateway or Interface Endpoint)
+* The VPC Endpoint Policy must allow access to the target bucket and Access Point
+
+<img src="../images/s3/s3-access-points.png" alt="VPC Access Point">
+
+### S3 Object Lambda
+
+* Use AWS Lambda Functions to change the object before it is retrieved by the caller application
+* Only one S3 bucket is needed, on top of which we create **S3 Access Point** and **S3 Object Lambda Access Points**
+* Use-cases"
+  * Redacting personally identifiable information for analytics or non-production environments
+  * Converting across data formats, such as converting XML to JSON
+  * Resizing and watermarking images on the fly using caller-specific details, such as the user who requested the object.
+
+<img src="../images/s3/s3-access-points.png" alt="Access Points">
