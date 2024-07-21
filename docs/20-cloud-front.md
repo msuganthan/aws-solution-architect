@@ -77,19 +77,69 @@
 
 <img src="../images/cloud-front/cloud-front-price-class.png" alt="Cloud Front Price Class">
 
+#### CloudFront - Cache Invalidations
+
+* In case you update the backend origin, CloudFront doesn't know about it and will only get the refreshed content after the TTL has expired
+* However, you can force an entire or partial cache refresh(thus bypassing the TTL) by performing **CloudFront Invalidation**
+* You can invalidate all files(*) or a special path(/images/*)
+
+<img src="../images/cloud-front/cloud-front-cache-invalidation.png" alt="Cloud Front Cache Invalidations">
+
+#### Global users for our application
+
+* You have deployed an application and have global users who want to access it directly
+* The go over the public internet, which can add a lot of latency due to many hops
+* We wish to go as fast as possible through AWS network to minimize latency
+
+<img src="../images/cloud-front/global-user-for-application.png" alt="Global user for application">
+
+##### Unicast IP vs Anycast IP
+
+* Unicast IP: one server holds one IP address
+
+<img src="../images/cloud-front/unicast.png" alt="Unicast">
+
+* Anycast IP: all server hold th same IP address and the client is routed to the nearest one
+
+<img src="../images/cloud-front/anycast.png" alt="Anycast">
+
+##### AWS Global Accelerator
+
+* Leverage the AWS internal network to route to your application
+* **2 Anycast IP** are created for your application
+* The Anycast IP send traffic directly to Edge Locations
+* The Edge locations send the traffic to your application
+
+<img src="../images/cloud-front/global-accel-working.png" alt="Global Accel Working">
+
+* Works with Elastic IP, EC2 instances, ALB, NLB, public or private
+* Consistent Performance
+  * Intelligent routing to the lowest latency and fast regional failover
+  * No issue with client cache(because the IP doesn't change)
+  * Internal AWS network
+* Health Checks
+  * Global Accelerator performs a health check of you application
+  * Helps make you application global(failover less than 1 minute for healthy)
+  * Great for disaster recovery(thanks to the health checks)
+* Security
+  * only 2 external IP need to be whitelisted
+  * DDoS protection thanks for to AWS Shield
 
 
+##### AWS Global Accelerator vs CloudFront
 
-
-
-
-
-
-
-
-
-
-
+* They both use the AWS global network and its edge locations around the world
+* Both services integrate with AWS Shield for DDoS protection
+* **CloudFront**
+  * Improves performance of both cacheable content(such as images and videos)
+  * Dynamic content(suck as API acceleration and dynamic site delivery)
+  * Content is served at the edge
+* **Global Accelerator**
+  * Improves performance for wide range of application over **TCP or UDP**.
+  * Proxying packets at the edge to applications running in one or more AWS regions.
+  * Good fit for non-HTTP use cases, suck as gaming(UDP), IoT(MQTT) or Voice over IP
+  * Good for HTTP use cases that require static IP addresses
+  * Good for HTTP use cases that required deterministic, fast regional failover.
 
 
 
