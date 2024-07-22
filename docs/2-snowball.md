@@ -30,6 +30,60 @@ Challenges:
 **AWS Snow Family: offline devices to perform data migrations**
 If it takes more than a week to transfer over the network, use Snowball devices!!!
 
+#### Diagrams
+
+* Clients sends the data to S3
+
+<img src="../images/storage-extras/s3-direct-upload.png" alt="Direct upload">
+
+* Client request Snowball device and we receive it via post
+* Client load the data directly onto the device locally
+* Client ship back the device to AWS
+* AWS will take and will plug the device into their own infrastructure and data will be imported or export
+
+<img src="../images/storage-extras/working-of-snow-ball-upload.png" alt="Working of Snow ball upload">
+
+#### Snowball Edge(for data transfers)
+
+* Physical data transport solution: move TBs or PBs of data in or out of AWS
+* Alternative to moving data over the network(and paying network fees)
+* Pay per data transfer job
+* Provide block storage and Amazon S3-compatible object storage
+* **Snowball Edge Storage optimized**
+  * 80 TB of HDD or 210 TB NVMe capacity for block volume and S3 compatible object storage
+* **Snowball Edge Compute optimized**
+  * 42 TB of HDD or 28TB NVMe capacity for block volume and S3 compatible object storage
+
+* Use-cases: large data cloud migrations, DC decommission, disaster recovery.
+
+#### AWS Snowcone & Snowcone SSD
+
+* Small, portable computing, anywhere, rugged & secure withstands harsh environments
+* Light(4.5 pounds, 2.1 kg)
+* Device used for edge computing, storage, and data transfer
+* **Snowcone** - 8TB or HDD storage
+* **Snowcone SSD** - 14TB of SSD storage
+* Use Snowcone where Snowball does not fit(space-constrained environment)
+* Must provide your own battery/cables
+
+* Can be sent back to AWS offline, or connect it to internet and use **AWS DataSync** to send data.
+
+#### Snowmobile
+
+* Transfer exabyte of data(1 Exabyte = 1,000 PB = 1,000,000 TBs)
+* Each Snowmobile has 100PB of capacity(use multiple in parallel)
+* High security: temperature controlled, GPS, 24/7 video surveillance
+* Better than Snowball if you transfer more than 10PB.
+
+#### AWS Snow Family for Data migrations
+
+<img src="../images/storage-extras/snow-cone-ball-mobile.png" alt="Snow cone ball mobile">
+
+|                  | Snowcone & Snowcone SSD        | Snowball Edge(storage optimized) | Snowmobile            |
+|------------------|--------------------------------|----------------------------------|-----------------------|
+| Storage Capacity | 8 TB HDD & 14 TB SSD           | 80 TB - 210 TB                   | < 100 PB              |
+| Migration Size   | Upto 24 TB, online and offline | Upto  petabytes, offline         | Upto exabyte, offline |
+| Datasync agent   | Pre-installed                  |                                  |                       |
 
 =============================================================================================================
 
