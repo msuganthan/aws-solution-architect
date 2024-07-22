@@ -1,3 +1,38 @@
+### AWS Snow Family
+
+* Highly secure, portable device to **collect and process data at the edge, and migrate data into and out of AWS**
+* **Data migration:**
+  * Snowcone
+  * Snowball Edge
+  * Snowmobile
+* **Edge Computing**
+  * Snowcone
+  * Snowball Edge
+
+#### Data Migrations with AWS Snow Family
+
+
+|          | Time to transfer |           |           |
+|----------|------------------|-----------|-----------|
+|          | 100 Mbps         | 1Gbps     | 10Gbps    |
+| -------- | ---------------- | --------- | --------- |
+| 10 TB    | 12 days          | 30 hours  | 3 hours   |
+| 100 TB   | 124 days         | 12 days   | 30 hours  |
+| 1 PB     | 3 years          | 124 days  | 12 days   |
+
+Challenges:
+* Limited connectivity
+* Limited bandwidth
+* High network cost
+* Shared bandwidth(can't maximize the line)
+* Connection stability
+
+**AWS Snow Family: offline devices to perform data migrations**
+If it takes more than a week to transfer over the network, use Snowball devices!!!
+
+
+=============================================================================================================
+
 ### Snowball
 
 * **Petabyte-scale** data transfer service. 
