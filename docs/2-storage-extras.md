@@ -316,3 +316,5 @@ If it takes more than a week to transfer over the network, use Snowball devices!
 * Works with File Gateway, Volume Gateway, Tape Gateway
 * Has the required CPU, memory, network, SSD cache resources
 * Helpful for daily NFS backups in small data centers
+
+<img src="../images/storage-extras/storage-gateway.png" alt="Storage gateway">
