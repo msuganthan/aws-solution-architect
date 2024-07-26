@@ -318,3 +318,56 @@ If it takes more than a week to transfer over the network, use Snowball devices!
 * Helpful for daily NFS backups in small data centers
 
 <img src="../images/storage-extras/storage-gateway.png" alt="Storage gateway">
+
+
+### AWS Transfer Family
+
+* A fully managed service for file transfers into and out of Amazon S3 or Amazon EFS using the FTP protocol
+* Supported Protocols
+  * **AWS Transfer for FTP**(File Transfer Protocol)
+  * **AWS Transfer for FTPS**(File Transfer Protocol over SSL)
+  * **AWS Transfer for SFTP**(Secure File Transfer Protocol)
+* Managed infrastructure, Scalable, Reliable, Highly Available(multi-AZ)
+* Pay per provisioned endpoint per hour + data transfer in GB
+* Store and manage user's credentials within the service
+* Integrate with existing authentication system(Microsoft Active Directory, LDAP, Okta, Amazon Cognito, custom)
+* Usage: sharing files, public datasets, CRM, ERP,...
+
+<img src="../images/storage-extras/transfer-family.png" alt="AWS Transfer family">
+
+* The transfer family has three flavors and the users can access directly using the end points of the end-points of the FTP or optionally you can use a DNS(Route 53) to provide your own host name
+* The FTP service assume IAM roles that will be assumed to send or read through the files from Amazon S3 or EFS
+
+### AWS DataSync
+
+* Move large amount of data to and from
+  * On-premises/other cloud to AWS(NFS, SMB, HDFS, S3, API...) - **needs agent**
+  * AWS to AWS(different storage services) - **no agent needed**
+* Can synchronize to:
+  * Amazon S3(any storage classes - including Glacier)
+  * Amazon EFS
+  * Amazon FSx(Windows, Lustre, NetApp, OpenZFS...)
+* Replication tasks can be **scheduled** hourly, daily, weekly
+* **File permissions and metadata are preserved(NFS POSIX, SMB...)**
+* One agent task can use 10 Gbps, can set up a bandwidth limit
+
+<img src="../images/storage-extras/aws-datasync.png" alt="AWS Datasync">
+
+#### Transfer between AWS storage services
+
+<img src="../images/storage-extras/datasync-bw-aws-services.png" alt="Data sync services">
+
+### Storage Comparison
+
+* **S3**: Object Storage
+* **S3 Glacier**: Object Archival
+* **EBS Volumes**: Network storage for one EC2 instance at a time
+* **Instance storage**: Physical storage for your EC2 instance(high IOPS)
+* **EFS**: Network File System for Linux instances, POSIX file system
+* **FSx for Windows**: Network File System for Windows servers
+* **FSx for Lustre**: High Performance Computing Linux File System
+* **FSx for NetApp ONTAP**: High OS Compatibility
+* **FSx for OpenZFS**: Managed ZFS file system
+* **Storage Gateway**: S3 & FSx File Gateway, Volume Gateway(cache & stored), Tape Gateway
+* **Transfer Family**: FTP, FTPS, SFTP inerface on top of Amazon S3  or Amazon  EFS
+* **DataSync**: Schedule data sync from on-premises to AWS, or AWS to AWS
