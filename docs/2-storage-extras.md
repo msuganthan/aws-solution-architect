@@ -172,27 +172,27 @@ If it takes more than a week to transfer over the network, use Snowball devices!
 
 ##### Amazon FSx for Lustre
 
-* Lustre is a type of parallel distributed file system, for large-scale computing
+* Lustre is a type of parallel distributed file system, for **large-scale computing**
 * The name Lustre is derived from "Linux" and "cluster"
 
 * Machine Learning, "**High Performance Computing(HPC)**"
 * Video Processing, Financial Modeling, Electronic Design Automation
-* Scales up to 100s GB/s, millions of IOPS, sub-ms latencies
+* Scales up to 100s Giga Bytes/s, millions of IOPS, sub-milliseconds latencies
 * Storage Options:
-  * SSD: low-latency, IOPS intensive workloads, small & random file operations
-  * HDD - throughput-intensive workloads, large & sequential file operations.
+  * **SSD**: low-latency, IOPS intensive workloads, small & random file operations
+  * **HDD** - throughput-intensive workloads, large & sequential file operations.
 * Seamless integration with S3
   * Can read S3 as a file system(through FSx)
   * Can write the output of the computations back to S3(through FSx)
-* Can be used on-premises servers(VPN or Direct Connect)
+* Can be used **on-premises** servers(VPN or Direct Connect)
 
 ###### FSx File System Deployment Options
 
 * **Scratch File System**
   * Temporary storage
   * Data is not replicated(doesn't persist if file server fails)
-  * High burst(6x faster, 200MBps per TiB)
-  * Usage: short term processing, optimize costs
+  * **High burst**(6x faster, 200MBps per TiB)
+  * Usage: **short term processing**, **optimize costs**
 
 <img src="../images/storage-extras/scratch-file-system.png" alt="Scratch file Systems">
 
@@ -200,7 +200,7 @@ If it takes more than a week to transfer over the network, use Snowball devices!
   * Long term storage
   * Data is replicated within the same AZ
   * Replace failed files within minutes
-  * Usage: long-term processing, sensitive data
+  * Usage: **long-term processing**, **sensitive data**
 
 <img src="../images/storage-extras/persistent-file-system.png" alt="Persistent file System">
 
@@ -218,15 +218,15 @@ If it takes more than a week to transfer over the network, use Snowball devices!
   * Amazon EC2, EC2 and EKS
 * Storage shrinks or grow automatically
 * Snapshots, replication, low-cost, compression and data de-duplication
-* **Point-int-time instantaneous cloning(helpful for testing new workloads)**
+* **Point-in-time instantaneous cloning(helpful for testing new workloads)**
 
 <img src="../images/storage-extras/netapp-ontap.png" alt="NetApp ONTAP">
 
 #### Amazon FSx for OpenZFS
 
 * Managed OpenZFS file system on AWS 
-* File System compatible with NFS(v3, v4, v4.1, v4.2)
-* Move workloads running on ZFS to AWS
+* **File System compatible with NFS(v3, v4, v4.1, v4.2)**
+* Move workloads running on **ZFS to AWS**
 * Works with:
   * Linux
   * Windows
@@ -236,66 +236,83 @@ If it takes more than a week to transfer over the network, use Snowball devices!
   * Amazon EC2, ECS and EKS
 * Upto 1,000,000 IOPS with 0.5ms latency
 * Snapshots, compression and low-cost
-* Point-in-time instantaneous cloning(helpful for testing new workloads)
+* **Point-in-time instantaneous cloning(helpful for testing new workloads)**
 
 <img src="../images/storage-extras/openzfs.png" alt="OpenZFS">
 
+### Storage gateway
 
-====================================================================================================================
-
-* **Petabyte-scale** data transfer service. 
-* Move data onto AWS via physical briefcase computer.
-
-* **Low Cost:** It cost a **thousand of dollars** to transfer 100TB over high speed internet. Snowball can reduce that cost by **1/5th**.
-* **Speed:** It can take 100TB over 100 days to transfer over high speed internet. Snowball can reduce that transfer time by less than a week.
-
-#### **Snowball features and limitations:**
-
-* E-Ink display(shipping information) 
-* Tamper and weatherproof.
-* Data is encrypted end-to-end(256-bit encryption)
-* Uses **Trusted Platform Module(TPM).** (A specialized chip on an endpoint device that stores RSA encryption keys specific to the host system for hardware authentication)
-* For security purposes, data transfer must be completed **within 90 days** of the Snowball being prepared.
-* Snowball can Import and Export from S3.
-
-#### **Snowball come in two sizes:**
-
-* 50TB(42 TB of usable spaces)
-* 80TB(72 TB of usable spaces)
+* AWS is pushing for "hybrid cloud"
+  * Part of your infrastructure is on the cloud
+  * Part of your infrastructure is on-premeses
+* This can be due to
+  * Long cloud migrations
+  * Security requirements
+  * Compliance requirements
+  * IT Strategy
+* S3 is a proprietary storage technology(unline EFS/NFS), so how do you expose the S3 data on-premises?
+* AWS Storage Gateway !!!
 
 
-### **AWS Snowball Edge:**
+#### AWS Storage Gateway
 
-* Petabyte-scale data transfer service. 
-* Move data onto AWS via physical briefcase computer. 
-* More storage and on-site compute capabilities. 
-* Similar to Snowball but with more storage and with local processing.
+* Bridge between on-premises data and cloud data
+* Use cases:
+  * Disaster recovery
+  * backup & restore
+  * tiered storage
+  * on-premises cache & low-latency files access
+* Types of Storage Gateway
+  * S3 File Gateway
+  * FSx File Gateway
+  * Volume Gateway
+  * Tape Gateway
 
-#### **Snowball Edge features and limitations:**
+#### S3 File Gateway
 
-* **LCD display**(shipping information and other functionality)
-* Can undertake **local processing and edge computing** workloads.
-* **Can use in a cluster in groups of 5 to 10 devices**.
-* three options for device configurations:
-  * storage optimized(24 vCPUs)
-  * compute optimized(54 vCPUs)
-  * GPU optimized (54 vCPUs)
+* Configured S3 buckets are accessible using the NFS and SMB protocol
+* **Most recently used data is cached in the file gateway**
+* Supports S3 Standard, S3 Standard IA, S3 One Zone A, S3 Intelligent Tiering
+* **Transition to S3 Glacier using a Lifecycle Policy**
+* Bucket access using IAM roles for each File Gateway
+* SMB protocol has integration with Active Directory(AD) for user authentication
 
-#### **Snowball Edge come in two sizes:**
+<img src="../images/storage-extras/s3-file-gateway.png" alt="S3 file gateway">
 
-* 100 TB(83 TB of usable space)
-* 100 TB clustered(45 TB per node)
+#### FSx File Gateway
 
-### **Snowmobile**
+* Native access to Amazon FSx for Window File Server
+* **Local cache for frequently accessed data**
+* Windows native compatibility(SMB, NTFS, Active Directory...)
+* Useful for group file shares and home directories
 
-* a 45 foot long ruggedized shipping container, pulled by a semi-trailer truck.
-* transfer up to 100PB per Snowmobile. 
-* AWS personal will help you connect your network to the snowmobile and when data transfer is complete they'll drive it back to AWS to import into S3 or Glacier.
+<img src="../images/storage-extras/fsx-file-gateway.png" alt="FSX File Gateway">
 
-#### **Security Features:**
+#### Volume Gateway
 
-* GPS tracking
-* Alarm monitoring
-* 24/7 video surveillance
-* an escort security vehicle while in transit(optional)
-* It comes in one size: 100PB
+* Block storage using **iSCSI** protocol backed by S3
+* Backed by EBS snapshots which can help restore on-premises volumes
+* **Cached Volumes**: Low latency access to most recent data
+* **Stored Volumes**: entire dataset is on premises, scheduled backups to S3
+
+<img src="../images/storage-extras/volume-gateway.png" alt="Volume gateway">
+
+#### Tape Gateway
+
+* Some companies have backup processes using physical tapes(!)
+* With Tape Gateway, companies use the same processes but in the cloud
+* Virtual Tape Library(VTL) backed by Amazon S3 and Glacier
+* Back up data using existing tape-based processes(and **iSCSI** interface)
+* Works with leading backup software vendors
+
+<img src="../images/storage-extras/tape-gateway.png" alt="Tape Gateway">
+
+#### Storage Gateway - Hardware appliance
+
+* Using Storage Gateways means you need on-premises virtualization
+* Otherwise, you can use a **Storage Gateway Hardware Appliance**
+* You can but it on amazon.com
+
+* Works with File Gateway, Volume Gateway, Tape Gateway
+* Has the required CPU, memory, network, SSD cache resources
+* Helpful for daily NFS backups in small data centers
