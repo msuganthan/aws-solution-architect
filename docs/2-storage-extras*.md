@@ -12,13 +12,13 @@
 #### Data Migrations with AWS Snow Family
 
 
-|          | Time to transfer |           |           |
-|----------|------------------|-----------|-----------|
-|          | 100 Mbps         | 1Gbps     | 10Gbps    |
-| -------- | ---------------- | --------- | --------- |
-| 10 TB    | 12 days          | 30 hours  | 3 hours   |
-| 100 TB   | 124 days         | 12 days   | 30 hours  |
-| 1 PB     | 3 years          | 124 days  | 12 days   |
+|        | Time to transfer |          |          |
+|--------|------------------|----------|----------|
+|        | 100 Mbps         | 1Gbps    | 10Gbps   |
+|        |                  |          |          |
+| 10 TB  | 12 days          | 30 hours | 3 hours  |
+| 100 TB | 124 days         | 12 days  | 30 hours |
+| 1 PB   | 3 years          | 124 days | 12 days  |
 
 Challenges:
 * Limited connectivity
@@ -369,5 +369,7 @@ If it takes more than a week to transfer over the network, use Snowball devices!
 * **FSx for NetApp ONTAP**: High OS Compatibility
 * **FSx for OpenZFS**: Managed ZFS file system
 * **Storage Gateway**: S3 & FSx File Gateway, Volume Gateway(cache & stored), Tape Gateway
-* **Transfer Family**: FTP, FTPS, SFTP inerface on top of Amazon S3  or Amazon  EFS
+* **Transfer Family**: FTP, FTPS, SFTP interface on top of Amazon S3  or Amazon  EFS
 * **DataSync**: Schedule data sync from on-premises to AWS, or AWS to AWS
+* **Snowcone/Snowball/Snowmobile:** to move large amount of data to the cloud, physically
+* **Database**: for specific workloads, usually with indexing and querying
