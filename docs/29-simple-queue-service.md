@@ -32,14 +32,14 @@ Used to provide asynchronous communication and decouple processes via messages /
 3. Other app reports that they completed their task and marks the message for completion
 4. Original app pulls the queue and sees the message is no longer in the queue.
 
-<img src="../images/sqs/use-case.png" alt="">
+<img src="../images/sqs/old/use-case.png" alt="">
 
 ### Limits and Retentions
 
 * **Message Size:** The size of a message can be between **1 byte and 256KB**
 * **Amazon SQS Extended Client Library for Java** lets you send messages **256KB to 2GB** in size. The message will be stored in S3 and library will reference the S3 object.
 
-<img src="../images/sqs/extending-the-size.png" alt="">
+<img src="../images/sqs/old/extending-the-size.png" alt="">
 
 **Message Retention**
 
@@ -66,7 +66,7 @@ Used to provide asynchronous communication and decouple processes via messages /
 * Messages will be **deleted** from the queue **after a job has processed.**(before the visibility timeout expires)
 * If a job is **NOT** processed before the visibility time-out period, the message will **become visible again** and another reader will process it. This can result in the same message being delivered twice.
 
-<img src="../images/sqs/visibility.png" alt="visibility">
+<img src="../images/sqs/old/visibility.png" alt="visibility">
 
 ### Short vs Long Polling
 

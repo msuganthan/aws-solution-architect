@@ -11,7 +11,7 @@ Publish-subscribe pattern commonly implemented in **messaging systems.** In a pu
 * Messages are instead automatically and immediately pushed to subscribers.
 * Messages and events are interchangeable terms in pub/sub
 
-<img src="../images/sns/pub-and-sub.png" alt="">
+<img src="../images/sns/old/pub-and-sub.png" alt="">
 
 **SNS** is a highly available, durable, secure, fully managed **pub/sub messaging** service that enables you to **decouple** ms, ds, and serverless applications.
 
@@ -19,7 +19,7 @@ Publish-subscribe pattern commonly implemented in **messaging systems.** In a pu
 * Publisher **push** events to an SNS Topic
 * Subscribers subscribe to SNS Topic to have events **pushed** to them
 
-<img src="../images/sns/pub-sub.png" alt="">
+<img src="../images/sns/old/pub-sub.png" alt="">
 
 ### Topics
 
@@ -28,11 +28,11 @@ Publish-subscribe pattern commonly implemented in **messaging systems.** In a pu
 * When topics deliver messages to subscribers it will automatically format your message according to the subscriber's chosen protocol
 * You can encrypt Topics via **KMS**
 
-<img src="../images/sns/topic-encryption.png" alt="topic encryption">
+<img src="../images/sns/old/topic-encryption.png" alt="topic encryption">
 
 ### Subscriptions
 
-<img src="../images/sns/subscriptions.png" alt="">
+<img src="../images/sns/old/subscriptions.png" alt="">
 
 * A subscription can only subscribe to one protocol and one topic. The following protocols:
   * **HTTP and HTTPs** create webhooks into your web-application
@@ -43,14 +43,14 @@ Publish-subscribe pattern commonly implemented in **messaging systems.** In a pu
   * **SMS** send a text message
   * **Platform application endpoints** Mobile Push
 
-<img src="../images/sns/protocols.png" alt="protocols">
+<img src="../images/sns/old/protocols.png" alt="protocols">
 
 ### Application As Subscriber
 
 * Send push notification message directly to apps on mobile devices.
 * Push notification message sent to a mobile endpoint can appear in the mobile app as message alerts, badge updates or even sound alerts.
 
-<img src="../images/sns/app-as-subscriber.png" alt="">
+<img src="../images/sns/old/app-as-subscriber.png" alt="">
 
 ### CheatSheet
 * SNS is a fully managed pub/sub messaging service
