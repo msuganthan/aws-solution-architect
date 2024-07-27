@@ -48,7 +48,7 @@ If it takes more than a week to transfer over the network, use Snowball devices!
 * Physical data transport solution: move TBs or PBs of data in or out of AWS
 * Alternative to moving data over the network(and paying network fees)
 * Pay per data transfer job
-* Provide block storage and Amazon S3-compatible object storage
+* Provide **block storage** and Amazon **S3-compatible object storage**
 * **Snowball Edge Storage optimized**
   * 80 TB of HDD or 210 TB NVMe capacity for block volume and S3 compatible object storage
 * **Snowball Edge Compute optimized**
@@ -84,8 +84,6 @@ If it takes more than a week to transfer over the network, use Snowball devices!
 | Storage Capacity | 8 TB HDD & 14 TB SSD           | 80 TB - 210 TB                   | < 100 PB              |
 | Migration Size   | Upto 24 TB, online and offline | Upto  petabytes, offline         | Upto exabyte, offline |
 | Datasync agent   | Pre-installed                  |                                  |                       |
-
-=============================================================================================================
 
 #### Snow Family - Usage Process
 
@@ -158,11 +156,11 @@ If it takes more than a week to transfer over the network, use Snowball devices!
 ##### Amazon FSx for Windows(File Server)
 
 * **FSx for Windows** is a fully managed Windows file system share drive
-* Support SMB protocol & Windows NTFS
+* Support Server Message Block(SMB) protocol & Windows New Technology File System(NTFS)
 * Microsoft Active Directory integration, ACLs, user quotas
 * **Can be mounted on Linux EC2 instances**
 * Supports **Microsoft Distributed File System(DFS) Namespaces** (group files across multiple FS)
-* Scale upto 10s of GigaBytes/s, millions of IOPS, 100s PetaByte of data
+* Scale upto **10s** of GigaBytes/s, **millions of IOPS**, 100s PetaByte of data
 * Storage Options:
   * **SSD**: latency sensitive workloads(database, media processing, data analytics,...)
   * **HDD**: broad spectrum of workloads(home directory, CMS, ...)
@@ -177,11 +175,11 @@ If it takes more than a week to transfer over the network, use Snowball devices!
 
 * Machine Learning, "**High Performance Computing(HPC)**"
 * Video Processing, Financial Modeling, Electronic Design Automation
-* Scales up to 100s Giga Bytes/s, millions of IOPS, sub-milliseconds latencies
+* Scales up to **100s** GigaBytes/s, **millions of IOPS**, sub-milliseconds latencies
 * Storage Options:
   * **SSD**: low-latency, IOPS intensive workloads, small & random file operations
   * **HDD** - throughput-intensive workloads, large & sequential file operations.
-* Seamless integration with S3
+* **Seamless integration with S3**
   * Can read S3 as a file system(through FSx)
   * Can write the output of the computations back to S3(through FSx)
 * Can be used **on-premises** servers(VPN or Direct Connect)
@@ -207,14 +205,14 @@ If it takes more than a week to transfer over the network, use Snowball devices!
 #### Amazon FSx for NetApp ONTAP
 
 * Managed NetApp ONTAP on AWS
-* **File System compatible with NFS, SMB, iSCSI protocol**
-* Move workload running on ONTAP or NAS to AWS
+* **File System compatible with NFS, SMB, Internet Small Computer System Interface(iSCSI) protocol**
+* Move workload running on ONTAP or Network Attached Storage(NAS) to AWS
 * Works with:
   * Linux 
   * Windows
   * MaxOS
   * VMWare Cloud on AWS
-  * Amazon Workspaces * ApprStream 2,0
+  * Amazon Workspaces * AppStream 2,0
   * Amazon EC2, EC2 and EKS
 * Storage shrinks or grow automatically
 * Snapshots, replication, low-cost, compression and data de-duplication
@@ -243,8 +241,8 @@ If it takes more than a week to transfer over the network, use Snowball devices!
 ### Storage gateway
 
 * AWS is pushing for "hybrid cloud"
-  * Part of your infrastructure is on the cloud
-  * Part of your infrastructure is on-premeses
+  * Part of your infrastructure is **on the cloud**
+  * Part of your infrastructure is **on-premises**
 * This can be due to
   * Long cloud migrations
   * Security requirements
@@ -252,7 +250,6 @@ If it takes more than a week to transfer over the network, use Snowball devices!
   * IT Strategy
 * S3 is a proprietary storage technology(unline EFS/NFS), so how do you expose the S3 data on-premises?
 * AWS Storage Gateway !!!
-
 
 #### AWS Storage Gateway
 
@@ -270,12 +267,12 @@ If it takes more than a week to transfer over the network, use Snowball devices!
 
 #### S3 File Gateway
 
-* Configured S3 buckets are accessible using the NFS and SMB protocol
+* Configured S3 buckets are accessible using the **NFS and SMB** protocol
 * **Most recently used data is cached in the file gateway**
 * Supports S3 Standard, S3 Standard IA, S3 One Zone A, S3 Intelligent Tiering
 * **Transition to S3 Glacier using a Lifecycle Policy**
 * Bucket access using IAM roles for each File Gateway
-* SMB protocol has integration with Active Directory(AD) for user authentication
+* **SMB protocol has integration with Active Directory(AD)** for user authentication
 
 <img src="../images/storage-extras/s3-file-gateway.png" alt="S3 file gateway">
 
@@ -331,7 +328,7 @@ If it takes more than a week to transfer over the network, use Snowball devices!
 * Pay per provisioned endpoint per hour + data transfer in GB
 * Store and manage user's credentials within the service
 * Integrate with existing authentication system(Microsoft Active Directory, LDAP, Okta, Amazon Cognito, custom)
-* Usage: sharing files, public datasets, CRM, ERP,...
+* Usage: **sharing files, public datasets, CRM, ERP**,...
 
 <img src="../images/storage-extras/transfer-family.png" alt="AWS Transfer family">
 
@@ -345,7 +342,7 @@ If it takes more than a week to transfer over the network, use Snowball devices!
   * AWS to AWS(different storage services) - **no agent needed**
 * Can synchronize to:
   * Amazon S3(any storage classes - including Glacier)
-  * Amazon EFS
+  * **Amazon EFS**
   * Amazon FSx(Windows, Lustre, NetApp, OpenZFS...)
 * Replication tasks can be **scheduled** hourly, daily, weekly
 * **File permissions and metadata are preserved(NFS POSIX, SMB...)**
