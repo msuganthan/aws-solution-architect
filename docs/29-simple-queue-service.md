@@ -72,7 +72,7 @@
   * Useful for cross-account access to SQS queues
   * Useful for allowing other service(SNS, S3) to write to an SQS queue
 
-### Message Visibility Timeout
+#### Message Visibility Timeout
 
 * After a message is polled by a consumer, it becomes invisible to other consumers
 * By default, the "message visibility timeout" is **30 seconds**
@@ -87,7 +87,7 @@
 * If visibility timeout is high, and consumer crashes, re-processing will take time
 * If visibility timeout is too low(second), we may get duplicates
 
-### Long Polling
+#### Long Polling
 
 * When a consumer requests messages from the queue, it can optionally "wait" for messages to arrive if there are none in the queue.
 * This is called Long Polling
@@ -98,7 +98,7 @@
 
 <img src="../images/sqs/sqs-long-polling.png" alt="SQS long polling">
 
-### FIFO Queue
+#### FIFO Queue
 
 * Ordering of messages in the queue
 
@@ -108,7 +108,7 @@
 * Exactly-once send capability(by removing duplicates)
 * Messages are processed in order by the consumer
 
-### SQS with Auto Scaling Group(ASG)
+#### SQS with Auto Scaling Group(ASG)
 
 * Based on the metric `ApproximateNumberOfMessages` in `CloudWatch` alarm the `ASG` can scale up and down the `ec2` instances 
 
@@ -119,6 +119,48 @@
 * By using SQS as a buffer, we don't miss any request during the high load, since we delete messages only if system process it.
 
 <img src="../images/sqs/sqs-as-a-buffer-to-database.png" alt="SQS as a buffer to the database">
+
+
+### Amazon SNS
+
+* What if you want to send one message to many receivers
+
+<img src="../images/sqs/sns-with-pub-sub-receiver.png" alt="SNS with pub and sub receiver">
+
+* The "event producer" only sends message to one SNS topic
+* As many "event receivers"(subscriptions) as we want to listen to the SNS topic notifications.
+* Each subscriber to the topic will get all the message(note: new feature to filter messages)
+* Up to 12,500,000 subscriptions per topic
+* 100,000 topics limit
+
+<img src="../images/sqs/sns-subscribers.png" alt="SNS subscribers">
+
+* Many AWS services can send data directly to SNS for notifications
+
+#### SNS - How to publish
+
+* Topic Publish(using the SDK)
+  * Create a topic
+  * Create one or many subscription(or many)
+  * Publish to the topic
+* Direct Publish(for mobile apps SDK)
+  * Create a platform application
+  * Create a platform endpoint
+  * Publish to the platform endpoint
+  * Works with Google GCM, Apple APNS, Amazon ADM...
+
+#### SNS - Security
+
+* **Encryption**:
+  * In-flight encryption using HTTPS API
+  * At-rest encryption using KMS keys
+  * Client-side encryption if the client wants to perform encryption/decryption itself
+
+* **Access Controls**: IAM policies to regulate access to the SNS API
+
+* **SNS Access Policies**(similar to S3 bucket policies)
+  * Useful for cross-account access to SNS topics
+  * Useful for allowing other services(S3...) to write to an SNS topic
 
 ========================================================================================================================
 
