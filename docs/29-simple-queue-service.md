@@ -72,6 +72,33 @@
   * Useful for cross-account access to SQS queues
   * Useful for allowing other service(SNS, S3) to write to an SQS queue
 
+### Message Visibility Timeout
+
+* After a message is polled by a consumer, it becomes invisible to other consumers
+* By default, the "message visibility timeout" is **30 seconds**
+* That means the message has 30 seconds to be processed.
+* After the message visibility timeout is over, the message is "visible" is SQS
+
+<img src="../images/sqs/sqs-message-visibility-timeout.png" alt="Message visibility timeout">
+
+
+* If a message is not processed within the visibility timeout, it will be processed **twice**
+* A consumer could call the **ChangeMessageVisibility** API to get more time
+* If visibility timeout is high, and consumer crashes, re-processing will take time
+* If visibility timeout is too low(second), we may get duplicates
+
+### Long Polling
+
+* When a consumer requests messages from the queue, it can optionally "wait" for messages to arrive if there are none in the queue.
+* This is called Long Polling
+* **LongPolling decreases the number of API calls made of SQS while increasing the efficiency and latency of your application**
+* The wait time can be between 1 sec to 20 sec(20 sec preferable)
+* Long Polling is preferable to Short Polling
+* Long polling can be enabled at the queue level or at the API level using **WaitTimeSeconds**
+
+<img src="../images/sqs/sqs-long-polling.png" alt="SQS long polling">
+
+
 ========================================================================================================================
 
 
