@@ -98,6 +98,27 @@
 
 <img src="../images/sqs/sqs-long-polling.png" alt="SQS long polling">
 
+### FIFO Queue
+
+* Ordering of messages in the queue
+
+<img src="../images/sqs/sqs-fifo-queue.png" alt="SQS fifo queue">
+
+* Limited throughput: 300 msg/s without batching, 3000 msg/s with
+* Exactly-once send capability(by removing duplicates)
+* Messages are processed in order by the consumer
+
+### SQS with Auto Scaling Group(ASG)
+
+* Based on the metric `ApproximateNumberOfMessages` in `CloudWatch` alarm the `ASG` can scale up and down the `ec2` instances 
+
+<img src="../images/sqs/sqs-with-auto-scaling.png" alt="SQS with auto scaling group">
+
+### SQS as a buffer to database writes
+
+* By using SQS as a buffer, we don't miss any request during the high load, since we delete messages only if system process it.
+
+<img src="../images/sqs/sqs-as-a-buffer-to-database.png" alt="SQS as a buffer to the database">
 
 ========================================================================================================================
 
