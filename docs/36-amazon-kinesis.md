@@ -109,7 +109,7 @@
 
 #### Kinesis vs SQS ordering
 
-* Let' assume 100 trucks, 5 kinesis shards, 1 SQS FIFO
+* Let's assume 100 trucks, 5 kinesis shards, 1 SQS FIFO
 * **Kinesis Data Streams:**
   * On average you'll have 20 trucks per shard
   * Trucks will have their data ordered within each shard
@@ -120,3 +120,14 @@
   * You will have 100 Group ID
   * You can have up to 100 Consumers(due to the 100 Group ID)
   * You have up to 300 messages per second(or 3000 if using batching)
+
+| SQS                                            | SNS                                                  | Kinesis                                                 |
+|------------------------------------------------|------------------------------------------------------|---------------------------------------------------------|
+| Consumer "pull data"                           | Push data to many subscribers                        | Standard: pull data(2 MB per shard)                     |
+| Data is deleted after being consumed           | Up to 12,500,000 subscribers                         | Enhanced-fan out: push data(2MB per shard per consumer) |
+| Can have as many workers(consumers) as we want | Data is not persisted(lost if not delivered)         | Possibility to replay data                              |
+| No need to provision throughput                | Pub/Sub                                              | **Meant for real-time big data, analytics and ETL**     |
+| Ordering guarantees only on FIFI queues        | Up to **100,000** topics                             | **Ordering at the shard level**                         |
+| Individual message delay capability            | No need to provision throughput                      | Data expires after X days(1 to 365 as of today)         |
+|                                                | Integrates with SQS for fan-out architecture pattern | **Provisioned** mode or **on-demand** capacity mode     |
+|                                                | FIFO capability for SQS FIFO                         |                                                         |
