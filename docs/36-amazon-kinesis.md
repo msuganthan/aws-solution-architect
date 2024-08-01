@@ -131,3 +131,20 @@
 | Individual message delay capability            | No need to provision throughput                      | Data expires after X days(1 to 365 as of today)         |
 |                                                | Integrates with SQS for fan-out architecture pattern | **Provisioned** mode or **on-demand** capacity mode     |
 |                                                | FIFO capability for SQS FIFO                         |                                                         |
+
+
+### Amazon MQ
+
+* SQS, SNS are "cloud-native" service: proprietary protocol from AWS
+* Traditional applications running from on-premises many use open protocols such as MQTT, AMQP, STOMP, Openwire, WSS
+* **When migrating to the cloud**, instead of re-engineering the application to use SQS and SNS, we can use Amazon MQ
+* Amazon MQ is a managed message broker service for:
+  * Rabbit MQ
+  * Active MQ
+* Amazon MQ doesn't scale as much as SQS/SNS
+* Amazon MQ runs on servers, can run in Multi-AZ with failover
+* Amazon MQ has both queue feature(~SQS) and topic features(~SNS)
+
+#### Amazon MQ - High Availability
+
+<img src="../images/kinesis/amazon-mq-high-availability.png" alt="Amazon MQ high availability">
