@@ -81,96 +81,82 @@
 
 <img src="../images/lambda/lambda-snap-start.png" alt="Lambda SnapStart">
 
-=================================================================================================================
-### AWS Lambda
+### Customization At the Edge
 
-* Run code **without provisioning or managing** servers.
-* Servers automatically start and stop when needed.
-* **Serverless Functions**
-* **Pay per invocation**.
+* Many modern applications execute some form of the logic at the edge
+* **Edge Function:**
+  * A code that you write and attach to CloudFront distributions
+  * Runs close to your users to minimize latency
+* CloudFront provides two types: **CloudFront Functions & Lambda@Edge**
+* You don't have to manage any servers, it is deployed globally
+* Use case: customize the CDN content.
+* Pay only for what you use
+* Fully serverless
 
-### Intro
+#### CloudFront Functions & Lambda@Edge Use Case
 
-* AWS Lambda is a compute service that lets you run code **without provisioning or managing** servers.
-* Lambda executes your code only when needed and scales automatically to a **few to a 1000** lambda functions concurrently in seconds.
-* You pay only for the compute time you consume - there is no charge when your code is not running.
-* Lambda is **Cheap**
-* Lambda is **Serverless**
-* Lambda **Scales Automatically**
+* Website Security and Privacy
+* Dynamic Web Application at the Edge
+* Search Engine Optimization
+* Intelligently Route Across Origins and Data Centers
+* Bot Mitigation at the Edge
+* Real-time Image Transformation
+* A/B testing
+* User Authentication and Authorization
+* User Prioritization
+* User Tracking and Analytics
 
-**Supported Language**
-1. Ruby
-2. Python
-3. Java
-4. Go
-5. Powershell
-6. NodeJS
-7. C#
+#### CloudFront Functions
 
-You can also create your own **custom runtime** environment.
+* Lightweight functions written in Javascript
+* For high-scale, latency sensitive CDN customizations
+* Sub-ms startup time, **millions of requests/second**
+* Used to change Viewer requests and responses:
+  * **Viewer Request:** after CloudFront receives a request from a viewer
+  * **Viewer Response:** before CloudFront forwards the response to the viewer
+* Native feature of CloudFront(**manage code entirely within CloudFront**)
 
-### Use cases
+<img src="../images/lambda/cloud-front-function.png" alt="Cloud Front Function">
 
-* Lambda is commonly used to **glue different services together** so the use cases are endless.
+#### Lambda@Edge
 
-**Processing Thumbnails**
+* Lambda functions written in NodeJS or Python
+* Scales to **1000s of requests/second**
+* Used to change CloudFront requests and responses:
+  * **Viewer Request** - after CloudFront receives a request from a viewer
+  * **Origin Request** - before CloudFront forwards the request to the origin
+  * **Origin Response** - before CloudFront receives the response from the origin
+  * **Viewer Response** - before CloudFront forwards the response to the viewer
+* Author your function in one AWS Regions(us-east-1), then CloudFront replicates to its location
 
-A web-service allows users to upload their profile photo. They are stored in an S3 bucket. We can setup an Event Trigger which will invoke a Lambda which will process the Profile Photo into a Thumbnail and store it back in the bucket.
+<img src="../images/lambda/lambda-at-edge.png" alt="Lambda at Edge">
 
-**Contact Email Form**
+|                                    | CloudFront Functions                    | Lambda@Edge                                              |
+|------------------------------------|-----------------------------------------|----------------------------------------------------------|
+| Runtime Support                    | JavaScript                              | Node.js, Python                                          |
+| # of Requests                      | **Millions** of requests per second     | Thousands of requests per second                         |
+| CloudFront Triggers                | - Viewer Request/Response               | - Viewer Request/Response<br/> - Origin Request/Response |
+| Max. Execution Time                | < 1 ms                                  | 5-10 seconds                                             |
+| Max. Memory                        | 2 MB                                    | 128 MB up to 10 GB                                       |
+| Total Package Size                 | 10 KB                                   | 1 MB - 50 MB                                             |
+| Network Access, File System Access | **No**                                  | Yes                                                      |
+| Access to the Request Body         | **No**                                  | Yes                                                      |
+| Pricing                            | Free tier available 1/6th price of Edge | No free tier, charged per request & duration             |
 
-A company has a contact email form which submits form data via API Gateway Endpoint. That endpoint triggers a lambda which validates the form dat and if valid will save the submission in DynamoDB and send and email notification via SNS to the company.
+#### CloudFront Functions vs Lambda@Edge - Use Cases
 
-### Triggers
+* CloudFront Functions
+  * Cache Key normalization
+    * Transform request attribute(headers, cookies, query strings, URL) to create an optimal Cache Key
+  * Header manipulation
+    * Insert/modify/delete HTTP headers in the request or response
+  * URL rewrites or redirects
+  * Request authentication & authorization
+  * Create and validate user-generated tokens(e.g. JWT) to allow/deny requests
 
-* Lambdas can be invoked via the AWS SDK or trigger from other AWS Services.
-
-<img src="../images/lambda/old/triggers.png" alt="triggers">
-
-* Lambdas third party trigger
-
-<img src="../images/lambda/old/third-party-trigger.png" alt="">
-
-### Pricing
-
-* First **1 million requests** per month are free. 
-* There-after **$0.20** per additional 1 million requests.
-
-* **400, 000 GB seconds** free per month
-* Thereafter, **$0.0000166667** for every GB second
-
-* ** This price will vary on the amount of memory you allocate
-* 128MB of Memory * 30M executed per month * 20ms run time per invocation = **$5.83**
-
-### Lambda Interface
-
-<img src="../images/lambda/old/interface.png" alt="interface">
-
-### Defaults and Limits
-
-* By default, you can have 1000 Lambda running concurrently(Ask AWS support for Limit Increase)
-* /tmp directory can contain up to **500MB**
-* By default, Lambda run in **No VPC**. You can set them to by in your own VPC but your lambda will lose internet access.
-* You can set timeout to be a maximum of **15 minutes**
-* Memory can be set between **128MB** to a Maximum of **3008MB** at an increment of **64MB**
-
-### Cold Starts
-
-* AWS has servers preconfigured(just sitting around turned off) for your runtime environment. When a Lambda is invoked these servers need to be turned on and your code needs to be copied over.
-* During the time there will be a delay when the function will initially run which is caled a **Cold Start**
-* If the same Lambda is invoked and the server is still running it will use that server again, so there will be little to delay to running that function. This what we call a **Warm Server**
-* Serverless functions are **cheap** but everything comes with a trade off. Serverless functions Cold Starts can **cause delay in the User Experience.** If you web-application relies on being very responsive, then you want to reconsider Serverless Functions.
-* There are strategies around Cold Start such as **Pre Warming** which keep servers continously running Cloud providers are always looking for ways to reduce cold starts.
-
-### CheatSheet
-
-* Lambda's are serverless functions. You upload your code and it runs without you managing or provisioning any servers.
-* Lambda's is serverless. You don't need to worry about underlying architecture.
-* Lambda is a good fit for short running tasks where you don't need to customize the OS enviornment. if you need along running tasks(> 15 mins) and a custom OS environemtn than consider using **Fargate**
-* 7 Runtim supported: **Ruby, Python, Java, NodeJS, C#, Powershell, and GO**
-* You pay per invocation
-* You can adjust the duration timeout for up to 15 mins and memory up to **3008 MB**
-* You can trigger Lambdas from the SDK or multiple AWS services.
-* Lambdas by default run in No VPC. To interact with some services you need to have your Lambda in the same VPC eg. RDS
-* Lambdas can scale to **1000 of concurrent functions** in seconds.
-* Lambdas have **Cold Starts.** If a function has not been recently been execute there will be a delay.
+* Lambda@Edge
+  * Longer execution time(several ms)
+  * Adjustable CPU or memory
+  * Your code depends on a 3rd libraries(e.g., AWS SDK to access other AWS services)
+  * Network access to use external services for processing
+  * File system access or access to the body of HTTP requests
