@@ -1,3 +1,87 @@
+### What is serverless?
+
+* The developers don't have to manage servers anymore
+* They just deploy code
+* Serverless was pioneered by AWS Lambda but now also includes anything that's managed: "databases, messaging, storage, etc."
+* **Serverless does not mean there are no servers...**
+  It means you just don't manage/ provision / see them
+
+#### Serverless in AWS
+
+* AWS Lambda
+* DynamoDB
+* AWS Cognito
+* AWS API Gateway
+* Amazon S3
+* AWS SNS & SQS
+* AWS Kinesis Data Firehose
+* Aurora Serverless
+* Step Functions
+* Fargate
+
+### Why AWS Lambda
+
+* **EC2**:
+  * Virtual Servers in the Cloud
+  * Limited by RAM and CPU
+  * Continuously running
+  * Scaling means intervention to add/remove servers
+* **Lambda**
+  * Virtual **functions** - no servers to manage
+  * Limited by time - **short executions**
+  * Run **on-demand**
+  * **Scaling is automated**
+
+
+#### Benefits of AWS Lambda
+
+* Easy pricing
+  * Pay per request and compute time
+  * Free tier of 1,000, 000 AWS Lambda requests and 400,000 GBs of compute time
+
+* Integrated with the whole AWS suite of services
+* Integrated with many programming languages
+* Easy monitoring through AWS Cloudwatch
+* Easy to get more resources per functions(up to 10GB of RAM)
+* Increasing RAM will also improve CPU and network
+
+#### AWS Lambda Language Support
+
+* Node.js
+* Python
+* Java
+* C# / Powershell
+* Ruby
+* Custom Runtime API(community supported, example Rust or Golang)
+
+* Lambda Container Image
+  * The container image must implement the Lambda Runtime API
+  * ECS / Fargate is preferred for running arbitrary Docker images
+
+#### AWS Lambda Limits to know - per region
+
+* **Execution**
+  * Memory allocation: 128MB - 10GB(1 MB increments)
+  * Maximum execution time: 900 seconds(15 minutes)
+  * Environment variables(4 KB)
+* **Deployment**
+  * Lambda function deployment size(compressed .zip): 50 MB
+  * Size if uncompressed deployment(code + dependencies): 250 MB
+  * Can use the **/tmp** directory to load other files at startup
+  * Size of environment variables: 4 KB
+
+#### Lambda SnapStart
+
+* Improves your Lambda functions performance up to 10x at no extra cost for Java 11 and above
+* When enabled, function is invoked from a pre-initialized state(no function initialization from scratch)
+* When you publish a new version:
+  * Lambda initializes your function
+  * Takes a snapshot of memory and disk state of the initialized function
+  * Snapshot is cached for low-latency access.
+
+<img src="../images/lambda/lambda-snap-start.png" alt="Lambda SnapStart">
+
+=================================================================================================================
 ### AWS Lambda
 
 * Run code **without provisioning or managing** servers.
@@ -41,11 +125,11 @@ A company has a contact email form which submits form data via API Gateway Endpo
 
 * Lambdas can be invoked via the AWS SDK or trigger from other AWS Services.
 
-<img src="../images/lambda/triggers.png" alt="triggers">
+<img src="../images/lambda/old/triggers.png" alt="triggers">
 
 * Lambdas third party trigger
 
-<img src="../images/lambda/third-party-trigger.png" alt="">
+<img src="../images/lambda/old/third-party-trigger.png" alt="">
 
 ### Pricing
 
@@ -60,7 +144,7 @@ A company has a contact email form which submits form data via API Gateway Endpo
 
 ### Lambda Interface
 
-<img src="../images/lambda/interface.png" alt="interface">
+<img src="../images/lambda/old/interface.png" alt="interface">
 
 ### Defaults and Limits
 
