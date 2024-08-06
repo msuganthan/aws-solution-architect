@@ -145,7 +145,7 @@
 
 #### CloudFront Functions vs Lambda@Edge - Use Cases
 
-* CloudFront Functions
+* **CloudFront Functions**
   * Cache Key normalization
     * Transform request attribute(headers, cookies, query strings, URL) to create an optimal Cache Key
   * Header manipulation
@@ -154,9 +154,34 @@
   * Request authentication & authorization
   * Create and validate user-generated tokens(e.g. JWT) to allow/deny requests
 
-* Lambda@Edge
+* **Lambda@Edge**
   * Longer execution time(several ms)
   * Adjustable CPU or memory
   * Your code depends on a 3rd libraries(e.g., AWS SDK to access other AWS services)
   * Network access to use external services for processing
   * File system access or access to the body of HTTP requests
+
+### Lambda by default
+
+* By default, you Lambda function is launched outside your own VPC(in an AWS-owned VPC)
+* Therefore, it cannot access resources in your VPC(RDS, ElasticCache, internal ELB...)
+
+<img src="../images/lambda/default-lambda-deployment.png" alt="Default Lambda deployment">
+
+#### Lambda is VPC
+
+* You must define the VPC ID, the Subnets and the Security Groups
+* Lambda will create an ENI(**Elastic Network Interface**) in your subnets.
+
+<img src="../images/lambda/lambda-in-vpc.png" alt="Lambda in VPC">
+
+#### Lambda with RDS Proxy
+
+* If Lambda functions directly access your database, they many open too many connections under high load
+* RDS Proxy
+  * Improve scalability by pooling and sharing DB connections
+  * Improve availability by reducing by 66% the failover time  and preserving connections
+  * Improve security by enforcing IAM authentication and storing credentials in Secrets Manager.
+* **The Lambda function must be deployed in your VPC, because RDS Proxy is never publicly accessible**
+
+<img src="../images/lambda/lambda-with-rds-proxy.png" alt="Lambda with RDS Proxy">
