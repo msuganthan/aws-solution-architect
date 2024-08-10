@@ -260,3 +260,44 @@
   * If using Edge-Optimized endpoint, then the certificate must be in **us-east-1**
   * If using Regional endpoint, the certificate must be in the API Gateway region
   * Must set up CNAME or A-alias record in Route 53
+
+### Amazon Cognito 
+
+* Give users an identity to interact with our web or mobile application
+
+* **Cognito User Pools**
+  * Sign-in functionality for app users
+  * Integrate with API Gateway & Application Load Balancer
+* **Cognito Identity Pools(Federated Identity)**
+  * Provide AWS credentials to users, so they can access AWS resources directly
+  * Integrate with Cognito User Pools as an Identity Provider
+* **Cognito vs IAM:** "Hundreds of user", "mobile users", "authenticate with SAML"
+
+#### Cognito User Pools(CUP) - User Features
+
+* **Create a serverless database of user for your web & mobile apps**
+* Simple login: Username(or email)/ password combination
+* Password reset
+* Email & Phone Number verification
+* Multi-factor authentication(MFA)
+* Federated Identities: users from Facebook, Google, SAML...
+
+* CUP integrates with **API Gateway** & **Application Load Balancer**
+
+<img src="../images/amazon-cognito/cup-with-api-gt-app-lb.png" alt="Cognito User Pools with API gateway and application load balancer">
+
+#### Cognito Identity Pools (Federated Identities)
+
+* **Get identities for "users" so they obtain temporary AWS credential**
+* Users source can be Cognito User Pools, 3rd party logins, etc...
+
+* **Users can then access AWS services directly or through API Gateway**
+* The IAM policies applied to the credentials are defined in Cognito
+* They can be customized based on the user_id for fine-grained control
+* **Default IAM roles** for authenticated and guest users
+
+<img src="../images/amazon-cognito/cognito-identity-pools.png" alt="Cognito identity pools">
+
+#### Row Level Security in DynamoDB
+
+<img src="../images/amazon-cognito/cognito-row-level-identity.png" alt="Row Level Identity">
