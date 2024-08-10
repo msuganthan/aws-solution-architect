@@ -109,7 +109,7 @@
   * Work for any point of time in the last 35 days
   * Doesn't affect the read capacity of your table
   * Perform data analysis on top of DynamoDB
-  * Retain spanshots for auditing
+  * Retain snapshots for auditing
   * ETL on top of S3 data before importing back into DynamoDB
   * Export in DynamoDB JSON or ION format
 * Import from S3
