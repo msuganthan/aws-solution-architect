@@ -9,11 +9,19 @@
 * The users can write and read to-dos, but they mostly read them
 * The database should scale, and have some high read throughput
 
+#### User authentication
+
 <img src="../images/my-todo-list/user-authentication.png" alt="Serverless user authentication">
+
+#### Giving User acceess to S3
 
 <img src="../images/my-todo-list/giving-user-access-to-s3.png" alt="Giving users access to S3">
 
+#### High read throughput
+
 <img src="../images/my-todo-list/high-read-throughput.png" alt="High read throughput using DAX">
+
+#### Caching at the API Gateway
 
 <img src="../images/my-todo-list/caching-at-the-api-gateway.png" alt="Caching at the API Gateway">
 
