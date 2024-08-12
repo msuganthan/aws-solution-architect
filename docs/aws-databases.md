@@ -131,3 +131,16 @@
 * Encryption, backup, Point-in-time recovery(PITR) up to 35 days
 
 * Use cases: store IoT devices info, time series data,...
+
+#### Amazon QLDB
+
+* QLDB stands for "Quantum Ledger Database"
+* A Ledger is a book recording financial transactions
+* Fully managed, Serverless, High available, Replication across 3 AZ
+* Used to **review history of all the changes made to you application data** over time
+* **Immutable** system: no entry can be removed or modified, cryptographically verifiable.
+
+<img src="../images/aws-databases/aws-qldb.png" alt="AWS QLDB journal">
+
+* 2-3x better performance than common ledger blockchain framework, manipulate data using SQL
+* Difference with Amazon Managed Blockchain: **no decentralization component,** in accordance with financial regulation rules
