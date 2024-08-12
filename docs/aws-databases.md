@@ -69,9 +69,9 @@
 #### Amazon S3 - Summary
 
 * S3 is a... key / value store for objects
-* Greate for bigger objects, not so greate for many small objects
+* Great for bigger objects, not so great for many small objects
 * Serverless, scales infinitely, max object size is 5 TB, versioning capability
-* **Tiers**: S3 Standard, S3 IA, S3 Intellignet, S3 Glacier + lifecycle policy
+* **Tiers**: S3 Standard, S3 IA, S3 Intelligent, S3 Glacier + lifecycle policy
 * Features: Versioning, Encryption, replication, MFA-Delete, Access Logs...
 * Security: IAM, Bucket Policies, ACL, Access Points, Object Lambda, CORS, Object/Vault Lock
 * Encryption: SSE-S3, SSE-KMS, SSE-C, client-side, TLS in transit, default encryption
