@@ -116,3 +116,18 @@
   * Send notifications when certain changes are made
   * Maintain your graph data synchronized in another data store(e.g., S3, OpenSearch, ElastiCache)
   * Replicate data across regions in Neptune
+
+#### Keyspaces (for Apache Cassandra)
+
+* Apache Cassandra is an open-source NoSQL distributed database
+
+* A managed Apache Cassandra-compatible database service
+* Serverless, Scalable, highly available, fully managed by AWS
+* Automatically scale table up/down based on the application's traffic
+* Tables are replicated 3 times across multiple AZ
+* Using the Cassandra Query Language(CQL)
+* Single-digit millisecond latency at any scale, 1000s of request per second
+* Capacity: On-demand mode or provisioned mode with auto-scaling
+* Encryption, backup, Point-in-time recovery(PITR) up to 35 days
+
+* Use cases: store IoT devices info, time series data,...
