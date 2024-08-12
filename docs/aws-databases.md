@@ -91,3 +91,28 @@
 * DocumentDB storage automatically grows in increment of 10GB
 
 * Automatically scales to workloads with millions of requests per seconds.
+
+#### Amazon Neptune
+
+* Fully managed **graph** database
+* A popular **graph dataset** would be a **social network**
+  * Users have friends
+  * Posts have comments
+  * Comments have likes from users
+  * Users share and like posts...
+* Highly available across 3 AZ, with up to 15 read replicas
+* Build and run applications working with highly connected datasets - optimized for these complex and hard queries
+* Can store up to billions of relations and query the graph with millisecond latency
+* Highly available with replications across multiple AZ
+* Great for knowledge graphs(Wikipedia), fraud detection, recommendation engines, social networking.
+
+##### Amazon Neptune - Streams
+
+* Real-time ordered sequence of every change to your graph data
+* Changes are available immediately after writing
+* No duplicates, strict order
+* Streams data is accessible in an HTTP REST API
+* Use cases:
+  * Send notifications when certain changes are made
+  * Maintain your graph data synchronized in another data store(e.g., S3, OpenSearch, ElastiCache)
+  * Replicate data across regions in Neptune
