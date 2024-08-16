@@ -32,5 +32,6 @@
 
 * Allows you to run SQL queries across data stored in relational, non-relational, object, and custom data sources(AWS or on-premises)
 * Uses Data Source Connectors that run on AWS Lambda to run Federated Queries(e.g., CloudWatch Logs, DynamoDB, RDS,...)
+* Store the results back in Amazon S3
 
 <img src="../images/amazon-athena/athena-federated-query.png" alt="Athena Federated Query">
