@@ -208,3 +208,29 @@
 #### Lake Formation - Centralized Permissions Example
 
 <img src="../images/aws-data-analytics/lake-formation-centralized-permission.png" alt="Lake Formation centralized permission">
+
+### Kinesis Data Analytics
+
+<img src="../images/aws-data-analytics/kinesis-data-analytics-for-sql-application.png" alt="Kinesis Data Analytics for SQL applications">
+
+* Real-time analytics on **Kinesis Data Streams & Firehose** using SQL
+* Add reference data from Amazon S3 to enrich streaming data
+* Fully managed, no servers to provision
+* Automatic scaling
+* Pay for actual consumption rate
+* Output:
+  * Kinesis Data Streams: create streams out of the real-time analytics queries
+  * Kinesis Data Firehose: send analytics query results to destination
+* Use cases:
+  * Time-series analytics
+  * Real-time dashboards
+  * Real-time metrics
+
+#### Kinesis Data Analytics For Apache Flink
+
+* Use Flink(Java, Scala or SQL) to process and analyze streaming data
+* Run any Apache Flink application on a managed cluster on AWS
+  * provisioning compute resources, parallel computation, automatic scaling
+  * application backups(implemented as checkpoints and snapshots)
+  * Use any Apache Flink programming features
+  * Flink does not read from Firehose(use Kinesis Analytics for SQL instead)
