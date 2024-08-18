@@ -9,7 +9,7 @@
 * **Use cases:** Business intelligence / analytics / reporting, analyze & query VPC Flow Logs, ELB Logs, **CloudTrail trails**, etc...
 * **Exam Tip:** analyze data in S3 using serverless SQL, use Athena
 
-<img src="../images/amazon-athena/amazon-athena-working.png" alt="Amazon Athena working.">
+<img src="../images/aws-data-analytics/amazon-athena-working.png" alt="Amazon Athena working.">
 
 
 #### Athena - Performance
@@ -34,7 +34,7 @@
 * Uses Data Source Connectors that run on AWS Lambda to run Federated Queries(e.g., CloudWatch Logs, DynamoDB, RDS,...)
 * Store the results back in Amazon S3
 
-<img src="../images/amazon-athena/athena-federated-query.png" alt="Athena Federated Query">
+<img src="../images/aws-data-analytics/athena-federated-query.png" alt="Athena Federated Query">
 
 ### Amazon Redshift
 
@@ -54,7 +54,7 @@
 * You provision the node size in advance
 * You can use Reserved Instances for cost savings.
 
-<img src="../images/red-shift/red-shift-cluster.png" alt="Red Shift Cluster">
+<img src="../images/aws-data-analytics/red-shift-cluster.png" alt="Red Shift Cluster">
 
 #### Redshift - Snapshots & DR
 
@@ -67,11 +67,11 @@
 
 * You can configure Amazon Redshift to automatically copy snapshots(automated or manual) of a cluster to another AWS Region
 
-<img src="../images/red-shift/red-shift-snapshots-and-dr.png" alt="Snapshots and Disaster Recovery">
+<img src="../images/aws-data-analytics/red-shift-snapshots-and-dr.png" alt="Snapshots and Disaster Recovery">
 
 #### Loading data into Redshift
 
-<img src="../images/red-shift/red-shift-loading-data-into-red-shift.png" alt="Loading data into red shift">
+<img src="../images/aws-data-analytics/red-shift-loading-data-into-red-shift.png" alt="Loading data into red shift">
 
 #### Redshift Spectrum
 
@@ -79,7 +79,7 @@
 * **Must have a Redshift Cluster available to start the query**
 * The query is then submitted to thousands of Redshift Spectrum nodes.
 
-<img src="../images/red-shift/red-shift-spectrum.png" alt="Redshift Spectrum ">
+<img src="../images/aws-data-analytics/red-shift-spectrum.png" alt="Redshift Spectrum ">
 
 ### OpenSearch
 
@@ -99,19 +99,19 @@
 
 * DynamoDB data can be loaded into OpenSearch
 
-<img src="../images/open-search/load-data-dynamoDB.png" alt="Load data to OpenSearch from DynamoDB">
+<img src="../images/aws-data-analytics/load-data-dynamoDB.png" alt="Load data to OpenSearch from DynamoDB">
 
 ##### CloudWatch Logs
 
 * Cloudwatch logs can be loaded into OpenSearch
 
-<img src="../images/open-search/load-data-dynamoDB.png" alt="Load data using DynamoDB">
+<img src="../images/aws-data-analytics/load-data-dynamoDB.png" alt="Load data using DynamoDB">
 
 ##### Kinesis Data Streams & Kinesis Data Firehose
 
 * Loading data from Kinesis data stream and kinesis data firehose
 
-<img src="../images/open-search/load-data-using-kinesis.png" alt="Load data using Kinesis">
+<img src="../images/aws-data-analytics/load-data-using-kinesis.png" alt="Load data using Kinesis">
 
 ### Amazon EMR
 
@@ -135,3 +135,48 @@
   * Spot Instances: cheaper, can be terminated, less reliable
   
 * Can have long-running cluster, or transient(temporary) cluster
+
+### Amazon QuickSight
+
+* **Serverless machine learning-powered business intelligence service to create interactive dashboards**
+* Fast, automatically, scalable, embeddable, with per-session pricing
+* Use cases:
+  * Business analytics
+  * Building visualization
+  * Perform ad-hoc analysis
+  * Get business insights using data
+* Integrated with RDS, Aurora, Athena, RedShift, S3...
+* **In-memory computation using SPICE** engine if data is imported into QuickSight
+* Enterprise edition: Possibility to set up **Column-Level security (CLS)**
+
+#### QuickSight Integrations
+
+<img src="../images/aws-data-analytics/quick-sight-integration.png" alt="Quick sight integrations">
+
+#### QuickSight - Dashboard & Analysis
+
+* Define users(standard versions) and Groups(enterprise version)
+  * These users & groups only exist within Quick Sight, not IAM !!!
+* A dashboard...
+  * is a read-only snapshot of an analysis that you can share
+  * preserves the configuration of the analysis(filtering, parameters, controls, sort)
+
+* **You can share the analysis or the dashboard with Users or Groups**
+* To share a dashboard, you must first publish it.
+* Users who see the dashboard can also see the underlying data.
+
+### AWS Glue
+
+* Managed **Extract, Transform, and Load (ETL)** service
+* Useful to prepare and transform data for analytics
+* Fully **serverless** service
+
+<img src="../images/aws-data-analytics/amazon-glue-working.png" alt="AWS Glue working">
+
+#### AWS Glue - Convert data into Parquet Format
+
+<img src="../images/aws-data-analytics/convert-data-into-parquet.png" alt="Convert data into Parquet using Glue ETL">
+
+#### Glue Data Catalog: catalog of datasets
+
+<img src="../images/aws-data-analytics/glue-data-catalog.png" alt="Glue Data Catalog">
