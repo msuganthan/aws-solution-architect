@@ -263,3 +263,16 @@
 #### Amazon MSK Consumers
 
 <img src="../images/aws-data-analytics/amazon-msk-consumer.png" alt="Amazon MSK consumer">
+
+### Big Data Ingestion Pipeline
+
+* IoT Core allows you to harvest data from IoT devices
+* **Kinesis is great for real-time data collection**
+* **Firehose helps with data delivery to S3 in near real-time(1 minute)**
+* Lambda can help Firehose with data **transformations**
+* Amazon S3 can trigger notifications with SQS
+* Lambda can subscribe to SQS(we could have connecter S3 to Lambda)
+* **Athena is a serverless SQL service** and results are stored in S3
+* The reporting bucket contains analyzed data and can be used by reporting tools such as AWS QuickSight, RedShift, etc...
+
+<img src="../images/aws-data-analytics/big-data-ingestion-pipeline.png" alt="Big Data Ingestion Pipeline">
