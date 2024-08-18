@@ -191,3 +191,20 @@
 * **Glue DataBrew:** clean and normalize data using pre-built transformation
 * **Glue Studio:** new GUI to create, run and monitor ETL jobs in Glue
 * **Glue Streaming ETL** (built in Apache Spark Structured Streaming): compatible with Kinesis Data Streaming, Kafka, MSK(managed Kafka)
+
+### AWS Lake Formation
+
+* Data Lake = central place to have all your data for analytics purposes
+* Fully managed service that makes it easy to setup a data lake in days
+* Discover, cleanse, transform, and ingest data into your Data Lake
+* It automates many complex manual steps(collecting, cleansing, moving, cataloging data,...) and de-duplicate (using ML Transform)
+* Combine structured and unstructured data in the data lake
+* **Out-of-the-box source blueprints:** S3, RDS, Relational & NoSQL DB
+* **Fine-grained Access Control of your applications(row and column-level)**
+* Build on top of AWS Glue
+
+<img src="../images/aws-data-analytics/aws-data-lake-formation.png" alt="AWS Data Lake Formation">
+
+#### Lake Formation - Centralized Permissions Example
+
+<img src="../images/aws-data-analytics/lake-formation-centralized-permission.png" alt="Lake Formation centralized permission">
