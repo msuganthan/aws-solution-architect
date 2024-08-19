@@ -1,10 +1,10 @@
 ### Amazon Athena
 
-* **Serverless** query service to analyze data stored in Amazon S3.
+* **Serverless query service to analyze data stored in Amazon S3.**
 * Uses standard SQL language to query the files(built on Presto)
-* Support CSV, JSON, ORC, Avro and Parquet.
+* **Support CSV, JSON, ORC, Avro and Parquet.**
 * Pricing $5.00 per TB of data scanned
-* Commonly used with Amazon Quicksight for reporting/dashboards.
+* **Commonly used with Amazon Quicksight for reporting/dashboards.**
 
 * **Use cases:** Business intelligence / analytics / reporting, analyze & query VPC Flow Logs, ELB Logs, **CloudTrail trails**, etc...
 * **Exam Tip:** analyze data in S3 using serverless SQL, use Athena
@@ -45,12 +45,12 @@
 * Pay as you go based on the instance provisioned
 * Has SQL interface for performing the queries
 * BU tools such as Amazon Quickshift ot Tableau integrate with it
-* vs Athena: faster queries / joins/ aggregations thanks to indexes
+* vs Athena: faster queries / joins / aggregations thanks to indexes
 
 #### Redshift Cluster
 
-* Leader node: for query planning, results aggregation
-* Compute node: for performing the queries, send result to leader
+* **Leader node**: for query planning, results aggregation
+* **Compute node**: for performing the queries, send result to leader
 * You provision the node size in advance
 * You can use Reserved Instances for cost savings.
 
@@ -60,12 +60,12 @@
 
 * **Redshift has Multi-AZ mode for some clusters**
 * Snapshots are point-in-time backups of a cluster, stored internally in S3
-* Snapshots are incremental(only what has changed in saved)
+* Snapshots are incremental (only what has changed in saved)
 * You can restore a snapshot into a **new cluster**
-* Automated: every 8 hours, every 5 GB, or on a schedule. Set retention
-* Manual: snapshot is retained until you delete it.
+* **Automated**: every 8 hours, every 5 GB, or on a schedule. Set retention
+* **Manual**: snapshot is retained until you delete it.
 
-* You can configure Amazon Redshift to automatically copy snapshots(automated or manual) of a cluster to another AWS Region
+* You can configure Amazon Redshift to automatically copy snapshots (automated or manual) of a cluster to another AWS Region
 
 <img src="../images/aws-data-analytics/red-shift-snapshots-and-dr.png" alt="Snapshots and Disaster Recovery">
 
@@ -87,10 +87,10 @@
 * In DynamoDB, queries only exist by primary key or indexes...
 * **With OpenSearch, you can search any field, even partially matches**
 * It's common to use OpenSearch as a complement to another database
-* Two modes: managed cluster or serverless cluster
-* Does _not_ natively support SQL(can be enabled via a plugin)
-* Ingestion from Kinesis Data Firehose, AWS IoT, and CloudWatch Logs
-* Security through Cognito & IAM, KMS encryption, TLS
+* **Two modes**: managed cluster or serverless cluster
+* Does _not_ natively support SQL (can be enabled via a plugin)
+* Ingestion from **Kinesis Data Firehose, AWS IoT, and CloudWatch Logs**
+* Security through **Cognito & IAM, KMS encryption, TLS**
 * Comes with OpenSearch Dashboards(visualization)
 
 #### OpenSearch Patterns
@@ -116,9 +116,9 @@
 ### Amazon EMR
 
 * EMR stands for "Elastic MapReduce"
-* EMR helps creating **Hadoop clusters (Big Data)** to analyze and process vast amount of data.
+* EMR helps to create **Hadoop clusters (Big Data)** to analyze and process vast amount of data.
 * The clusters can be made of **Hundreds of EC2 instances**
-* EMR comes bundled with Apache Spark, HBase, Presto, Flint...
+* EMR comes bundled with **Apache Spark, HBase, Presto, Flink...**
 * EMR takes care of all the provisioning and configuration
 * Auto-scaling and integrated with Spot Instances
 
@@ -130,21 +130,21 @@
 * **Core Node:** Run tasks and store data - long running
 * **Task Node (optional):** Just to run tasks - usually Spot
 * **Purchasing options:**
-  * On-demand: reliable, predictable, won't be terminated
-  * Reserved(min 1 year): Cost savings(EMR will automatically use if available)
-  * Spot Instances: cheaper, can be terminated, less reliable
+  * **On-demand:** reliable, predictable, won't be terminated
+  * **Reserved(min 1 year):** Cost savings(EMR will automatically use if available)
+  * **Spot Instances:** cheaper, can be terminated, less reliable
   
 * Can have long-running cluster, or transient(temporary) cluster
 
 ### Amazon QuickSight
 
 * **Serverless machine learning-powered business intelligence service to create interactive dashboards**
-* Fast, automatically, scalable, embeddable, with per-session pricing
+* **Fast, automatically, scalable, embeddable, with per-session pricing**
 * Use cases:
-  * Business analytics
-  * Building visualization
-  * Perform ad-hoc analysis
-  * Get business insights using data
+  * **Business analytics**
+  * **Building visualization**
+  * **Perform ad-hoc analysis**
+  * **Get business insights using data**
 * Integrated with RDS, Aurora, Athena, RedShift, S3...
 * **In-memory computation using SPICE** engine if data is imported into QuickSight
 * Enterprise edition: Possibility to set up **Column-Level security (CLS)**
@@ -155,8 +155,8 @@
 
 #### QuickSight - Dashboard & Analysis
 
-* Define users(standard versions) and Groups(enterprise version)
-  * These users & groups only exist within Quick Sight, not IAM !!!
+* Define users (standard versions) and Groups(enterprise version)
+  * **These users & groups only exist within Quick Sight, not IAM !!!**
 * A dashboard...
   * is a read-only snapshot of an analysis that you can share
   * preserves the configuration of the analysis(filtering, parameters, controls, sort)
