@@ -87,3 +87,51 @@
   * Case notes
 * **Uses NLP to detect Protected Health Information (PHI)** - DetectPHI API
 * Store your documents in Amazon S3, analyze real-time data with Kinesis Data Firehose, or use Amazon Transcribe patient narratives into text that can be analyzed by Amazon Comprehend Medical.
+
+### Sagemaker
+
+* Fully managed server for developers / data scientists to build ML models
+* Typically difficult to do all the processing in one place + provision servers
+* Machine learning process(simplified): predicting you example
+
+<img src="../images/machine-learning/amazon-sage-maker.png" alt="Sage Maker">
+
+### Forecast
+
+* Fully managed service that uses ML to deliver highly accurate forecasts
+* Example: predict the future sales of a raincoat
+* 50% more accurate than looking at the data itself
+* Reduce forecasting time from months to hours
+* Use cases: Product Demand Planning, Financial Planning, Resource Planning...
+
+<img src="../images/machine-learning/amazon-forecast.png" alt="Forecast">
+
+### Kendra
+
+* Fully managed **document search service** powered by Machine Learning
+* Extract answers from within a document(text, pdf, HTML, PowerPoint, MS Word, FAQs...)
+* Natural language search capabilities
+* Learn from user interactions/feedback to promote preferred result(Incremental learning)
+* Ability to manually fine-tune search results(importance of data, freshness, custom,...)
+
+<img src="../images/machine-learning/amazon-sage-maker.png" alt="Amazon Kendra">
+
+### Personalize 
+
+* Fully managed ML-service to build apps with real-time personalized recommendataions
+* Example: personalized product recommendations/re-ranking, customized direct marketing
+  * Example: User bought gardening tools, provide recommendations on the next one to bug
+* Same technology used by Amazon.com
+* Integrates with existing websites, application, SMS, email marketing systems...
+* Implement in days, not months
+* Use case: retail stores, media, and entertainment...
+
+### Textract
+
+* Automatically extracts text, handwriting, and data from any scanned documents using AI and ML
+* Extract data from forms and tables
+* Read and process any type of documents(PDFs, images,...)
+* Use cases:
+  * Financial Services (e.g., invoices, financial reports)
+  * Healthcare (e.g., medical records, insurance claims)
+  * Public Sector (e.g., tax forms, ID documents, passports)
