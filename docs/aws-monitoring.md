@@ -114,3 +114,44 @@
 * **Swap Space**(free, used, used%)
 
 * Reminder: out-of-box metrics for EC2 - disk, CPU, network(high-level)
+
+### CloudWatch Alarms
+
+* Alarms are used to trigger notifications for any metrics
+* Various options(sampling, %, max, min, etc...)
+* Alarm States:
+  * OK
+  * INSUFFICIENT_DATA
+  * ALARM
+* Period
+  * Length of time in second to evaluate the metric
+  * High resolution custom metrics: 10 sec, 30 sec or multiples of 60 sec
+
+#### CloudWatch Alarm Targets
+
+* Stop, Terminate, Reboot, or Recover an EC2 Instance
+* Trigger Auto Scaling Action
+* Send notification to SNS(from which you can do pretty much anything)
+
+#### CloudWatch Alarms - Composite Alarms
+
+* CloudWatch Alarms are on single metric
+* **Composite Alarms are monitoring the states of multiple other alarm**
+* **AND** and **OR** conditions
+* Helpful to reduce "alarm noise" by creating complex composite alarms
+
+<img src="../images/cloudwatch/composite-alarms.png" alt="Composite Alarms">
+
+* **Recovery**: Same Private, Public, Elastic IP, metadata, placement group
+
+#### CloudWatch Alarm: good to know
+
+* Alarms can be created based on CloudWatch Logs Metrics Filters
+
+<img src="../images/cloudwatch/test-cloud-watch-alarms.png" alt="CloudWatch Alarm: Good to Know">
+
+* To test alarms and notifications, set the alarm state to Alarm using CLI
+
+```
+aws cloudwatch set-alarm-state --alarm-name "myalarm" --state-value ALARM --state-reason "testing purposes"
+```
