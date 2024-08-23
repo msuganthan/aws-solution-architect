@@ -71,16 +71,16 @@
 * Send to Kinesis Data Streams, Kinesis Data Firehose or Lambda
 * Subscription Filter - filter which logs are events delivered to you destination
 
-<img src="../images/cloudwatch/cloud-watch-subscriptions.png" alt="Cloud Watch Subscriptions">
+<img src="../images/aws-monitoring/cloud-watch-subscriptions.png" alt="Cloud Watch Subscriptions">
 
 
 #### CloudWatch Logs Aggregation: Multi-Account & Multi Region
 
-<img src="../images/cloudwatch/cloud-watch-multi-account-multi-region.png" alt="Cloud Watch Multi Account and Multi Region">
+<img src="../images/aws-monitoring/cloud-watch-multi-account-multi-region.png" alt="Cloud Watch Multi Account and Multi Region">
 
 * Cross Account Subscription - send log events to resources in a different AWS account(KDS, KDF)
 
-<img src="../images/cloudwatch/cloud-watch-multi-account-subscription.png" alt="Multi Account Subscription">
+<img src="../images/aws-monitoring/cloud-watch-multi-account-subscription.png" alt="Multi Account Subscription">
 
 ### CloudWatch Logs for EC2
 
@@ -89,7 +89,7 @@
 * Make sure IAM permissions are correct
 * The CloudWatch log agent can be setup on-premises too
 
-<img src="../images/cloudwatch/cloud-watch-logs-for-ec2.png" alt="Cloud Watch Logs for EC2">
+<img src="../images/aws-monitoring/cloud-watch-logs-for-ec2.png" alt="Cloud Watch Logs for EC2">
 
 #### CloudWatch Logs Agent & Unified Agent
 
@@ -140,7 +140,7 @@
 * **AND** and **OR** conditions
 * Helpful to reduce "alarm noise" by creating complex composite alarms
 
-<img src="../images/cloudwatch/composite-alarms.png" alt="Composite Alarms">
+<img src="../images/aws-monitoring/composite-alarms.png" alt="Composite Alarms">
 
 * **Recovery**: Same Private, Public, Elastic IP, metadata, placement group
 
@@ -148,10 +148,48 @@
 
 * Alarms can be created based on CloudWatch Logs Metrics Filters
 
-<img src="../images/cloudwatch/test-cloud-watch-alarms.png" alt="CloudWatch Alarm: Good to Know">
+<img src="../images/aws-monitoring/test-cloud-watch-alarms.png" alt="CloudWatch Alarm: Good to Know">
 
 * To test alarms and notifications, set the alarm state to Alarm using CLI
 
 ```
 aws cloudwatch set-alarm-state --alarm-name "myalarm" --state-value ALARM --state-reason "testing purposes"
 ```
+
+### Amazon EventBridge
+
+* Schedule: Cron jobs(schedule scripts)
+
+<img src="../images/aws-monitoring/event-bridge-use-case-1.png" alt="Event bridge to Schedule a job">
+ 
+* Event Pattern: Event rules to react to a service doing something
+
+<img src="../images/aws-monitoring/event-bridge-use-case-2.png" alt="Event bridge to react to a service">
+
+* Trigger Lambda functions, send SQS/SNS messages...
+
+#### EventBridge Rules
+
+<img src="../images/aws-monitoring/event-bridge-rules.png" alt="Event Bridge Rules">
+
+#### Event Bus
+
+<img src="../images/aws-monitoring/event-bridge-bus.png" alt="Event Bridge event bus">
+
+* Event buses can be accessed by other AWS accounts with Resource-based Policies
+* You can **archive events**(all/filter) sent to an event bus(indefinitely or set period)
+* Ability to **replay archived events**
+
+#### EventBridge - Schema Registry
+
+* EventBridge can analyze the events in your bus and infer the **schema**
+* The **Schema Registry** allows you to generate code for your application, that will know in advance how data is structured in the event bus
+* Schema can be versioned
+
+#### EventBridge - Resource-based Policy
+
+* Manage permission for a specific Event Bus
+* Example: allow/deny events from another AWS account or AWS region
+* Use case: aggregate all events from your AWS Organization in a single AWS account or AWS regions
+
+<img src="../images/aws-monitoring/event-bridge-resource-based-policy.png" alt="EventBridge event based policy">
