@@ -236,4 +236,54 @@ aws cloudwatch set-alarm-state --alarm-name "myalarm" --state-value ALARM --stat
 
 * Powered by SageMaker
 * Enhanced visibility into your application health to reduce the time it will take you to troubleshoot and repair you applications
-* Finding and alerts are sent to Amazon EventBridge and SSM OpsCenter 
+* Finding and alerts are sent to Amazon EventBridge and SSM OpsCenter
+
+### CloudTrail
+
+* **Provides governance, compliance and audit for your AWS Account**
+* CloudTrail in enabled by default
+* Get **an history of events / API calls made within your AWS Account by:**
+  * Console
+  * SDK
+  * CLI
+  * AWS Services
+* Can put logs from CloudTrail into CloudWatch Logs or S3
+* **A trails can be applied to All regions(default) or a single Region.**
+* If a resource is deleted in AWS, investigate CloudTrail first.
+
+<img src="../images/aws-monitoring/cloud-trail-diagram.png" alt="Cloud trail diagram">
+
+#### CloudTrail Events
+
+* **Management Events**
+  * Operations that are performed on resources in your AWS account
+  * Examples:
+    * Configuring security (IAM **AttachRolePolicy**)
+    * Configuring rules for routing data (Amazon EC2 **CreateSubnet**)
+    * Setting up logging (AWS CloudTrail **CreateTrail**)
+  * **By default, trails are configured to log management events**
+  * Can separate **Read Events** from **Write Events**
+* **Data Events**
+  * **By default, data events are not logged(because high volume operations)**
+  * Amazon S3 object-level activity(ex: **GetObject**, **DeleteObject**, **PutObject**): can separate Read and Write Events
+  * AWS Lambda function execution activity(the **Invoke** API)
+* CloudTrail Insights
+  * Enabled **CloudTrail Insights to detect unusual activity** in your account
+    * inaccurate resource provisioning
+    * hitting service limit
+    * Bursts of AWS IAM actions
+    * Gaps in periodic maintenance activity
+  * CloudTrail Insights analyzes normal management events to create a baseline
+  * And then **continuously analyzes write events to detect unusual patterns**
+    * Anomalies appear in the CloudTrail console
+    * Event is sent to Amazon S3
+    * An EventBridge event is generated(for automation needs)
+
+<img src="../images/aws-monitoring/cloud-trail-insights.png" alt="CloudTrail insights">
+
+#### CloudTrail Event Retention
+
+* Events are stored for 90 days in CloudTrail
+* To keep events beyond this period, log them to S3 and use Athena
+
+<img src="../images/aws-monitoring/cloud-trail-events-retention.png" alt="Events Retention">
