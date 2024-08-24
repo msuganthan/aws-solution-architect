@@ -287,3 +287,71 @@ aws cloudwatch set-alarm-state --alarm-name "myalarm" --state-value ALARM --stat
 * To keep events beyond this period, log them to S3 and use Athena
 
 <img src="../images/aws-monitoring/cloud-trail-events-retention.png" alt="Events Retention">
+
+#### CloudTrail EventBridge - Intercept API Calls
+
+<img src="../images/aws-monitoring/cloud-trail-event-bridge.png" alt="Cloud Trail Event Bridge">
+
+
+### AWS Config
+
+* Helps with auditing and recording **compliance** of your AWS resources
+* Helps record configurations and changes over time
+* Questions that can be solved be AWS Config:
+  * Is there unrestricted SSH access to my security groups?
+  * Do my buckets have any public access?
+  * How has my ALB configuration changed over time?
+* You can receive alerts(SNS notifications) for any changes
+* AWS Config is a per-region service
+* Can be aggregates across regions and accounts
+* Possibility of storing the configuration data into S3(analyzed by Athena)
+
+#### AWS Config Rules
+
+* Can use AWS managed config rules(over 75)
+* Can make custom config rules(must be defined in AWS Lambda)
+  * Ex: evaluate if each EBS disk is of type gp2
+  * Ex: evaluate if each EC2 instance is t2.micro
+* Rules can be evaluated / triggered:
+  * For each config change
+  * And / or : at regular time intervals
+* **AWS Config Rules does not prevent actions from happening**
+
+* Pricing: no free tier, $0.0003 per configuration item recorded per region, $0.001 per config rule evaluation per region
+
+#### Config Rules - Remediations
+
+* Automate remediation of non-compliant resources using **SSM Automation Documents**
+* Use AWS-Managed Automation Documents or create custom Automation Documents
+  * Tip: you can create custom Automation Documents that invokes Lambda function
+* You can set **Remediation Retries** if the resource is still non-compliant after auto-remediation
+
+<img src="../images/aws-monitoring/config-rules-remediations.png" alt="Config rules remediations">
+
+### CloudWatch vs CloudTrail vs Config
+
+* CloudWatch
+  * Performance monitoring(metrics, CPU, network, etc...) & dashboard
+  * Events & Alerting
+  * Log Aggregation & Analysis
+* CloudTrail
+  * Record API calls made within your Account by everyone
+  * Can define trails for specific resources
+  * Global Service
+* Config
+  * Record configuration changes
+  * Evaluate resources against compliance rules
+  * Get timeline of changes and compliance
+
+#### For an Elastic Load Balancer
+
+* CloudWatch
+  * Monitoring incoming connection metric
+  * Visualize error codes as a % over time
+  * Make a dashboard to get an idea of your load balancer performance
+* Config
+  * Track security group rules for the load balancer
+  * Track Configuration changes for the load balancer
+  * Ensure an SSL certificate is always assigned to the Load Balancer
+* CloudTrail
+  * Track you made any changes to the Load Balancer with API calls
