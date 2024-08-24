@@ -193,3 +193,47 @@ aws cloudwatch set-alarm-state --alarm-name "myalarm" --state-value ALARM --stat
 * Use case: aggregate all events from your AWS Organization in a single AWS account or AWS regions
 
 <img src="../images/aws-monitoring/event-bridge-resource-based-policy.png" alt="EventBridge event based policy">
+
+### CloudWatch Insights and Operational Visibility
+
+* Collect, aggregate, summarize **metrics and logs** from containers
+* Available for containers on
+  * Amazon Elastic Container Service(Amazon ECS)
+  * Amazon Elastic Kubernetes Services(Amazon EKS)
+  * Kubernetes platforms on EC2
+  * Fargate(both for ECS and EKS)
+
+<img src="../images/aws-monitoring/cloud-watch-container-insights.png" alt="CloudWatch Container Insights">
+
+* **In Amazon EKS and Kubernetes, CloudWatch Insights is using a containerized version of the CloudWatch Agent to discover containers**
+
+#### CloudWatch Lambda Insights
+
+* Monitoring and troubleshooting solution for serverless applications running on AWS Lambda
+* Collects, aggregates and summarizes system-level metrics including CPU time, memory, disk, and network
+* Collects, aggregates and summarizes diagnostic information such as cold starts and Lambda worker shutdowns
+* Lambda Insights is provided as a Lambda Layer
+
+#### CloudWatch Contributor Insights
+
+* Analyze log data and create time series that display contributor data.
+  * **See metrics about the top N-Contributor**
+  * The total number of unique contributors, and their usage
+* This helps you find a top talkers and understand who or what is the impacting system performance
+* Works for any AWS-generated logs(VPC, DNS, etc...)
+* For example, you can find bad hosts, **identify the heaviest network users**, or find the URLs that generates the most errors.
+
+<img src="../images/aws-monitoring/cloud-watch-container-insights.png" alt="Cloud Watch Insights">
+
+* You can build your rules from scratch, or you can also use sample rules that AWS has created - **leverages your CloudWatch Logs**
+* CloudWatch also provides built-in rules that you can use to analyze metrics from other AWS services
+
+#### CloudWatch Application Insights
+
+* Provides automated dashboards that show potential problems with monitored applications, to help isoalte ongoing issues
+* You applications run on Amazon EC2 Instances with select technologies only(Java, .NET, Microsoft IIS Web server, databases...)
+* And you can use other AWS resources such as Amazon EBS, RDS, ELS, ASG, Lambda,...
+
+* Powered by SageMaker
+* Enhanced visibility into your application health to reduce the time it will take you to troubleshoot and repair you applications
+* Finding and alerts are sent to Amazon EventBridge and SSM OpsCenter 
