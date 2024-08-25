@@ -222,3 +222,84 @@
 * When a rule runs, it needs permission on the target
 * **Resource-based policy: Lambda, SQS, SNS, S3, API Gateway**
 * **IAM role: Kinesis stream, Systems Manager Run Command, ECS task...**
+
+### IAM Permission Boundaries
+
+* IAM Permission Boundaries are supported for users and roles(**not groups**)
+* Advanced featured to use a managed policy to set the maximum permissions an IAM entity can get.
+
+Example:
+
+* IAM Permission Boundary
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:*",
+        "cloudwatch:*",
+        "ec2:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+* IAM Permissions through IAM Policy
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": {
+    "Effect": "Allow",
+    "Action": "iam:CreateUser",
+    "Resource": "*"
+  }
+}
+```
+
+Together it offers no permissions
+
+#### IAM Permission Boundaries
+
+* Can be used in combinations of AWS Organizations SCP
+
+<img src="../images/identity-and-access-management/effective-permissions-scp-boundary.png" alt="IAM Permission Boundaries">
+
+_Use cases_
+
+* Delegate responsibilities to non administrators within their permission boundaries, for example create new IAM users
+* Allow developers to self-assign policies and manage their own permissions, while making sure they can't escalate their privileges(= make themselves admin)
+* Useful to restrict one specific user(instead of a whole account using Organization & SCP)
+
+<img src="../images/identity-and-access-management/policy-evaluation-logic.png" alt="Policy evaluation Logic">
+
+#### Example IAM Policy
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sqs:*",
+      "Effect": "Deny",
+      "Resource": "*"
+    },
+    {
+      "Action": [
+        "sqs:DeleteQueue"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+* Can you perform sqs:CreateQueue? No
+* Can you perform sqs:DeleteQueue? No
+* Can you perform ec2:DescribeInstances? No
