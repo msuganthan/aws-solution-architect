@@ -10,9 +10,9 @@
 * **Shared reserved instances and Saving Plans discounts across accounts**
 * API is available to automate AWS account creation
 
-<img src="../images/aws-organization/aws-organizations.png" alt="AWS Organizations">
+<img src="../images/identity-and-access-management/aws-organizations.png" alt="AWS Organizations">
 
-<img src="../images/aws-organization/aws-organization-units.png" alt="AWS Organization Units Examples">
+<img src="../images/identity-and-access-management/aws-organization-units.png" alt="AWS Organization Units Examples">
 
 #### Advantages
 
@@ -30,7 +30,7 @@
 
 #### SCP Hierarchy
 
-<img src="../images/aws-organization/security-control-policy-hierarchy.png" alt="SCP hierarchy">
+<img src="../images/identity-and-access-management/security-control-policy-hierarchy.png" alt="SCP hierarchy">
 
 * Management Account
     * Can do anything(no SCP apply)
@@ -202,3 +202,23 @@
   ]
 }
 ```
+
+
+### Resource-based Policies vs IAM Roles
+
+* Cross Account
+  * attaching a resource-based policy to a resource(example: S3 bucket policy)
+  * OR using a role as a proxy
+    
+<img src="../images/identity-and-access-management/cross-account-policies.png" alt="Cross Account Policies">
+
+* **When you assume a role(user, application or service), you give up your original permissions and take the permissions assigned to the role**
+* When using a resource-based policy, the principal doesn't have to give up his permission
+* Example: user in account A need to scan a DynamoDB table in Account A and dump it in an S3 bucket in Account B
+* Supported by: Amazon S3 buckets, SNS topics, SQS queues, etc...
+
+#### Amazon EventBridge - Security
+
+* When a rule runs, it needs permission on the target
+* **Resource-based policy: Lambda, SQS, SNS, S3, API Gateway**
+* **IAM role: Kinesis stream, Systems Manager Run Command, ECS task...**
