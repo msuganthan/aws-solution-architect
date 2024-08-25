@@ -48,7 +48,7 @@
 #### CloudWatch Logs Insights
 
 * Search and analyze log data stored in CloudWatch Logs
-* Example: find a specific IP inside a log, count occurences of "ERROR" in your logs
+* Example: find a specific IP inside a log, count occurrences of "ERROR" in your logs
 * Provides a purpose-build query language
   * Automatically discovers fields from AWS services and JSON log events
   * Fetch desired event fields, filter based on conditions, calculate aggregate statistics, sort events, limit number of events
@@ -267,7 +267,7 @@ aws cloudwatch set-alarm-state --alarm-name "myalarm" --state-value ALARM --stat
   * **By default, data events are not logged(because high volume operations)**
   * Amazon S3 object-level activity(ex: **GetObject**, **DeleteObject**, **PutObject**): can separate Read and Write Events
   * AWS Lambda function execution activity(the **Invoke** API)
-* CloudTrail Insights
+* **CloudTrail Insights**
   * Enabled **CloudTrail Insights to detect unusual activity** in your account
     * inaccurate resource provisioning
     * hitting service limit
