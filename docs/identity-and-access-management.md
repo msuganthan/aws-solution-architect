@@ -303,3 +303,36 @@ _Use cases_
 * Can you perform sqs:CreateQueue? No
 * Can you perform sqs:DeleteQueue? No
 * Can you perform ec2:DescribeInstances? No
+
+### AWS IAM Identity Center
+
+* One login (single sign-on) for all your
+  * **AWS accounts in AWS Organizations**
+  * Business cloud applications(e.g, Salesforce, Box, Microsoft 365,...)
+  * SAML2.0-enabled applications
+  * EC2 Windows Instances
+
+* **Identity providers**
+  * Built-in identity store in IAM identity Center
+  * 3rd party: Active Directory(AD), OneLogin, Okta...
+
+<img src="../images/identity-and-access-management/aws-iam-identity-center.png" alt="AWS IAM Identity Center">
+
+#### IAM identity Center
+
+<img src="../images/identity-and-access-management/aws-iam-identity-center-aws-organization.png" alt="AWS Identity Center in AWS Organization">
+
+#### Fine-grained Permissions
+
+* **Multi-Account Permissions**
+  * Manage access across AWS accounts in your AWS Organization
+  * Permission Sets - a collection of one or more IAM Policies assigned to users and groups to define AWS access
+* **Application Assignments**
+  * SSO access to many SAML 2.0 business application(Salesforce, Box, Microsoft 365,...)
+  * Provide required URLs, certificates, and metadata
+* **Attribute-Based Access Control(ABAC)**
+  * Fine-grained permissions based on user's attributes stored in IAM Identity Center Identity Store
+  * Example: cost center, title, locale...
+  * Use case: Define permissions once, then modify AWS access by changing the attributes
+
+<img src="../images/identity-and-access-management/identity-center-fine-grained-permissions.png" alt="Fine grained Permissions and Assignments">
