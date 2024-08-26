@@ -336,3 +336,42 @@ _Use cases_
   * Use case: Define permissions once, then modify AWS access by changing the attributes
 
 <img src="../images/identity-and-access-management/identity-center-fine-grained-permissions.png" alt="Fine grained Permissions and Assignments">
+
+### What is Microsoft Active Directory(AD)
+
+* Found on any Windows Server with AD Domain Services
+* Database of **objects:** User Accounts, Computers, Printers, File Shares, Security Groups
+* Centralized security management, create account, assign permissions
+* Objects are organized in **trees**
+* A group of trees is a **forest**
+
+#### AWS Directory Services
+
+* **AWS Managed Microsoft AD**
+  * Create your own AD in AWS, manage users locally supports MFA
+  * Establish "trust" connections with your on-premise AD
+  
+<img src="../images/identity-and-access-management/aws-managed-microsoft-ad.png" alt="AWS Managed Microsoft AD">
+
+* **AD Connector**
+  * Directory Gateway(proxy) to redirect to on-premise AD, supports MFA
+  * Users are managed on the on-premise AD
+
+<img src="../images/identity-and-access-management/aws-ad-connector.png" alt="AWS AD Connector">
+
+* **Simple AD**
+  * AD-compatible managed directory on AWS
+  * Cannot be joined with on-premise AD
+
+#### IAM Identity Center - Active Directory Setup
+
+* **Connect to an AWS Managed Microsoft AD**
+  * Integration is out of the box
+
+<img src="../images/identity-and-access-management/connect-to-aws-managed-microsoft-ad.png" alt="Connect to AWS Managed Microsoft AD">
+
+* **Connect to a Self-Managed Directory**
+  * Create Two-way Trust Relationship using AWS Managed Microsoft AD
+  * Create an AD Connector
+
+<img src="../images/identity-and-access-management/aws-connect-a-self-managed-directory.png" alt="Connect to a Self-Managed Directory">
