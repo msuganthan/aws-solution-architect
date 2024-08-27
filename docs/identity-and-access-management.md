@@ -375,3 +375,22 @@ _Use cases_
   * Create an AD Connector
 
 <img src="../images/identity-and-access-management/aws-connect-a-self-managed-directory.png" alt="Connect to a Self-Managed Directory">
+
+
+### AWS Control Tower
+
+* Easy way to **set up and govern a secure and compliant multi-account AWS environment** based on best practices
+* AWS Control Tower uses AWS Organizations to create accounts
+* Benefits
+  * Automate the set-up of your environment in a few clicks
+  * Automate ongoing policy management using guardrails
+  * Detect policy violations and remediate them
+  * Monitor compliance through an interactive dashboard
+
+#### AWS Control Tower - Guardrails
+
+* Provides ongoing governance for your Control Tower environment(AWS Accounts)
+* Preventive Guardrail - using SCP (e.g. Restrict Regions across all your accounts)
+* Detective Guardrail - using AWS Config (e.g., identify untagged resources)
+
+<img src="../images/identity-and-access-management/aws-control-tower-guardrails.png" alt="AWS Control Tower Guardrails">
