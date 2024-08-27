@@ -72,7 +72,7 @@
 
 #### aws:RequestedRegion
 
-* restrict the region the API calls are made to
+* restrict the region the API calls are made **to**
 
 ```json
 {
