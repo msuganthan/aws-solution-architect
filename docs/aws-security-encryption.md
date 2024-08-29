@@ -87,3 +87,32 @@
 * Share the encrypted snapshot
 * In target: Create a copy of the Snapshot, encrypt it with a CMK in your account
 * Create a volume from the snapshot
+
+### KMS - Multi Region Keys
+
+* Identical KMS keys in different AWS Regions that can be used interchangeably
+* Multi-Region keys have the same key ID, Key material, automatic rotation...
+
+* Encrypt in one Region and decrypt in other Regions
+* No need to re-encrypt or making cross-Region API calls
+
+* KMS Multi-Region are NOT global(Primary + Replicas)
+* Each Multi-Region key in managed **independently**
+
+* **Use-cases**: global client-side encryption, encryption on Global DynamoDB, Global Aurora
+
+#### DynamoDB Global Tables and KMS Multi-Region Keys Client-side encryption
+
+* We can encrypt specific attributes client-side in our DynamoDB table using the **Amazon DynamoDB Encryption Client**
+* Combined with Global Tables, the client-side encrypted data is replicated to other regions
+* If we use a multi-region key, replicated in the same region as the DynamoDB Global table, the clients in these regions can use low-latency API calls to KMS in their region to decrypt the data client-side
+* Using client-side encryption we can protect specific fields and guarantee only decryption if the client has access to API key
+
+<img src="../images/aws-security-encryption/dynamo-db-global-table-and-kms-multi-region.png" alt="DynamoDB Global Tables and KMS Multi-Region Keys Client-side encryption">
+
+* We can encrypt specific attributes client-side in our Aurora table using the **AWS Encryption SDK**
+* Combined with Aurora Global Tables, the client-side encrypted data is replicated to other regions
+* If we use a multi-region key, replicated in the same region as the Globale Aurora DB, then clients in these regions can use low-latency API calls to KMS in their regions to decrypt the data client-side
+* Using client-side encryption we can protect specific fields and guarantee only encryption if the client has access to an API key, **we can protect specific fields even from database admin**
+
+<img src="../images/aws-security-encryption/client-side-encryption.png" alt="Client side encryption">
