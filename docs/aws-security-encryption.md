@@ -126,6 +126,92 @@
   * Specify which KMS key to encrypt the objects within the target bucket
   * Adapt the KMS Key Policy for the target key
   * An IAM Role with kms:Decrypt for the source KMS key and kms:Encrypt for the target KMS Key
-  * You might get KMS throttling errors, in which case you can ask for a Service Quoatas increase
+  * You might get KMS throttling errors, in which case you can ask for a Service Quotas increase
 
 * **You can use multi-region AWS KMS keys, but they are currently treated as independent keys by Amazon S3(the object will still be decrypted and then encrypted)**
+
+### AMI Sharing Process Encrypted via KMS
+
+* AMI in Source Account is encrypted with KMS Key from Source Account
+* Must modify the image attribute to add a **Launch Permission** which corresponds to the specified target AWS account
+* Must share the KMS keys used to encrypted the snapshot the AMI references with the target account / IAM Role
+* The IAM Role/User in the target account must have the permissions to DescribeKey, ReEncrypted, CreateGrant, Decrypt
+* When Launching an EC2 instance from the AMI optionally the target account can specify a new KMS key in its own account to re-encrypt the volumes.
+
+<img src="../images/aws-security-encryption/ami-sharing-process-via-kms.png" alt="AMI Sharing Process Encrypted via KMS">
+
+### SSM Parameter Store Overview
+
+* Secure storage for configuration and secrets
+* Optional Seemless Encryption using KMS
+* Serverless, scalable, durable, easy SDK
+* Version tracking of configuration / secrets
+* Security through IAM
+* Notifications with Amazon EventBridge
+* Integration with CloudFormation
+
+<img src="../images/aws-security-encryption/ssm-parameter-store.png" alt="SSM Parameter Store">
+
+#### SSM Parameter Store Hierarchy
+
+* /my-department/
+  * my-app/
+    * dev/
+      * db-url
+      * db-password
+    * prod/
+      * db-url
+      * db-password
+  * other-app/
+* /other-department/
+* /aws/reference/secretsmanager/secret_ID_in_Secrets_Manager
+* /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-ap2 (public)
+
+#### Standard and advanced parameter tiers
+
+|                                                        | Standard             | Advanced                               |
+|--------------------------------------------------------|----------------------|----------------------------------------|
+| Total number of parameters allowed(per account/region) | 10,000               | 100,000                                |
+| Maximum size of a parameter value                      | 4KB                  | 8KB                                    |
+| Parameter policies avilable                            | No                   | Yes                                    |
+| Cost                                                   | No additional charge | Charges apply                          |
+| Storage Pricing                                        | Free                 | $0.05 per advanced parameter per month |
+
+#### Parameter Policies(for advanced parameters)
+
+* Allow to assign a TTL to a parameter to force updating or deleting sensitive data such as parameter
+* Can assign multiple policies at a time
+
+##### Expiration(to delete a parameter)
+
+```json
+{
+  "Type": "Expiration",
+  "Version": "1.0",
+  "Attributes": {
+    "Timestamp": "2020-12-02T21:34:33.000Z"
+  }
+}
+```
+
+```json
+{
+  "Type": "ExpirationNotification",
+  "Version": "1.0",
+  "Attributes": {
+    "Before": 15,
+    "Unit": "Days"
+  }
+}
+```
+
+```json
+{
+  "Type": "NoChangeNotification",
+  "Version": "1.0",
+  "Attributes": {
+    "After": "20",
+    "Unit": "Days"
+  }
+}
+```
