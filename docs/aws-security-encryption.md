@@ -343,3 +343,26 @@
   * 24/7 access to AWS DDoS response team(DRP)
   * Protect against higher fees during usage spikes due to DDoS
   * Shield Advanced automatic application layer DDoS mitigation automatically creates, evaluates and deploys AWS WAF rules to mitigate layer 7 attacks.
+
+### AWS Firewall Manager
+
+* **Manage rules in all accounts of an AWS Organization**
+
+* Security policy: common set of security rules
+  * WAF rules(Application Load Balancer, API Gateways, CloudFront)
+  * AWS Shield Advanced(ALB, CLB, NLB, Elastic IP, CloudFront)
+  * Security Groups for EC2, Application Load Balancer and ENI resources in VPC
+  * AWS Network Firewall(VPC Level)
+  * Amazon Route 53 Resolver DNS Firewall
+  * Policies are created at the region level
+  
+* **Rules are applied to new resources as they are created(good for compliance) across all and future accounts in your organization.**
+
+#### WAF vs Firewall Manager vs Shield
+
+* **WAF, Shield, and Firewall Manager are used together for comprehensive protection**
+* Define your Web ACL rules in WAF
+* For granular protection of your resources, WAF alone is the correct choice
+* If you want to use **AWS WAF across accounts, accelerate WAF configuration, automate the protection of new resources**, use Firewall manager with AWS WAF
+* Shield Advanced adds additional features on top of AWS WAF, such as dedicates support from the Shield Response Team(SRT) and advanced reporting.
+* If you're prone to frequent DDoS attacks, consider purchasing Shield Advanced.
