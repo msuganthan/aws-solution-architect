@@ -416,3 +416,19 @@
   * Hide EC2, Lambda, elsewhere
   * Edge-optimized mode, or CloudFront + regional mode(more control for DDoS)
   * WAF + API Gateway: burst limits, header filtering, use API keys
+
+### Amazon GuardDuty
+
+* Intelligent Threat discovery to protect your AWS account
+* Uses Machine Learning algorithms, anomaly detection, 3rd party data
+* One click to enable(30 days trail), no need to install software
+* Input data includes:
+  * CloudTrail Events Logs - unusual API calls, unauthorized deployments
+  * VPC Flow Logs - usual internal traffic, unusual IP address
+  * DNS Logs - compromised EC2 instances sending encoded data within DNS queries
+  * Optional Features - EKS Audio Logs, RDS & Aurora, EBS, Lambda, S3 Data Events...
+* Can setup **EventBridge rules** to be notified in case of findings
+* EventBridge rules can target AWS Lambda or SNS
+* **Can protect against CryptoCurrency attacks (has a dedicated "finding" for it)**
+
+<img src="../images/aws-security-encryption/amazon-guard-duty.png" alt="Amazon GuardDuty">
