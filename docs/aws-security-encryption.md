@@ -330,3 +330,16 @@
 * We can use Global Accelerator for fixed IP and WAF on the ALB
 
 <img src="../images/aws-security-encryption/waf-fixed-ip-solution-with-load-balancer.png" alt="WAF fixed IP Solution">
+
+### Shield - DDoS Protection
+
+* DDoS: Distributed Denial of Service - many requests at the same time
+* AWS Shield Standard:
+  * Free service that is activated for every AWS customer
+  * Provides protection from attacks such as SYN/UDP floods, Reflection attacks and other layer 3/layer 4 attacks
+* AWS Shield Advanced:
+  * Optional DDoS mitigation service($3,000 per month per organization)
+  * Protect against more sophisticated attack on _Amazon EC2, Elastic Load Balancing(ELB), Amazon CloudFront, AWS Global Accelerator and Route 53_
+  * 24/7 access to AWS DDoS response team(DRP)
+  * Protect against higher fees during usage spikes due to DDoS
+  * Shield Advanced automatic application layer DDoS mitigation automatically creates, evaluates and deploys AWS WAF rules to mitigate layer 7 attacks.
