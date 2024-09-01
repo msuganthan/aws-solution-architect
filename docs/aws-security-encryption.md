@@ -427,8 +427,42 @@
   * VPC Flow Logs - usual internal traffic, unusual IP address
   * DNS Logs - compromised EC2 instances sending encoded data within DNS queries
   * Optional Features - EKS Audio Logs, RDS & Aurora, EBS, Lambda, S3 Data Events...
-* Can setup **EventBridge rules** to be notified in case of findings
+* Can set up **EventBridge rules** to be notified in case of findings
 * EventBridge rules can target AWS Lambda or SNS
 * **Can protect against CryptoCurrency attacks (has a dedicated "finding" for it)**
 
 <img src="../images/aws-security-encryption/amazon-guard-duty.png" alt="Amazon GuardDuty">
+
+### Amazon Inspector
+
+* Automated Security Assessments
+
+* **For EC2 instances**
+  * Leveraging the **AWS System Manager(SSM) agent**
+  * Analyze against **unintended network accessibility**
+  * Analyze the **running OS** against **known vulnerabilities**
+* **For Container Images push to Amazon ECR**
+  * Assessment of Container Images as they are pushed
+* **For Lambda Functions**
+  * Identifies software vulnerabilities in function code and package dependencies
+  * Assessment of functions as they are deployed
+
+* Reporting & integration with AWS Security Hub
+
+<img src="../images/aws-security-encryption/amazon-inspector.png" alt="Amazon Inspector">
+
+#### What does Amazon Inspector evaluate?
+
+* Continuous scanning of the infrastructure only when needed
+
+* Package vulnerabilities(EC2, ECR & Lambda) - database of CVE
+* Network reachability(EC2)
+
+* A risk score is associated with all vulnerabilities for prioritization
+
+#### Amazon Macie
+
+* Amazon Macie is a fully managed data security and data privacy service that uses **machine learning and pattern matching to discover and protect your sensitive data in AWS**
+* Macie helps identify and alert you to **sensitive data, such as personally identifiable information(PII)**
+
+<img src="../images/aws-security-encryption/amazon-macie.png" alt="Amazon Macie">
