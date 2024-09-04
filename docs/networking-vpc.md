@@ -316,3 +316,7 @@ __.__.__.__
 * Outbound ACCEPT, Inbound REJECT => NACL
 
 <img src="../images/net-working-vpc/vpc-flow-logs-outgoing-requests.png" alt="Outgoing Requests">
+
+#### VPC Flow Logs - Architectures
+
+<img src="../images/net-working-vpc/vpc-flow-logs-architecture.png" alt="VPC Flow Logs architecture">
