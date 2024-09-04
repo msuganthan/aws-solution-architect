@@ -279,3 +279,40 @@ __.__.__.__
 * Interface Endpoint is preferred access is required from on-premises(Site to Site VPN or Direct Connect), a different VPC or a different region
 
 <img src="../images/net-working-vpc/gateway-or-interface-endpoints-for-s3.png" alt="Gateway or Interface Endpoint for S3">
+
+### VPC Flow Logs
+
+* Capture information about IP traffic going into your interfaces:
+  * VPC Flow Logs
+  * Subnet Flow Logs
+  * Elastic Network Interface(ENI) Flow Logs
+* Helps to monitor & troubleshoot connectivity issues
+* Flow logs data can go to S3, CloudWatch Logs, and Kinesis Data Firehose
+* Capture network information from AWS managed interface too: ELB, RDS, ElastiCache, RedShift, WorkSpaces, NATGW, Transit Gateway
+
+#### VPC Flow Logs Syntax
+
+<img src="../images/net-working-vpc/vpc-flow-logs-syntax.png" alt="VPC Flow Logs Syntax">
+
+* **srcaddr & dstaddr** - help identify problematic IP
+* **srcport & dstport** - help identify problematic ports
+* Action - success or failure of the request due to Security Group / NACL
+* Can be used for analytics on usage patterns, or malicious behavior
+* **Query VPC flow logs using Athena on S3 or CloudWatch Logs Insights**
+
+
+#### VPC Flow Logs - Troubleshoot SG & NACL issues
+
+##### Incoming Requests
+
+* Inbound REJECT => NACL or SG
+* Inbound ACCEPT, Outbound REJECT => NACL
+
+<img src="../images/net-working-vpc/vpc-flow-log-incoming-requests.png" alt="Incoming Requests">
+
+##### Outgoing Requests
+
+* Outbound REJECT => NACL or SG
+* Outbound ACCEPT, Inbound REJECT => NACL
+
+<img src="../images/net-working-vpc/vpc-flow-logs-outgoing-requests.png" alt="Outgoing Requests">
