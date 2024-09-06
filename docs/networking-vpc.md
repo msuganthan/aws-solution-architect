@@ -426,3 +426,49 @@ __.__.__.__
 #### Transit Gateway - Share Direct Connect between multiple accounts
 
 <img src="../images/net-working-vpc/transit-gateway-share-direct-connect.png" alt="Share Direct Connect between multiple accounts">
+
+### VPC - Traffic Mirroring
+
+* Allows you to capture and inspect network traffic in your VPC
+* Route the traffic to security appliances that you manage
+* Capture the traffic
+  * **From(Source)** - ENIs
+  * **To(Target)** - an ENI or a Network Load Balancer
+* Capture all packets or capture the packets of your interest(optionally, truncate packets)
+* Source and target can be in the same VPC or different VPCs(VPC Peering)
+* Use cases: content inspection, threat monitoring, troubleshooting,...
+
+<img src="../images/net-working-vpc/vpc-traffic-mirroring.png" alt="VPC - Traffic Mirroring">
+
+### What is IPv6?
+
+* IPv6 is  the successor of IPv4
+* IPv6 is designed to provide 3.4 * 10^38 unique IP addresses
+* Every IPv6 address in AWS is public and Internet-routable(no private range)
+* Format => x.x.x.x.x.x.x.x (x is hexadecimal, range can be from 0000 to ffff)
+* Examples: 
+  * 2001:db8:3333:4444:5555:6666:7777:8888
+  * 2001:db8:3333:4444:cccc:dddd:eeee:ffff
+  * :: => all segments are zero
+  * 2001:db8:: => the last 6 segments are zero
+  * ::1234:5678 => the first 6 segments are zero
+  * 2001:db8::7777:8888 => the middle 4 segments are zero
+
+#### IPv6 in VPC
+
+* IPv4 cannot be disabled for your VPC and subnets
+* You can enable IPv6(they're public IP addresses) to operate in dual stack mode
+* Your EC2 instances will get at atleast a private internal IPv4 and a public IPv6
+* They can communicate using either IPv4 or IPv6 to the internet through an Internet Gateway 
+
+<img src="../images/net-working-vpc/ipv6-and-ipv4-in-vpc.png" alt="IPv6 in VPC">
+
+### IPv6 Troubleshooting
+
+* **IPv4 cannot be disabled for your VPC and subnets**
+* So, if you cannot launch an EC2 instance in your subnet
+  * It's not because it cannot acquire an IPv6(the space is very large)
+  * It's because there are not available IPv4 in your subnet
+* _Solution_: create a new IPv4 CIDR in your subnet
+
+<img src="../images/net-working-vpc/ipv6-troubleshooting.png" alt="IPv6 Troubleshooting">
