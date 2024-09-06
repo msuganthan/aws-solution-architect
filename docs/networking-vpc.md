@@ -398,3 +398,31 @@ __.__.__.__
 * In case Direct Connect fails, you can set up a backup Direct Connect connection(expensive), or a Site-to-Site connection
 
 <img src="../images/net-working-vpc/site-to-site-vpn-connection.png" alt="Site to Site VPN Connection as ab backup">
+
+### Transit Gateway
+
+* For having transitive peering between thousands of VPC and on-premises, hub-and-spoke(star) connection
+* Regional resource, can work cross-region
+* Share cross-account using Resource Access Manager(RAM)
+* You can peer Transit Gateways across regions
+* **Route Tables: limit which VPC can talk with other VPC**
+* Works with **Direct Connect Gateway, VPN connections**
+* Supports **IP Multicast**(not supported by any other AWS service)
+
+<img src="../images/net-working-vpc/transit-gateway.png" alt="Transit Gateway">
+
+#### Transit Gateway: Site-to-Site VPN ECMP
+
+* ECMP - Equal cost multi-path routing
+* Routing strategy to allow to forward a packet over multiple best path
+* Use case: create multiple Site-to-Site VPN connections **to increase the bandwidth of your connection to AWS**
+
+<img src="../images/net-working-vpc/transit-gateway-site-to-site-vpn-ecmp.png" alt="Site to site VPN ECMP">
+
+#### Transit Gateway: throughput with ECMP
+
+<img src="../images/net-working-vpc/transit-gateway-throughput-with-ecmp.png" alt="Throughput with ECMP">
+
+#### Transit Gateway - Share Direct Connect between multiple accounts
+
+<img src="../images/net-working-vpc/transit-gateway-share-direct-connect.png" alt="Share Direct Connect between multiple accounts">
