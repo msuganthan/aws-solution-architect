@@ -515,3 +515,39 @@ __.__.__.__
 * **Transit Gateway** - transitive peering connections for VPC, VPN, & DX
 * **Traffic Mirroring** - copy network traffice from ENUs for further analysis
 * **Egrees-only Internet Gateway** - like a NAT Gateway, but for IPv6
+
+### Networking Costs in AWS per GB 
+
+* Use Private IP instead of Public IP for good savings and better network performance
+* Use same AZ for maximum savings (at the cost of high availability)
+
+<img src="../images/net-working-vpc/networking-cost-in-aws.png" alt="Networking Costs in AWS per GB">
+
+#### Minimizing egress traffic network cost
+
+* Egress traffic: outbound traffic(from AWS to outside)
+* Ingress traffic: inbound traffic - from outside to AWS(typically free)
+* **Try to keep as much internet traffic within AWS to minimize costs.**
+* **Direct Connect location that are co-located in the same AWS Region result in lower cost for egress network.**
+
+<img src="../images/net-working-vpc/minimizing-traffic-traffic-network-cost.png" alt="Minimizing egress traffic network cost">
+
+#### S3 Data transfer Pricing - Analysis for USA
+
+* **S3 ingress**: free
+* **S3 to Interest**: $0.09 per GB
+* **S3 Transfer Acceleration**:
+  * Faster transfer times(50 to 500% better)
+  * Additional cost on top of Data Transfer Pricing: +$0.04 to $0.08 per GB
+* **S3 to CloudFront**: $0.00 per GB
+* **CloudFront to Internet**: $0.085 per GB(slightly cheaper than S3)
+  * Caching capability(lower latency)
+  * Reduce costs associated with S3 Requests Pricing(7* Cheaper with CloudFront)
+* **S3 Cross Region Replication:** $0.02 per GB
+
+
+<img src="../images/net-working-vpc/s3-data-transfer-pricing.png" alt="S3 Data Transfer Pricing">
+
+#### Pricing: NAT Gateway vs Gateway VPC Endpoint
+
+<img src="../images/net-working-vpc/nat-gateway-vs-gateway-vpc.png" alt="NAT Gateway vs Gateway VPC Endpoint">
