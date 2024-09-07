@@ -341,9 +341,9 @@ __.__.__.__
 
 #### AWS VPN CloudHub
 
-* Provide secure communication between multiple sites, if you have multiple VPN connections
-* Low-cost hub-and-spoke model for primary or secondary network connectivity between different locations(VPN only)
-* It's a VPN connection, so it goes over the public internet.
+* **Provide secure communication between multiple sites**, if you have multiple VPN connections
+* Low-cost **hub-and-spoke model for primary or secondary network connectivity between different locations**(VPN only)
+* It's a VPN connection, so it goes over the **public internet**.
 * To set it up, connection multiple VPN connections on the same VGW, setup dynamic routing and configure route tables.
 
 <img src="../images/net-working-vpc/aws-vpn-cloud-hub.png" alt="AWS VPN Cloudhub">
