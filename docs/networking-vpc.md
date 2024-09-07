@@ -551,3 +551,33 @@ __.__.__.__
 #### Pricing: NAT Gateway vs Gateway VPC Endpoint
 
 <img src="../images/net-working-vpc/nat-gateway-vs-gateway-vpc.png" alt="NAT Gateway vs Gateway VPC Endpoint">
+
+### AWS Network Firewall
+
+* To protect network on AWS, we've seen
+  * Network Access Control Lists(NACLs)
+  * Amazon VPC security groups
+  * AWS WAF(protect against malicious requests)
+  * AWS Shield & AWS Shield Advanced
+  * AWS Firewall Manager(to manage them across accounts)
+  
+* But what if you want to protect in a sophisticated way our entire VPC?
+
+* Protect your entire Amazon VPC
+* From Layer 3 to Layer 7 protection
+* Any direction, you can inspect
+  * VPC to VPC traffic
+  * Outbound to internet
+  * Inbound from internet
+  * To / from Direct Connect & Site-to-Site VPN
+* Internally, the AWS Network Firewall uses the **AWS Gateway Load Balancer**
+* Rules can be centrally managed cross-account by AWS Firewall Manager to apply to many VPCs
+
+<img src="../images/net-working-vpc/aws-network-firewall.png" alt="AWS network firewall">
+
+#### Network Firewall - Fine Grained Controls
+
+* Supports 1000s of rules
+* **Traffic filtering: Allow, drop or alert for the traffic that matches the rules**
+* **Active Flow inspection** to protect against network threats with intrusion-prevention capabilities(like Gateway Load Balancer, but all managed by AWS)
+* Send logs of rule matches to Amazon S3, CloudWatch Logs, Kinesis Data Firehose
