@@ -472,3 +472,46 @@ __.__.__.__
 * _Solution_: create a new IPv4 CIDR in your subnet
 
 <img src="../images/net-working-vpc/ipv6-troubleshooting.png" alt="IPv6 Troubleshooting">
+
+### Egress - only Internet Gateway
+
+* Used for IPv6 only
+* (similar to a NAT Gateway but for IPv6)
+
+* Allow instances in your VPC outbound connections over IPv6 while preventing the internet to initiate an IPv6 connection to your instances
+* **You must update the Route Tables**
+
+<img src="../images/net-working-vpc/egress-only-internet-gateway.png" alt="Egress only Internet Gateway">
+
+#### IPv6 Routing
+
+<img src="../images/net-working-vpc/ipv6-routing.png" alt="IPv6 Routing">
+
+
+### VPC Section Summary
+
+* **CIDR** - IP Range
+* **VPC** - Virtual Private Cloud => we define a list of IPv4 & IPv6 CIDR
+* **Subnets** - tied to an AZ, we define a CIDR
+* **Internet Gateway** - at the VPC level, provide IPv4 & IPv6 Internet Access
+* **Route Tables** - must be edited to add routes from subnet to the IGW, IPC Peering Connections, VPC Endpoints,...
+* **Bastion Host** - public EC2 instance to SSH into, that has SSH connectivity to EC2 instances in private subnets
+* **NAT Instances** - gives Internet access to EC2 instances in private subnets. Old, must be setup in a public subnet, disable Source / Destination check flag
+* **NAT Gateway** - managed by AWS, provides scalable Internet access to private EC2 instances, when the target is an IPv4 address.
+* **NACL** - stateless, subnet rules for inbound and outbound, don't forget Ephemeral Ports
+* **Security Groups** - stateful, operate at the EC2 instance level
+* **VPC Peering** - connect two VPCs with no overlapping CIDR, non-transitive
+* **VPC Endpoints** - provide private access to AWS Service(S3, DynamoDB, CloudFormation, SSM) within a VPC
+* **VPC Flow Logs** - can be setup at the VPC / Subnet / ENI Level, for ACCEPT and REJECT traffic, helps to identify attacks, analyze using Athena or CloudWatch Logs Insights
+* **Site-to-Site VPN** - set up a Customer Gateway on DC, a Virtual Private Gateway on VPC, and site-to-site VPN over public Internet
+* **AWS VPN CloudHub** - **hub-and-spoke** VPN model to connect your sites
+* **Direct Connect** - setup a Virtual Private Gateway on VPC, and establish a direct private connection to an AWS Direct Connect Location
+* **Direct Connect Gateway** - setup a Direct Connect to many VPCs in different AWS regions
+* **AWS PrivateLink / VPC Endpoint Services:**
+  * Connect services privately from your **service VPC to customer VPC**
+  * Doesn't need VPC Peering, public Internet, NAT Gateway, Route Tables
+  * Must be used with Network Load Balancer & ENI
+* **ClassicLink** - connect EC2 - Classic EC2 instances privately to your VPC
+* **Transit Gateway** - transitive peering connections for VPC, VPN, & DX
+* **Traffic Mirroring** - copy network traffice from ENUs for further analysis
+* **Egrees-only Internet Gateway** - like a NAT Gateway, but for IPv6
