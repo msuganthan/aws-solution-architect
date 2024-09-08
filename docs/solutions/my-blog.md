@@ -9,20 +9,20 @@
 
 #### Serving static content, globally securely
 
-<img src="../images/my-blog/serving-content-globally-and-securely.png" alt="Serving content globally and securely">
+<img src="../../images/solutions/my-blog/serving-content-globally-and-securely.png" alt="Serving content globally and securely">
 
 
 #### Adding a public serverless REST API
 
-<img src="../images/my-blog/public-rest-api.png" alt="Public Rest API">
+<img src="../../images/solutions/my-blog/public-rest-api.png" alt="Public Rest API">
 
 #### User Welcome email Flow
 
-<img src="../images/my-blog/user-welcome-email-flow.png" alt="User Welcome email flow">
+<img src="../../images/solutions/my-blog/user-welcome-email-flow.png" alt="User Welcome email flow">
 
 #### Thumbnail Generation Flow
 
-<img src="../images/my-blog/thumbnail-generation-flow.png" alt="Thumbnail generation flow">
+<img src="../../images/solutions/my-blog/thumbnail-generation-flow.png" alt="Thumbnail generation flow">
 
 #### Summary
 

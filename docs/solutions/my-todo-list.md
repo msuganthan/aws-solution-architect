@@ -11,19 +11,19 @@
 
 #### User authentication
 
-<img src="../images/my-todo-list/user-authentication.png" alt="Serverless user authentication">
+<img src="../../images/solutions/my-todo-list/user-authentication.png" alt="Serverless user authentication">
 
 #### Giving User acceess to S3
 
-<img src="../images/my-todo-list/giving-user-access-to-s3.png" alt="Giving users access to S3">
+<img src="../../images/solutions/my-todo-list/giving-user-access-to-s3.png" alt="Giving users access to S3">
 
 #### High read throughput
 
-<img src="../images/my-todo-list/high-read-throughput.png" alt="High read throughput using DAX">
+<img src="../../images/solutions/my-todo-list/high-read-throughput.png" alt="High read throughput using DAX">
 
 #### Caching at the API Gateway
 
-<img src="../images/my-todo-list/caching-at-the-api-gateway.png" alt="Caching at the API Gateway">
+<img src="../../images/solutions/my-todo-list/caching-at-the-api-gateway.png" alt="Caching at the API Gateway">
 
 * Serverless REST API: HTTPS, API Gateway, Lambda, DynamoDB
 * Using Cognito to generate temporary credentials to access S3 bucket with restricted policy. App users can directly access S3 bucket with restricted policy. App users can directly access AWS resource this way. Pattern can be applied to DynamoDB, Lambda...
