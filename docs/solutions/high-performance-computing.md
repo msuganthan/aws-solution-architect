@@ -65,3 +65,22 @@
   * Automate creation of VPC, Subnet, cluster type and instance type
 
 ### EC2 Instance High Availability
+
+
+#### Creating a highly available EC2 instance
+
+<img src="../../images/solutions/ec2-instance-high-avail/create-high-avail-ec2-instance.png" alt="Creating high availability EC2 instance">
+
+<img src="../../images/solutions/ec2-instance-high-avail/create-high-avail-alter-ec2-instance.png" alt="Alternative EC2 instance">
+
+#### With an Auto Scaling Group
+
+<img src="../../images/solutions/ec2-instance-high-avail/create-ec2-instance-with-auto-scaling-group.png" alt="With an Auto Scaling Group">
+
+<img src="../../images/solutions/ec2-instance-high-avail/create-alter-ec2-instance-with-auto-scaling-group.png" alt="Create Alternate EC2 instance with auto scaling group">
+
+#### With ASG + EBS
+
+<img src="../../images/solutions/ec2-instance-high-avail/create-ec2-instance-with-asg-ebs.png" alt="Create EC2 with AGS + EBS">
+
+<img src="../../images/solutions/ec2-instance-high-avail/create-alert-ec2-instance-with-asg-ebs.png" alt="Create alter EC2 with AGS + EBS">
