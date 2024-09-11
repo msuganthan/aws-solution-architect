@@ -81,9 +81,76 @@
 ### System Manager - SSM Session Manager
 
 * Allow you to start a secure shell on your EC2 and on-premises servers
-* No SSH access, bastion hosts, or SSH keys needed
-* No port 22 needed(better security)
+* **No SSH access, bastion hosts, or SSH keys needed**
+* **No port 22 needed(better security)**
 * Support Linux, macOS, and Windows
 * Send session log data to S3 or CloudWatch Logs
 
 <img src="../images/other-services/system-session-manager.png" alt="System Session Manager">
+
+#### Systems Manager - Run Command
+
+* Execute a document(= script) or just run a command
+* Run command across multiple instances(using resource groups)
+* No need for SSH
+* Command Output can be shown in the AWS Console, sent to S3 bucket or CloudWatch Logs
+* Send notifications to SNS about command status(In progress, Success, Failed,...)
+* Integrated with IAM & CloudTrail
+* Can be invoked using EventBridge
+
+<img src="../images/other-services/systems-manager-run-command.png" alt="Run Command">
+
+#### System Manager - Patch Manager
+
+* Automates the process of patching managed instances
+* OS updates, applications updates, security updates
+* Supports EC2 instances and on-premises servers
+* Supports Linux, macOS, and Windows
+* Patch on-demand or on a schedule using **Maintenance Windows**
+* Scan instances and generate patch compliance report(missing patches)
+
+<img src="../images/other-services/systems-manager-patch-manager.png" alt="Patch Manager">
+
+#### System Manager - Maintenance Windows
+
+* Defines a schedule for when to perform action on your instances
+* Example: OS patching, updating drivers, installing software,...
+* Maintenance Window contains
+  * Schedule
+  * Duration
+  * Set of registered instances
+  * Set of registered tasks
+
+<img src="../images/other-services/systems-manager-maintenance-windows.png" alt="Maintenance Windows">
+
+#### System Manager - Automation 
+
+* Simplifies common maintenance and deployment tasks of EC2 instances and other AWS resources
+* Examples: restart instances, create an AMI, EBS snapshot
+* **Automation Runbook** - SSM Documents to define actions performed on your EC2 instances or AWS resources(pre-defined or custom)
+* Can be triggered using:
+  * Manually using AWS Console, AWS CLI or SDK
+  * Amazon EventBridge
+  * On a schedule using Maintenance Windows
+  * By AWS Config for rules remediation's
+
+<img src="../images/other-services/systems-manager-automation.png" alt="Automation">
+
+### AWS Batch 
+
+* **Fully managed** batch processing at **any scale**
+* Efficiently run 100,000s of computing batch jobs in AWS
+* A batch job is a job with a start and an end
+* Batch will dynamically launch **EC2 instances** or **Spot Instances**
+* AWS Batch provisions the right amount of compute / memory
+* You submit or schedule batch jobs and AWS Batch does the rest
+* Batch jobs are defined as Docker images and run on ECS
+* Helpful for cost optimization and focusing less on the infra
+
+### AWS Amplify - web and mobile applications
+
+* A set of tools and services that helps you develop and deploy scalable full stack web and mobile application
+* Authentication, Storage, API(Rest, GraphQL), CI/CD, PubSub, Analytics, AI/ML Predictions, Monitoring,...
+* Connect your source code from Github, AWS CodeCommit, BitBucket, GitLab, or upload directly
+
+<img src="../images/other-services/aws-amplify-web-mobile-applications.png" alt="AWS Amplify">
