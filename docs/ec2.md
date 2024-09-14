@@ -94,7 +94,7 @@ EC2 Instance Sizes **generally double** in price and key attributes
 
 * Security Groups are the fundamental of network security in AWS.
 * They control how traffic is allowed into or out of our EC2 instances.
-* Security Groups only contain allow rules
+* Security Groups only contain **allow** rules
 * Security Groups rules can reference by IP or by security group.
 
 #### Security Group Deeper Dive
