@@ -1,3 +1,16 @@
+<!-- TOC -->
+  * [Amazon Kinesis](#amazon-kinesis)
+  * [Kinesis Data Streams](#kinesis-data-streams)
+    * [Kinesis Data Streams - Capacity Modes](#kinesis-data-streams---capacity-modes)
+    * [Kinesis Data Streams Security](#kinesis-data-streams-security)
+  * [Kinesis Data Firehose](#kinesis-data-firehose)
+  * [Ordering data into Kinesis](#ordering-data-into-kinesis)
+    * [Ordering data into SQS](#ordering-data-into-sqs)
+    * [Kinesis vs SQS ordering](#kinesis-vs-sqs-ordering)
+  * [Amazon MQ](#amazon-mq)
+    * [Amazon MQ - High Availability](#amazon-mq---high-availability)
+<!-- TOC -->
+
 ### Amazon Kinesis
 
 * Makes it easy to **collect, process and analyze** streaming data in real-time
