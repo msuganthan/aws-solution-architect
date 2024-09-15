@@ -1,3 +1,35 @@
+<!-- TOC -->
+  * [What is load balancing?](#what-is-load-balancing)
+    * [Why use a load balancer?](#why-use-a-load-balancer)
+  * [Elastic Load Balancer](#elastic-load-balancer)
+    * [Health Checks](#health-checks)
+    * [Types](#types)
+  * [Load Balancer Security Groups](#load-balancer-security-groups)
+  * [Application Load Balancer(v2)](#application-load-balancerv2)
+    * [Target Groups](#target-groups)
+    * [Good to know](#good-to-know)
+  * [Network Load Balancer](#network-load-balancer)
+    * [Network Load Balancer - Target Groups](#network-load-balancer---target-groups)
+  * [Gateways Load Balancer](#gateways-load-balancer)
+  * [Sticky Sessions(Session Affinity)](#sticky-sessionssession-affinity)
+    * [Sticky Sessions - Cookie Names](#sticky-sessions---cookie-names)
+    * [Cross-Zone Load Balancing](#cross-zone-load-balancing)
+      * [Application Load Balancer](#application-load-balancer)
+      * [Network Load Balancer & Gateway Load Balancer](#network-load-balancer--gateway-load-balancer)
+      * [Classic Load Balancer](#classic-load-balancer)
+  * [SSL/TLS - Basics](#ssltls---basics)
+    * [Load Balancer - SSL Certificates](#load-balancer---ssl-certificates)
+    * [SSL - Server Name Indication(SNI)](#ssl---server-name-indicationsni)
+  * [Elastic Load Balancers - SSL Certificates](#elastic-load-balancers---ssl-certificates)
+  * [Connection Draining](#connection-draining)
+  * [What's an Auto Scaling Group?](#whats-an-auto-scaling-group)
+    * [Auto Scaling Group Attributes](#auto-scaling-group-attributes)
+    * [Auto Scaling - CloudWatch Alarms & Scaling](#auto-scaling---cloudwatch-alarms--scaling)
+    * [Auto Scaling Group - Scaling Policies](#auto-scaling-group---scaling-policies)
+    * [Good metrics to scale on](#good-metrics-to-scale-on)
+    * [Auto Scaling Groups - Scaling Cool downs](#auto-scaling-groups---scaling-cool-downs)
+<!-- TOC -->
+
 ### What is load balancing?
 
 * Load balancers are servers that forward traffic to multiple servers (e.g. EC2 instances) downstream.
