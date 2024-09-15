@@ -1,3 +1,32 @@
+<!-- TOC -->
+  * [What is serverless?](#what-is-serverless)
+    * [Serverless in AWS](#serverless-in-aws)
+  * [Why AWS Lambda](#why-aws-lambda)
+    * [Benefits of AWS Lambda](#benefits-of-aws-lambda)
+    * [AWS Lambda Language Support](#aws-lambda-language-support)
+    * [AWS Lambda Limits to know - per region](#aws-lambda-limits-to-know---per-region)
+    * [Lambda SnapStart](#lambda-snapstart)
+  * [Customization At the Edge](#customization-at-the-edge)
+    * [CloudFront Functions & Lambda@Edge Use Case](#cloudfront-functions--lambdaedge-use-case)
+    * [CloudFront Functions](#cloudfront-functions)
+    * [Lambda@Edge](#lambdaedge)
+    * [CloudFront Functions vs Lambda@Edge - Use Cases](#cloudfront-functions-vs-lambdaedge---use-cases)
+  * [Lambda by default](#lambda-by-default)
+    * [Lambda is VPC](#lambda-is-vpc)
+    * [Lambda with RDS Proxy](#lambda-with-rds-proxy)
+  * [RDS Invoking Lambda & Event Notifications](#rds-invoking-lambda--event-notifications)
+    * [RDS Event Notifications](#rds-event-notifications)
+  * [API Gateway](#api-gateway)
+    * [API Gateway - Integrations High Level](#api-gateway---integrations-high-level)
+    * [API Gateway - AWS Service Integration - Kinesis Data Streams Example](#api-gateway---aws-service-integration---kinesis-data-streams-example)
+    * [API Gateway - Endpoint Types](#api-gateway---endpoint-types)
+    * [API Gateway - Security](#api-gateway---security)
+  * [Amazon Cognito](#amazon-cognito-)
+    * [Cognito User Pools(CUP) - User Features](#cognito-user-poolscup---user-features)
+    * [Cognito Identity Pools (Federated Identities)](#cognito-identity-pools-federated-identities)
+    * [Row Level Security in DynamoDB](#row-level-security-in-dynamodb)
+<!-- TOC -->
+
 ### What is serverless?
 
 * The developers don't have to manage servers anymore
