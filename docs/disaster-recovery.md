@@ -1,3 +1,27 @@
+<!-- TOC -->
+  * [Disaster Recovery Overview](#disaster-recovery-overview)
+    * [RPO and RTO](#rpo-and-rto)
+    * [Disaster Recovery Strategies](#disaster-recovery-strategies)
+    * [Backup and Restore(High RPO)](#backup-and-restorehigh-rpo)
+    * [Disaster Recovery - Pilot Light](#disaster-recovery---pilot-light)
+    * [Warm Standby](#warm-standby)
+    * [Multi Site / Hot Site Approach](#multi-site--hot-site-approach)
+    * [Disaster Recovery Tips](#disaster-recovery-tips)
+  * [DMS - Database Migration Service](#dms---database-migration-service)
+    * [DMS Sources and Targets](#dms-sources-and-targets)
+    * [AWS Schema Conversion Tool(SCT)](#aws-schema-conversion-toolsct)
+    * [AWS DMS - Multi AZ Deployment](#aws-dms---multi-az-deployment)
+  * [RDS & Aurora MySQL Migrations](#rds--aurora-mysql-migrations)
+    * [RDS & Aurora PostgreSQL Migrations](#rds--aurora-postgresql-migrations)
+  * [On-Premise strategy with AWS](#on-premise-strategy-with-aws)
+  * [AWS Backup](#aws-backup)
+    * [AWS Backup Vault Lock](#aws-backup-vault-lock)
+  * [AWS Application Discovery Service](#aws-application-discovery-service)
+    * [AWS Application Migration Service(MGN)](#aws-application-migration-servicemgn)
+  * [Transferring large amount of data into AWS](#transferring-large-amount-of-data-into-aws)
+  * [VMware Cloud on AWS](#vmware-cloud-on-aws)
+<!-- TOC -->
+
 ### Disaster Recovery Overview
 
 * Any event that has a negative impact on a company's business continuity or finances is a disaster
