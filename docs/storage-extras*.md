@@ -1,3 +1,36 @@
+<!-- TOC -->
+  * [AWS Snow Family](#aws-snow-family)
+    * [Data Migrations with AWS Snow Family](#data-migrations-with-aws-snow-family)
+    * [Diagrams](#diagrams)
+    * [Snowball Edge(for data transfers)](#snowball-edgefor-data-transfers)
+    * [AWS Snowcone & Snowcone SSD](#aws-snowcone--snowcone-ssd)
+    * [Snowmobile](#snowmobile)
+    * [AWS Snow Family for Data migrations](#aws-snow-family-for-data-migrations)
+    * [Snow Family - Usage Process](#snow-family---usage-process)
+    * [What is Edge Computing?](#what-is-edge-computing)
+    * [Snow Family - Edge computing](#snow-family---edge-computing)
+    * [AWS OpsHub](#aws-opshub)
+    * [Solution Architecture: Snowball into Glacier](#solution-architecture-snowball-into-glacier)
+    * [Amazon FSx - Overview](#amazon-fsx---overview)
+      * [File Systems](#file-systems)
+      * [Amazon FSx for Windows(File Server)](#amazon-fsx-for-windowsfile-server)
+      * [Amazon FSx for Lustre](#amazon-fsx-for-lustre)
+        * [FSx File System Deployment Options](#fsx-file-system-deployment-options)
+    * [Amazon FSx for NetApp ONTAP](#amazon-fsx-for-netapp-ontap)
+    * [Amazon FSx for OpenZFS](#amazon-fsx-for-openzfs)
+  * [Storage gateway](#storage-gateway)
+    * [AWS Storage Gateway](#aws-storage-gateway)
+    * [S3 File Gateway](#s3-file-gateway)
+    * [FSx File Gateway](#fsx-file-gateway)
+    * [Volume Gateway](#volume-gateway)
+    * [Tape Gateway](#tape-gateway)
+    * [Storage Gateway - Hardware appliance](#storage-gateway---hardware-appliance)
+  * [AWS Transfer Family](#aws-transfer-family)
+  * [AWS DataSync](#aws-datasync)
+    * [Transfer between AWS storage services](#transfer-between-aws-storage-services)
+  * [Storage Comparison](#storage-comparison)
+<!-- TOC -->
+
 ### AWS Snow Family
 
 * Highly secure, portable device to **collect and process data at the edge, and migrate data into and out of AWS**
