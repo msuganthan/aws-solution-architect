@@ -1,3 +1,19 @@
+<!-- TOC -->
+  * [What is CloudFormation](#what-is-cloudformation)
+    * [Benefits of AWS CloudFormation](#benefits-of-aws-cloudformation)
+    * [CloudFormation + Application Composer](#cloudformation--application-composer)
+  * [CloudFormation - Service Role](#cloudformation---service-role)
+  * [Amazon Simple Email Service (Amazon SES)](#amazon-simple-email-service-amazon-ses)
+  * [Amazon Pinpoint](#amazon-pinpoint)
+  * [System Manager - SSM Session Manager](#system-manager---ssm-session-manager)
+    * [Systems Manager - Run Command](#systems-manager---run-command)
+    * [System Manager - Patch Manager](#system-manager---patch-manager)
+    * [System Manager - Maintenance Windows](#system-manager---maintenance-windows)
+    * [System Manager - Automation](#system-manager---automation-)
+  * [AWS Batch](#aws-batch-)
+  * [AWS Amplify - web and mobile applications](#aws-amplify---web-and-mobile-applications)
+<!-- TOC -->
+
 ### What is CloudFormation
 
 * CloudFormation is a declarative way of outlining your AWS Infra, for any resources(most of them are supported)

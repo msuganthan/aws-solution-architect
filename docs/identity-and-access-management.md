@@ -1,3 +1,30 @@
+<!-- TOC -->
+  * [AWS Organizations](#aws-organizations)
+    * [Advantages](#advantages)
+    * [Security: Service Control Policies](#security-service-control-policies)
+    * [SCP Hierarchy](#scp-hierarchy)
+  * [IAM - Advanced Policies](#iam---advanced-policies)
+    * [aws:SourceIp](#awssourceip)
+    * [aws:RequestedRegion](#awsrequestedregion)
+    * [ec2:ResourceTag](#ec2resourcetag)
+    * [aws:MultiFactorAuthPresent](#awsmultifactorauthpresent)
+    * [IAM for S3](#iam-for-s3)
+    * [Resource Policies & aws:PrincipalOrgID](#resource-policies--awsprincipalorgid)
+  * [Resource-based Policies vs IAM Roles](#resource-based-policies-vs-iam-roles)
+    * [Amazon EventBridge - Security](#amazon-eventbridge---security)
+  * [IAM Permission Boundaries](#iam-permission-boundaries)
+    * [IAM Permission Boundaries](#iam-permission-boundaries-1)
+    * [Example IAM Policy](#example-iam-policy)
+  * [AWS IAM Identity Center](#aws-iam-identity-center)
+    * [IAM identity Center](#iam-identity-center)
+    * [Fine-grained Permissions](#fine-grained-permissions)
+  * [What is Microsoft Active Directory(AD)](#what-is-microsoft-active-directoryad)
+    * [AWS Directory Services](#aws-directory-services)
+    * [IAM Identity Center - Active Directory Setup](#iam-identity-center---active-directory-setup)
+  * [AWS Control Tower](#aws-control-tower)
+    * [AWS Control Tower - Guardrails](#aws-control-tower---guardrails)
+<!-- TOC -->
+
 ### AWS Organizations
 
 * Global service

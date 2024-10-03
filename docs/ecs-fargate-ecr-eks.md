@@ -1,3 +1,21 @@
+<!-- TOC -->
+  * [What is Docker?](#what-is-docker)
+    * [Docker on an OS](#docker-on-an-os)
+    * [Docker Containers Management on AWS](#docker-containers-management-on-aws)
+  * [Amazon ECS - EC2 Launch Type](#amazon-ecs---ec2-launch-type)
+  * [Amazon ECS - Fargate Launch Type](#amazon-ecs---fargate-launch-type)
+    * [Amazon ECS - IAM Roles for ECS](#amazon-ecs---iam-roles-for-ecs)
+    * [Amazon ECS - Load Balancer Integrations](#amazon-ecs---load-balancer-integrations)
+    * [Amazon ECS - Data Volumes](#amazon-ecs---data-volumes)
+    * [ECS Service Auto Scaling](#ecs-service-auto-scaling)
+    * [EC2 Launch Type - Auto Scaling EC2 Instances](#ec2-launch-type---auto-scaling-ec2-instances)
+    * [ECS Scaling - Service CPU Usage Example](#ecs-scaling---service-cpu-usage-example)
+  * [Amazon EKS](#amazon-eks-)
+    * [Amazon EKS - Node Types](#amazon-eks---node-types)
+    * [Amazon EKS - Data Volumes](#amazon-eks---data-volumes)
+  * [AWS App Runner](#aws-app-runner)
+<!-- TOC -->
+
 ### What is Docker?
 
 * Docker is a software development platform to deploy apps

@@ -1,3 +1,36 @@
+<!-- TOC -->
+  * [Amazon Athena](#amazon-athena)
+    * [Athena - Performance](#athena---performance)
+    * [Amazon Athena - Federated Query](#amazon-athena---federated-query)
+  * [Amazon Redshift](#amazon-redshift)
+    * [Redshift Cluster](#redshift-cluster)
+    * [Redshift - Snapshots & DR](#redshift---snapshots--dr)
+    * [Loading data into Redshift](#loading-data-into-redshift)
+    * [Redshift Spectrum](#redshift-spectrum)
+  * [OpenSearch](#opensearch)
+    * [OpenSearch Patterns](#opensearch-patterns)
+      * [DynamoDB](#dynamodb)
+      * [CloudWatch Logs](#cloudwatch-logs)
+      * [Kinesis Data Streams & Kinesis Data Firehose](#kinesis-data-streams--kinesis-data-firehose)
+  * [Amazon EMR](#amazon-emr)
+    * [Amazon EMR - Node type & purchasing](#amazon-emr---node-type--purchasing)
+  * [Amazon QuickSight](#amazon-quicksight)
+    * [QuickSight Integrations](#quicksight-integrations)
+    * [QuickSight - Dashboard & Analysis](#quicksight---dashboard--analysis)
+  * [AWS Glue](#aws-glue)
+    * [AWS Glue - Convert data into Parquet Format](#aws-glue---convert-data-into-parquet-format)
+    * [Glue Data Catalog: catalog of datasets](#glue-data-catalog-catalog-of-datasets)
+    * [Things to know at a high-level](#things-to-know-at-a-high-level)
+  * [AWS Lake Formation](#aws-lake-formation)
+    * [Lake Formation - Centralized Permissions Example](#lake-formation---centralized-permissions-example)
+  * [Kinesis Data Analytics](#kinesis-data-analytics)
+    * [Kinesis Data Analytics For Apache Flink](#kinesis-data-analytics-for-apache-flink)
+  * [Amazon Managed Streaming for Apache Kafka (Amazon MSK)](#amazon-managed-streaming-for-apache-kafka-amazon-msk)
+    * [Kinesis Data Stream vs Amazon MSK](#kinesis-data-stream-vs-amazon-msk)
+    * [Amazon MSK Consumers](#amazon-msk-consumers)
+  * [Big Data Ingestion Pipeline](#big-data-ingestion-pipeline)
+<!-- TOC -->
+
 ### Amazon Athena
 
 * **Serverless query service to analyze data stored in Amazon S3.**

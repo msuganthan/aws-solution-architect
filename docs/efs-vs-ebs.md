@@ -1,3 +1,10 @@
+<!-- TOC -->
+* [EBS volumes](#ebs-volumes)
+  * [To migrate an EBS volume AZ](#to-migrate-an-ebs-volume-az)
+  * [Root EBS Volumes of instances get terminated by default if the EC2 instance gets terminated(you can disable that)](#root-ebs-volumes-of-instances-get-terminated-by-default-if-the-ec2-instance-gets-terminatedyou-can-disable-that)
+* [EFS](#efs)
+<!-- TOC -->
+
 ### EBS volumes
 
 * One instance(except multi-attach io1/io2)

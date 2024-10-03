@@ -1,3 +1,20 @@
+<!-- TOC -->
+  * [AWS CloudFront](#aws-cloudfront)
+    * [CloudFront - Origins](#cloudfront---origins)
+    * [CloudFront at a high level](#cloudfront-at-a-high-level)
+    * [CloudFront - S3 as an Origin](#cloudfront---s3-as-an-origin)
+    * [CloudFront vs S3 Cross Region Replication](#cloudfront-vs-s3-cross-region-replication)
+    * [CloudFront - ALB or EC2 as an origin](#cloudfront---alb-or-ec2-as-an-origin)
+    * [CloudFront Geo Restriction](#cloudfront-geo-restriction)
+    * [CloudFront - Price Classes](#cloudfront---price-classes)
+      * [CloudFront - Price Classes](#cloudfront---price-classes-1)
+    * [CloudFront - Cache Invalidations](#cloudfront---cache-invalidations)
+    * [Global users for our application](#global-users-for-our-application)
+      * [Unicast IP vs Anycast IP](#unicast-ip-vs-anycast-ip)
+      * [AWS Global Accelerator](#aws-global-accelerator)
+      * [AWS Global Accelerator vs CloudFront](#aws-global-accelerator-vs-cloudfront)
+<!-- TOC -->
+
 ### AWS CloudFront
 
 * Content Delivery Network(CDN)

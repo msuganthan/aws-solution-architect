@@ -1,3 +1,10 @@
+<!-- TOC -->
+  * [Well Architected Framework General Guiding Principles](#well-architected-framework-general-guiding-principles)
+    * [6 Pillars](#6-pillars)
+  * [Trusted Advisor](#trusted-advisor)
+  * [More Architecture Examples](#more-architecture-examples)
+<!-- TOC -->
+
 ### Well Architected Framework General Guiding Principles
 
 * Stop guessing your capacity needs

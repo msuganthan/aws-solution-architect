@@ -1,3 +1,15 @@
+<!-- TOC -->
+  * [Amazon Machine Image(AMI): A template to configure new instances.](#amazon-machine-imageami-a-template-to-configure-new-instances)
+    * [AMI Process(from an EC2 instance)](#ami-processfrom-an-ec2-instance)
+    * [An AMI holds the following information:](#an-ami-holds-the-following-information)
+  * [AMI Use cases](#ami-use-cases)
+  * [AMI Marketplace:](#ami-marketplace)
+  * [Creating an AMI:](#creating-an-ami)
+  * [Choosing an AMI](#choosing-an-ami)
+    * [Amazon Machine Images can be selected based on:](#amazon-machine-images-can-be-selected-based-on)
+  * [Copying an AMI](#copying-an-ami)
+<!-- TOC -->
+
 ### Amazon Machine Image(AMI): A template to configure new instances.
 
 * AMI are a customization of an EC2 instance

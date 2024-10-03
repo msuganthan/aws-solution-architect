@@ -1,3 +1,37 @@
+<!-- TOC -->
+  * [What is DNS?](#what-is-dns)
+    * [DNS Terminologies](#dns-terminologies)
+    * [How DNS Works](#how-dns-works)
+  * [Amazon Route 53](#amazon-route-53-)
+    * [Route 53 - Records](#route-53---records)
+    * [Route 53 - Record Types](#route-53---record-types)
+    * [Route 53 - Hosted Zones](#route-53---hosted-zones)
+    * [Route 53 - Records TTL(Time to Live)](#route-53---records-ttltime-to-live)
+  * [CNAME vs Alias](#cname-vs-alias)
+    * [Route 53 - Alias Records](#route-53---alias-records)
+  * [Route 53 - Alias Records Targets](#route-53---alias-records-targets)
+  * [Route 53 - Routing Policies](#route-53---routing-policies)
+    * [Routing Policies - Simple](#routing-policies---simple)
+    * [Routing Policies - Weighted](#routing-policies---weighted)
+    * [Routing Policies - Latency](#routing-policies---latency)
+    * [Route 53 - Health Checks](#route-53---health-checks)
+    * [Health Checks - Monitor an Endpoint](#health-checks---monitor-an-endpoint)
+    * [Route 53 - Calculated Health Checks](#route-53---calculated-health-checks)
+    * [Health Checks - Private Hosted Zones](#health-checks---private-hosted-zones)
+  * [Routing Policies - Failover(Active-Passive)](#routing-policies---failoveractive-passive)
+    * [Routing Policies - Geolocation](#routing-policies---geolocation)
+    * [Routing Policies - GeoLocation](#routing-policies---geolocation-1)
+    * [Geo proximity Routing Policy](#geo-proximity-routing-policy)
+    * [Routing Policies - IP-based Routing](#routing-policies---ip-based-routing)
+    * [Routing Policies - Multi-Value](#routing-policies---multi-value)
+  * [Domain Registrar vs DNS Service](#domain-registrar-vs-dns-service)
+    * [GoDaddy as Registrar & Route 53 as DNS Service](#godaddy-as-registrar--route-53-as-dns-service)
+  * [Beanstalk Overview](#beanstalk-overview)
+    * [Elastic Beanstalk - Components](#elastic-beanstalk---components)
+    * [Web Server Tier vs Worker Tier](#web-server-tier-vs-worker-tier)
+    * [Elastic Beanstalk Deployment Modes](#elastic-beanstalk-deployment-modes)
+<!-- TOC -->
+
 ### What is DNS?
 
 * Domain Name System which translates the human friendly hostname into the machine IP addresses

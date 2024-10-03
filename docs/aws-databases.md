@@ -1,3 +1,18 @@
+<!-- TOC -->
+  * [Database Types](#database-types)
+    * [Amazon RDS - Summary](#amazon-rds---summary)
+    * [Amazon Aurora - Summary](#amazon-aurora---summary)
+    * [Amazon Elastic - Summary](#amazon-elastic---summary)
+    * [Amazon DynamoDB - Summary](#amazon-dynamodb---summary)
+    * [Amazon S3 - Summary](#amazon-s3---summary)
+    * [DocumentDB](#documentdb)
+    * [Amazon Neptune](#amazon-neptune)
+      * [Amazon Neptune - Streams](#amazon-neptune---streams)
+    * [Keyspaces (for Apache Cassandra)](#keyspaces-for-apache-cassandra)
+    * [Amazon QLDB](#amazon-qldb)
+    * [Amazon Timestream](#amazon-timestream)
+<!-- TOC -->
+
 ### Database Types
 
 * **RDBMS (= SQL / OLTP)**: RDS, Aurora - great for joins.

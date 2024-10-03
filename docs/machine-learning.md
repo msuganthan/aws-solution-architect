@@ -1,3 +1,19 @@
+<!-- TOC -->
+  * [Amazon Rekognition](#amazon-rekognition)
+    * [Amazon Rekognition - Content Moderation](#amazon-rekognition---content-moderation)
+  * [Amazon Transcribe](#amazon-transcribe)
+  * [Amazon Polly](#amazon-polly)
+  * [Translate](#translate-)
+  * [Lex + Connect Overview](#lex--connect-overview)
+  * [Amazon Comprehend](#amazon-comprehend)
+    * [Amazon Comprehend Medical](#amazon-comprehend-medical)
+  * [Sagemaker](#sagemaker)
+  * [Forecast](#forecast)
+  * [Kendra](#kendra)
+  * [Personalize](#personalize-)
+  * [Textract](#textract)
+<!-- TOC -->
+
 ### Amazon Rekognition
 
 * Find objects, people, text, scenes in images and videos using ML

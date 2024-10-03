@@ -1,3 +1,19 @@
+<!-- TOC -->
+  * [Dynamo-DB](#dynamo-db)
+    * [DynamoDB - Basics](#dynamodb---basics)
+    * [DynamoDB - Read/Write Capacity Modes](#dynamodb---readwrite-capacity-modes)
+    * [DynamoDB Accelerator(DAX)](#dynamodb-acceleratordax)
+    * [DynamoDB Accelerator(DAX) vs ElasticCache](#dynamodb-acceleratordax-vs-elasticcache)
+    * [DynamoDB - Stream Processing](#dynamodb---stream-processing)
+      * [DynamoDB Stream](#dynamodb-stream)
+      * [Kinesis Data Streams(newer)](#kinesis-data-streamsnewer)
+    * [DynamoDB Streams](#dynamodb-streams)
+    * [DynamoDB Global Tables](#dynamodb-global-tables)
+    * [Time to Live(TTL)](#time-to-livettl)
+    * [Backups for disaster recovery](#backups-for-disaster-recovery)
+    * [Integration with Amazon S3](#integration-with-amazon-s3)
+<!-- TOC -->
+
 ### Dynamo-DB
 
 * Fully managed, highly available with replication across multiple AZs
