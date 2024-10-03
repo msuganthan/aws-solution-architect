@@ -1,3 +1,4 @@
+
 <!-- TOC -->
   * [AWS CloudFront](#aws-cloudfront)
     * [CloudFront - Origins](#cloudfront---origins)
@@ -11,8 +12,8 @@
     * [CloudFront - Cache Invalidations](#cloudfront---cache-invalidations)
     * [Global users for our application](#global-users-for-our-application)
       * [Unicast IP vs Anycast IP](#unicast-ip-vs-anycast-ip)
-      * [AWS Global Accelerator](#aws-global-accelerator)
-      * [AWS Global Accelerator vs CloudFront](#aws-global-accelerator-vs-cloudfront)
+    * [AWS Global Accelerator](#aws-global-accelerator)
+    * [AWS Global Accelerator vs CloudFront](#aws-global-accelerator-vs-cloudfront)
 <!-- TOC -->
 
 ### AWS CloudFront
