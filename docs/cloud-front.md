@@ -120,7 +120,7 @@
 
 <img src="../images/cloud-front/anycast.png" alt="Anycast">
 
-##### AWS Global Accelerator
+#### AWS Global Accelerator
 
 * Leverage the AWS internal network to route to your application
 * **2 Anycast IP** are created for your application
@@ -143,7 +143,7 @@
   * DDoS protection thanks for to AWS Shield
 
 
-##### AWS Global Accelerator vs CloudFront
+#### AWS Global Accelerator vs CloudFront
 
 * They both use the AWS global network and its edge locations around the world
 * Both services integrate with AWS Shield for DDoS protection
@@ -154,6 +154,6 @@
 * **Global Accelerator**
   * Improves performance for wide range of application over **TCP or UDP**.
   * Proxying packets at the edge to applications running in one or more AWS regions.
-  * Good fit for non-HTTP use cases, suck as gaming(UDP), IoT(MQTT) or Voice over IP
+  * Good fit for non-HTTP use cases, such as gaming(UDP), IoT(MQTT) or Voice over IP
   * Good for HTTP use cases that require static IP addresses
   * Good for HTTP use cases that required deterministic, fast regional failover.
