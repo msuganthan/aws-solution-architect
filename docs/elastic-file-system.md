@@ -21,25 +21,29 @@
 
 #### Performance & Storage Classes
 
-* EFS Scale
+* **EFS Scale**
   * 1000s of concurrent NFS client, 10 GB+ /s throughput
   * Grow to Petabyte-scale network file system, automatically
-* Performance Mode (set at EFS creation time)
+* **Performance Mode (set at EFS creation time)**
   * General Purpose (default) - latency-sensitive use cases(web server, CMS, etc...)
   * Max I/O - higher latency, throughput, highly parallel(big-data, media processing)
-* Throughput Mode
-  * Bursting - 1 TB = 50MiBs + burst of up to 100MiB/s
-  * Provisioned - set your throughput regarless of storage size, ex: 1 GiB for 1 TB storage
-  * Elastic - automatically scales throughput up or down based on your workloads
+* **Throughput Mode**
+  * **Bursting** - 1 TB = 50MiBs + burst of up to 100MiB/s
+  * **Provisioned** - set your throughput regarless of storage size, ex: 1 GiB for 1 TB storage
+  * **Elastic** - automatically scales throughput up or down based on your workloads
     * Up to 3GiB/s for reads and 1GiB/s for writes
     * Used for unpredictable workloads
 
 * Storage Tiers (lifecycle management feature - move file after N days)
-  * Standard: for frequently accessed files
-  * Infrequent access(EFS-1A): cost to retrieve files, lower price to store. Enable EFS-1A with a Lifecycle Policy.
-* Availability and durability,
-  * Standard: Multi-AZ, great for prod
-  * One Zone: One AZ, great for dev, backup enabled by default, compatible with 1A(EFS One Zone-1A)
+  * **Standard**: for frequently accessed files
+  * **Infrequent access(EFS-1A)**: cost to retrieve files, lower price to store.
+  * **Archive**: rarely accessed data(few times each year), 50% cheaper
+  * Implement **lifecycle policies** to move files between storage tiers
+  
+* **Availability and durability**
+  * **Standard**: Multi-AZ, great for prod
+  * **One Zone**: One AZ, great for dev, backup enabled by default, compatible with 1A(EFS One Zone-1A)
+
 * Over 90% in cost savings.
 
 <img src="../images/efs/efs-life-cycle-management.png" alt="">
