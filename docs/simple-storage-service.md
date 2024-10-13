@@ -751,7 +751,7 @@
 * You must create a **VPC Endpoint** to access the Access Point(Gateway or Interface Endpoint)
 * The VPC Endpoint Policy must allow access to the target bucket and Access Point
 
-<img src="../images/s3/s3-access-points.png" alt="VPC Access Point">
+<img src="../images/s3/s3-vpc-access-point.png" alt="VPC Access Point">
 
 ### S3 Object Lambda
 
@@ -762,4 +762,4 @@
   * Converting across data formats, such as converting XML to JSON
   * Resizing and watermarking images on the fly using caller-specific details, such as the user who requested the object.
 
-<img src="../images/s3/s3-access-points.png" alt="Access Points">
+<img src="../images/s3/s3-object-lambda.png" alt="Object Lambda">
