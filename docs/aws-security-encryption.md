@@ -370,7 +370,7 @@
 #### WAF - Fixed IP while using WAF with a Load Balancer
 
 * WAF does not support the Network Load Balancer(Layer 4)
-* We can use Global Accelerator for fixed IP and WAF on the ALB
+* We can use **Global Accelerator** for fixed IP and WAF on the ALB
 
 <img src="../images/aws-security-encryption/waf-fixed-ip-solution-with-load-balancer.png" alt="WAF fixed IP Solution">
 
