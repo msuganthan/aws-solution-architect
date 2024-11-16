@@ -31,7 +31,7 @@
 
 ### Elastic Block Store(EBS)
 
-* An EBS(Elastic Block Store) volume is a network drive you can attach to your instances while they run.
+* An EBS(Elastic Block Store) volume is a **network** drive you can attach to your instances while they run.
 * It allows your instances to persist data, even after their termination
 * **They can only be mounted to one instance at a time**(at the CCP level).
 * **They are bound to a specific availability zone.**
@@ -40,15 +40,15 @@
 
 #### EBS Volume
 
-* It is network drive(i.e. not physical drive)
-  * It uses the network to communicate the instance, which means there might be a bit of latency
-  * It can be detached from an EC2 instance and attached to another one quickly
-* It's locked to an Availability Zone(AZ)
+* It is **network** drive(i.e. not physical drive)
+  * It uses the **network** to communicate the instance, which means there might be a **bit of latency**
+  * It can be **detached** from an EC2 instance and **attached** to another one quickly
+* It's locked to an **Availability Zone(AZ)**
   * An EBS volume in us-east-1a cannot be attached to us-east-1b
-  * To move a volume across, you first need to snapshot it.
-* Have a provisioned capacity(size in GBs, and IOPS)
-  * You get billed for all the provisioned capacity.
-  * You can increase the capacity of the drive over time.
+  * To move a volume across, you first need to **snapshot** it.
+* Have a provisioned capacity (size in GBs, and IOPS)
+  * You get billed for all the **provisioned capacity**.
+  * You can **increase** the capacity of the drive over time.
 
 #### What is IOPS?
 
@@ -68,61 +68,61 @@ Bandwidth is **the measurement of the total possible speed of data movement alon
 
 <img src="../images/ebs/ebs-volume-example.png" alt="">
 
-#### EBS - Delete on Termination attribute
+#### EBS—Delete on Termination attribute
 
 * Controls the EBS behavior when an EC2 instance terminates
-  * By default, the root EBS volume is deleted(attribute enabled)
-  * By default, any other attached EBS volume is not deleted(attribute disabled)
+  * By default, the **root** EBS volume is **deleted**(attribute enabled)
+  * By default, any **other attached EBS volume is not deleted**(attribute disabled)
 * This can be controlled by the AWS console / AWS CLI
 * Use case: preserve root volume when instance is terminated
 
 ### Elastic Block Store
 
-* Is a highly available and durable solution for attaching persistent block storage volumes to an EC2 instance. Volumes are automatically replicated within their Availability Zone(AZ) to protect from component failure.
+* It is a highly available and durable solution for attaching persistent block storage volumes to an EC2 instance. Volumes are automatically **replicated within their Availability Zone (AZ)** to protect from component failure.
 
 * EBS Volumes come in 6 types
-  * **gp2/gp3(SSD):** General purpose SSD volume that balances price and performance for a wide variety of workloads.
-  * **io1/io2 Block Express (SSD):** Highest-performance SSD volume for mission-critical low-latency or high-throughput workloads.
-  * **st 1 (HDD):** Low cost HDD volume designed for frequently accessed, throughput-intensive workloads.
-  * **sc 1 (HDD):** Lowest cost HDD volume designed for less frequently accessed workloads.
-* EBS Volumes are characterized in Size | Throughput | IOPS (I/O Ops Per Sec)
-* Only gp2 / gp3 and io1/io2 Block Express can be used as boot volumes.
+  * **gp2/gp3(SSD):** General purpose SSD volume that **balances price and performance** for a wide variety of workloads.
+  * **io1/io2 Block Express (SSD):** **Highest-performance SSD** volume for mission-critical low-latency or high-throughput workloads.
+  * **st 1 (HDD):** **Low cost HDD volume designed for frequently accessed, throughput-intensive workloads.**
+  * **sc 1 (HDD):** **Lowest cost HDD volume designed for less frequently accessed workloads.**
+* EBS Volumes are characterized in **Size | Throughput | IOPS (I/O Ops Per Sec)**
+* **Only gp2/gp3 and io1/io2 Block Express can be used as boot volumes.**
 
 #### General Purpose SSD
 
 * Cost-effective storage, low-latency
 * System bool volumes, Virtual desktops, Development and test environments
 * 1 GiB - 16 TiB
-* gp3:
-  * Baseline of 3000 IOPS and throughtput of 125 MiB/s
-  * Can increase IOPS up to 16,000 and throughput up to 1000 MiB/s independently.
-* gp2: 
+* **gp3**:
+  * Baseline of **3000 IOPS and throughput of 125 MiB/s**
+  * It can increase IOPS up to **16,000 and throughput up to 1000 MiB/s independently**.
+* **gp2**: 
   * Small gp2 volumes can burst IOPS to 3,000
-  * Size of the volume and IOPS are linked, max IOPS is 16,000
+  * Size of the volume and IOPS are **linked**, max IOPS is 16,000
   * 3 IOPS per GB, means at 5,334 GB we are the max IOPS.
 
 #### Provisioned IOPS(PIOPS) SSD
 
-* Critical business application with sustained IOPS performance
-* Or application that need more than 16,000 IOPS
-* Great for database workload(sensitive to storage perf and consistency)
+* **Critical business application with sustained IOPS performance**
+* **Or application that needs more than 16,000 IOPS**
+* Great for database workload (sensitive to storage perf and consistency)
 * io1 (4 GiB - 16 TiB)
-  * Max PIOPS: 64,000 for Nitro EC2 instances & 32,000 for other
-  * Can increase PIOPS independently from storage size
+  * Max PIOPS: **64,000 for Nitro EC2 instances & 32,000 for other**
+  * It can increase PIOPS independently of storage size
 * io2 Block Express(4 GiB - 64 TiB)
   * Sub-millisecond latency
   * Max PIOPS: 256,000 with an IOPS:GiB ratio of 1000:1
-* Supports EBS Multi-attach
+* Supports **EBS Multi-attach**
 
 #### EBS Multi-Attach - io1 / io2 family
 
-* Attach the same EBS volume to multiple EC2 instances in the same AZ
+* Attach the **same EBS** volume to **multiple EC2 instances** in the **same AZ**
 * Each instance has full read & write permissions to the high performance volume.
 * Use cases:
-  * Achieve higher application availability in clustered Linux application(ex: Teradata)
-  * Application must manage concurrent write operations
-* Upto 16 EC2 instances at a time.
-* Must use a file system that's cluster-aware(not XFS, EXT4, etc...)
+  * Achieve higher application availability in clustered Linux application (ex: Teradata)
+  * Application must **manage concurrent write operations**
+* Up to 16 EC2 instances at a time.
+* Must use a file system **that's cluster-aware** (not XFS, EXT4, etc...)
 
 <img src="../images/ebs/ebs-multi-attach.png" alt="">
 
@@ -173,8 +173,8 @@ Bandwidth is **the measurement of the total possible speed of data movement alon
 ### EBS Snapshots
 
 * Make a backup(snapshot) of your EBS volume at a point in time.
-* Not necessary to detach volume to do snapshot, but recommended
-* Can copy snapshots across AZ or Region.
+* **Not necessary to detach volume to do snapshot, but recommended**
+* You can copy snapshots across **AZ or Region**.
 
 <img src="../images/ebs/ebs-snap-shot-example.png" alt="">
 
@@ -182,21 +182,32 @@ Bandwidth is **the measurement of the total possible speed of data movement alon
 
 #### EBS Snapshot Archive
 
-* Move a Snapshot to an "archive tier" that is 75% cheaper.
-* Takes with 24 to 72 hours for restoring the archive.
+* Move a Snapshot to an "**archive tier**" that is 75% less expensive.
+* Takes with **24 to 72** hours for restoring the archive.
 
 <img src="../images/ebs/ebs-snap-shot-archive.png" alt="">
 
 #### Recycle Bin for EBS Snapshots
 
-* Setup rules for retain deleted snapshots so you can recover them after an accidental deletion
-* Specify retention(from 1 day to 1 year)
+* **Setup rules for retained deleted snapshots, so you can recover them after an accidental deletion**
+* **Specify retention (from 1 day to 1 year)**
 
 <img src="../images/ebs/ebs-snap-shot-recycle-bin.png" alt="">
 
 #### Fast Snapshot Restore(FSR)
 
-* Force full initialization of snapshot to have no latency on the first use($$$)
+* **Force full initialization of snapshot to have no latency on the first use ($$$)**
+
+#### Instance Store
+
+* EBS volumes are network drives with good but "limited performance"
+* If you need a high performance hardware disk, use EC2 Instance Store
+
+* Better I/O performance.
+* EC2 instance **store loses** their storage if they're stopped(**ephemeral**)
+* Good for **buffer/cache/scratch data/temporary content**
+* **Risk of data loss if hardware fails**
+* **Backups and Replication are your responsibility.**
 
 #### Moving Volumes
 
@@ -219,13 +230,13 @@ Bandwidth is **the measurement of the total possible speed of data movement alon
 
 ### EBS Encryption
 
-* When you create and encrpted EBS volume, you get the following:
-  * Data at rest is encrypted inside the volume.
-  * All the data in flight moving between the instance and the volume is encrypted
-  * All snapshots are encrypted
-  * All volumes created from the snapshot.
-* Encryption and decryption are handled transparently(you have nothing to do)
-* Encryption has a minimal impact on latency
+* When you create and encrypted EBS volume, you get the following:
+  * **Data at rest is encrypted** inside the volume.
+  * All the data **in flight** moving **between the instance and the volume is encrypted**
+  * All **snapshots** are encrypted
+  * All **volumes created** from the snapshot.
+* Encryption and decryption are handled **transparently** (you have nothing to do)
+* Encryption has a **minimal impact** on latency
 * EBS Encryption leverages keys from KMS(AES-256)
 * Copying an unencrypted snapshot allows encryption
 * Snapshots of encrypted volumes are encrypted

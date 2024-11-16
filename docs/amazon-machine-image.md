@@ -12,23 +12,20 @@
 
 ### Amazon Machine Image(AMI): A template to configure new instances.
 
-* AMI are a customization of an EC2 instance
+* AMI is a customization of an EC2 instance
   * You add your own software, configuration, operating system, monitoring.
-  * Faster boot/configuration time because all your software is pre-packaged.
-* AMI are built for a specific region (and can be copied across regions)
+  * Faster boot/configuration time because all your **software is pre-packaged**.
+* AMI is built for a **specific region** (and can be copied across regions)
 * You can launch EC2 instances from:
   * **A Public AMI**: AWS provided
   * **You own AMI**: you make and maintain them yourself
   * **An AWS Marketplace AMI**: an AMI someone else made (and potentially sells)
 
-* Amazon Machine Image(AMI) provides the information required to launch an instance.
-* You can turn you **EC2 instances into AMIs,** so you can create copies of your server.
-
-#### AMI Process(from an EC2 instance)
+#### AMI Process (from an EC2 instance)
 
 * Start an EC2 instance and customize it
 * Stop the instance(for data integrity)
-* Build an AMI - this will also create EBS snapshots
+* Build an AMI—this will also create EBS snapshots
 * Launch instances from other AMIs
 
 #### An AMI holds the following information:
